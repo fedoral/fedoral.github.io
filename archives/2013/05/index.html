@@ -1,0 +1,1111 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>归档：2013/5 | Peng's Blog</title>
+  <meta name="author" content="Peng Feixiang">
+  
+  <meta name="description" content="Hello everyone">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Peng's Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Peng's Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Peng's Blog</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title">2013/5</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T02:59:00.000Z"><a href="/2013/05/06/draft-mccann-dmm-flatarch-00/">5月 6 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/draft-mccann-dmm-flatarch-00/">draft-mccann-dmm-flatarch-00</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>Authentication and Mobility Management in a Flat Architecture</h1>
+<h3><a href="http://tools.ietf.org/html/draft-mccann-dmm-flatarch-00">draft-mccann-dmm-flatarch-00</a></h3>
+<p>从运营商角度看待移动性管理，包含部署、身份认证等，略之</p>
+<hr>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T02:55:00.000Z"><a href="/2013/05/06/draft-ma-dmm-romip-00/">5月 6 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/draft-ma-dmm-romip-00/">draft-ma-dmm-romip-00</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>A Route Optimization solution support for Distributed Mobility Management</h1>
+<h3><a href="http://tools.ietf.org/id/draft-ma-dmm-romip-00.txt">draft-ma-dmm-romip-00</a></h3>
+<p>The first elements that provide IP connectivity to a set of MNs are also the mobility managers for those MNs.</p>
+<ul>
+<li>移动节点不参与任何与移动相关的信令交互。移动锚和接入路由器以及AAA代表主机负责管理IP移动性。</li>
+<li>The Home Address (HoA 切换前MAAR分配的地址) and Care-of address (CoA 切换后MAAR分配的地址).</li>
+<li>移动节点可以直接向通信节点发送数据包而不需要通过家乡移动锚。</li>
+</ul>
+<hr>
+<h2>1.  Introduction</h2>
+<ol>
+<li>MIPv6 和 PMIPv6的缺点</li>
+<li>在论文“<a href="http://eprints.networks.imdea.org/13/1/giust_mmfn2011.pdf">一个基于网络的分布式移动管理的局部性移动解决方案</a>”中，作者表述了两种方法：一个是完全分布式的方法，另一个是部分分布式的方法。第一个方法的主要问题是，如何在第一次连接到网络的时候和随后的切换之间区分移动锚和接入路由器。</li>
+<li>这篇文档描述了移动锚和接入路由器以及AAA协议代表主机对IP移动性的支持。这个解决方案能解决两方面的问题，它不仅使得移动实体能在第一次接入网络时和随后的切换之间进行区分，而且能减少家乡移动锚的重担。移动节点能直接向通信节点转发数据包。数据包的发送不需要通过家乡移动锚。 这篇文档时严格遵照这两方面进行展开。</li>
+<li>所遵循的两个原则:移动节点的移动对通信节点来说是透明的；移动节点不参与任何与移动相关的信令交互。</li>
+</ol>
+<h2>2.  Terminology</h2>
+<ul>
+<li>MAAR (Mobility anchor and Access Router)</li>
+<li>AAA (Authentication, Authorization and Accounting )</li>
+<li>DBU/DBA (Distributed BU/BA)</li>
+<li>sDBU/sDBA.  The MAAR attached by the MN currently to sends a sDBU message to the MAAR attached by MN before the MN&#39;s movement.  After that, the MAAR attached by MN currently receives a sDBA message including the address of CN&#39;s MAAR which the CN is currently attached to.  After that, the MAAR attached by the MN currently updates its internal binding list.</li>
+<li>dDBU/dDBA.  The MAAR attached by the MN currently sends a dDBU message to the MAAR attached by CN for refreshing the internal binding list of the CN&#39;s MAAR which the CN is currently attached to. After receiving the dDBU message, the CN&#39;s MAAR replies a dDBA message to the MN&#39;s MAAR.</li>
+</ul>
+<h2>3.  Operation</h2>
+<pre><code><figure class="highlight"><pre><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span> <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+<span class="comment">|The</span> <span class="comment">user</span> <span class="comment">A|</span>  <span class="comment">|The</span> <span class="comment">user</span> <span class="comment">B|</span> <span class="comment">|A_MAAR2|</span>  <span class="comment">|B_MAAR2|</span>   <span class="comment">|A_MAAR3|</span>     <span class="comment">|</span> <span class="comment">AAA</span> <span class="comment">|</span>
+<span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span> <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+     <span class="comment">|</span>             <span class="comment">|</span>           <span class="comment">|</span>          <span class="comment">|</span>           <span class="comment">|</span>             <span class="comment">|</span>
+     <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">1</span>.<span class="comment">RS(A_HoA1</span>,<span class="comment">B_HoA1)</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>             <span class="comment">|</span>
+     <span class="comment">|</span>             <span class="comment">|</span>           <span class="comment">|</span>          <span class="comment">|</span>           <span class="comment">|</span>-<span class="comment">2</span>.<span class="comment">request</span>-<span class="literal">-</span>&gt;<span class="comment">|</span>
+     <span class="comment">|</span>             <span class="comment">|</span>           <span class="comment">|</span>          <span class="comment">|</span>           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="comment">3</span>.<span class="comment">response</span>-<span class="comment">|</span>
+     <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">4</span>.<span class="comment">RA(A_HoA3)</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>             <span class="comment">|</span>
+     <span class="comment">|</span>             <span class="comment">|</span>           <span class="comment">|</span>          <span class="comment">|</span>           <span class="comment">|</span>             <span class="comment">|</span>
+     <span class="comment">|</span>             <span class="comment">|</span>           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">5</span>.<span class="comment">sDBU</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>             <span class="comment">|</span>
+     <span class="comment">|</span>             <span class="comment">|</span>           <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">6</span>. <span class="comment">sDBA</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>             <span class="comment">|</span>
+     <span class="comment">|</span>             <span class="comment">|</span>           <span class="comment">|</span>          <span class="comment">|</span>&lt;<span class="literal">-</span><span class="comment">7</span>.<span class="comment">dDBU</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>             <span class="comment">|</span>
+     <span class="comment">|</span>             <span class="comment">|</span>           <span class="comment">|</span>          <span class="comment">|</span>-<span class="literal">-</span><span class="comment">8</span>.<span class="comment">dDBA</span> <span class="literal">-</span>&gt;<span class="comment">|</span>             <span class="comment">|</span>
+     <span class="comment">|</span>             <span class="comment">|</span>           <span class="comment">|</span>          <span class="comment">|</span>           <span class="comment">|</span>             <span class="comment">|</span>
+
+
+                 <span class="comment">Figure</span> <span class="comment">1:Signaling</span> <span class="comment">of</span> <span class="comment">MN</span> <span class="comment">handover</span>
+
+
+
+  <span class="comment">________</span>                          <span class="comment">________</span>
+ <span class="comment">|The</span> <span class="comment">user|</span>                        <span class="comment">|The</span> <span class="comment">user|</span>
+ <span class="comment">|</span>   <span class="comment">B</span>    <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">move</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>   <span class="comment">B</span>    <span class="comment">|</span>
+ <span class="comment">|________|</span>                        <span class="comment">|________|</span>
+                                      <span class="comment">#</span>  <span class="comment">*</span>
+                                      <span class="comment">#</span>  <span class="comment">*</span>
+                                      <span class="comment">#</span>  <span class="comment">*</span>
+  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+  <span class="comment">|</span>       <span class="comment">|</span>                       <span class="comment">|</span>       <span class="comment">|</span>
+  <span class="comment">|B_MAAR1|</span>                       <span class="comment">|B_MAAR2|</span>
+  <span class="comment">|</span>       <span class="comment">|</span>                     <span class="comment">/</span> <span class="comment">|</span>       <span class="comment">|</span>
+  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                    <span class="comment">/</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                              <span class="comment">/</span>  <span class="comment">#</span>  <span class="comment">/|</span> <span class="comment">*</span> <span class="comment">|</span>
+                             <span class="comment">/</span>  <span class="comment">#</span>  <span class="comment">/</span> <span class="comment">|</span> <span class="comment">*</span> <span class="comment">|</span>
+                            <span class="comment">/</span>  <span class="comment">#</span>  <span class="comment">/</span>  <span class="comment">|</span> <span class="comment">*</span> <span class="comment">|</span>
+                           <span class="comment">/</span>  <span class="comment">#</span>  <span class="comment">/</span>   <span class="comment">|</span> <span class="comment">*</span> <span class="comment">|</span>
+                          <span class="comment">/</span>  <span class="comment">#</span>  <span class="comment">/</span>    <span class="comment">|</span> <span class="comment">*</span> <span class="comment">|</span>
+                         <span class="comment">/</span>  <span class="comment">#</span>  <span class="comment">/</span>     <span class="comment">|</span> <span class="comment">*</span> <span class="comment">|</span>
+<span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span> <span class="comment">#</span>  <span class="comment">/</span>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+<span class="comment">|</span>       <span class="comment">|</span>        <span class="comment">|</span>       <span class="comment">|</span>   <span class="comment">/</span>     <span class="comment">|</span>       <span class="comment">|</span>
+<span class="comment">|A_MAAR1|</span>        <span class="comment">|A_MAAR2|</span>  <span class="comment">/</span>      <span class="comment">|A_MAAR3|</span>
+<span class="comment">|</span>       <span class="comment">|</span>        <span class="comment">|</span>       <span class="comment">|</span>         <span class="comment">|</span>       <span class="comment">|</span>
+<span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>         <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                    <span class="comment">#</span>                   <span class="comment">*</span>
+                    <span class="comment">#</span>                   <span class="comment">*</span>
+                    <span class="comment">#</span>                   <span class="comment">*</span>
+ <span class="comment">________</span>         <span class="comment">________</span>             <span class="comment">________</span>
+<span class="comment">|The</span> <span class="comment">user|</span>       <span class="comment">|The</span> <span class="comment">user|</span>           <span class="comment">|The</span> <span class="comment">user|</span>
+<span class="comment">|</span>   <span class="comment">A</span>    <span class="comment">|</span>-<span class="comment">move</span>-&gt;<span class="comment">|</span>   <span class="comment">A</span>    <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="comment">move</span>-<span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>   <span class="comment">A</span>    <span class="comment">|</span>
+<span class="comment">|________|</span>       <span class="comment">|________|</span>           <span class="comment">|________|</span>
+
+
+             <span class="comment">Figure</span> <span class="comment">2:The</span> <span class="comment">transmission</span> <span class="comment">of</span> <span class="comment">data</span> <span class="comment">packets
+</pre></figure></code></pre>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T02:50:00.000Z"><a href="/2013/05/06/draft-luo-dmm-with-mip-and-pmip-00/">5月 6 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/draft-luo-dmm-with-mip-and-pmip-00/">draft-luo-dmm-with-mip-and-pmip-00</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>Distributed Mobility Management Approach with Mobile IP and Proxy Mobile IP</h1>
+<h3><a href="http://tools.ietf.org/html/draft-luo-dmm-with-mip-and-pmip-00">draft-luo-dmm-with-mip-and-pmip-00</a></h3>
+<pre><code><figure class="highlight"><pre>本文提出了分布式移动管理体系结构的概念以及该结构的一些主要处理方法。
+这些处理方法可以兼容现有的移动IP和代理移动IP协议。
+</pre></figure></code></pre>
+<hr>
+<h2>Introduction</h2>
+<p>集中式移动锚定有一些诸如单点故障、非最优路径路由等缺点。这些缺点在<a href="http://tools.ietf.org/html/draft-liu-mext-distributed-mobile-ip-00">I-D.liu-mext-distributed-mobile-ip</a>中讨论过了。</p>
+<p>本文提出了分布式移动管理体系结构的概念以及该结构的一些主要处理方法。这些处理方法可以兼容现有的移动IP和代理移动IP协议。</p>
+<p>本文只是一个初稿，并不为了解决<a href="http://tools.ietf.org/html/draft-liu-mext-distributed-mobile-ip-00">I-D.liu-mext-distributed-mobile-ip</a>中所提出的所有问题。</p>
+<h2>Terminology</h2>
+<p>移动路由(MR)，这是一个逻辑功能，用于拦截从移动节点和HoA发送/接收的数据包并转发数据包，根据位置信息执行分布式路由选择。</p>
+<p>主地址分配(HAA)，这是一个逻辑功能，用于向一个移动节点分配主网络前缀或主地址。</p>
+<p>位置管理(LM)，这是一个逻辑功能，用于管理并跟踪移动节点位置信息，其中包括MN的HoA与MN路由地址(或另一网络元素，它知道如何对MN的数据包进行转发)的映射。</p>
+<h2>Solution Overview</h2>
+<p>本方案将集中式锚点分解为下列逻辑功能，来允许使用更灵活的设计来实现DMM：</p>
+<ul>
+<li><p>主地址分配功能 </p>
+</li>
+<li><p>移动路由功能</p>
+</li>
+<li><p>位置管理功能</p>
+</li>
+</ul>
+<pre><code><figure class="highlight"><pre>            <span class="comment">One</span> <span class="comment">Administrative</span> <span class="comment">Domain</span>
+
+    <span class="comment">(</span>     <span class="comment">LM1/HAA1</span>    <span class="comment">)(</span>  <span class="comment">LM2/HAA2</span> <span class="comment">)(</span>   <span class="comment">LM3</span>   <span class="comment">HAA3</span>  <span class="comment">)</span>
+    <span class="comment">(</span>                 <span class="comment">)(</span>           <span class="comment">)(</span>               <span class="comment">)</span>
+    <span class="comment">(</span>                 <span class="comment">)(</span>           <span class="comment">)(</span>               <span class="comment">)</span>
+    <span class="comment">(</span>  <span class="comment">MR11</span>     <span class="comment">MR12</span>  <span class="comment">)(</span>     <span class="comment">MR2</span>   <span class="comment">)(</span> <span class="comment">MR31</span>    <span class="comment">MR32</span>  <span class="comment">)</span>
+        <span class="literal">+</span>                               <span class="literal">+</span>
+        <span class="comment">|</span>     <span class="comment">Local</span>        <span class="comment">Local</span>        <span class="comment">|</span>     <span class="comment">Local</span>
+        <span class="comment">|</span>    <span class="comment">Network1</span>     <span class="comment">Network2</span>      <span class="comment">|</span>    <span class="comment">Network3</span>
+        <span class="literal">+</span>                               <span class="literal">+</span>
+       <span class="comment">MN1</span>                             <span class="comment">MN2</span>
+
+       <span class="comment">Figure</span> <span class="comment">1</span>.  <span class="comment">An</span> <span class="comment">example</span> <span class="comment">of</span> <span class="comment">DMM</span> <span class="comment">deployment
+</pre></figure></code></pre>
+<p>本文中假设所有本地网络均属于同一个管理域。</p>
+<p>MN最初连接的本地网络被称为它的Home Local Network。HAA功能是负责移动节点的IP地址\分配（例如HoA\HNP）。在移动过程中，移动节点可以离开它的Home Local Network进入另一个本地网络——Visited Local Network。</p>
+<pre><code><figure class="highlight"><pre><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+<span class="comment">|</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>         <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="comment">|</span>  <span class="comment">|</span>        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="comment">|</span>
+<span class="comment">|</span>  <span class="comment">|</span>   <span class="comment">HAA</span>   <span class="comment">|</span>         <span class="comment">|</span>   <span class="comment">LM</span>    <span class="literal">+</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="literal">+</span>   <span class="comment">LM</span>    <span class="comment">|</span>       <span class="comment">|</span>
+<span class="comment">|</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>         <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="comment">|</span>  <span class="comment">|</span>        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="comment">|</span>
+<span class="comment">|</span>      <span class="comment">;</span>                   <span class="comment">/|\</span>        <span class="comment">|</span>  <span class="comment">|</span>            <span class="comment">/|\</span>           <span class="comment">|</span>
+<span class="comment">|</span>     <span class="comment">/|\</span>                   <span class="comment">|</span>         <span class="comment">|</span>  <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>
+<span class="comment">|</span>      <span class="comment">|</span>                   <span class="comment">\|/</span>        <span class="comment">|</span>  <span class="comment">|</span>            <span class="comment">\|/</span>           <span class="comment">|</span>
+<span class="comment">|</span>      <span class="comment">|</span>               <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="comment">|</span>  <span class="comment">|</span>        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="comment">|</span>
+<span class="comment">|</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>   <span class="comment">MR</span>    <span class="literal">+</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="literal">+</span>   <span class="comment">MR</span>    <span class="comment">|</span>       <span class="comment">|</span>
+<span class="comment">|</span>                      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="comment">|</span>  <span class="comment">|</span>        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="comment">|</span>
+<span class="comment">|</span>                        <span class="comment">/|\</span> <span class="comment">/|\</span>      <span class="comment">|</span>  <span class="comment">|</span>          <span class="comment">/|\</span> <span class="comment">/|\</span>         <span class="comment">|</span>
+<span class="comment">|</span>                         <span class="comment">|</span>   <span class="comment">|</span>       <span class="comment">|</span>  <span class="comment">|</span>           <span class="comment">|</span>   <span class="comment">|</span>          <span class="comment">|</span>
+<span class="comment">|</span>                         <span class="comment">|___|</span>       <span class="comment">|</span>  <span class="comment">|</span>           <span class="comment">|___|</span>          <span class="comment">|</span>
+<span class="comment">|</span>                                     <span class="comment">|</span>  <span class="comment">|</span>                          <span class="comment">|</span>
+<span class="comment">|</span> <span class="comment">Home</span> <span class="comment">Local</span> <span class="comment">Network</span>                  <span class="comment">|</span>  <span class="comment">|</span> <span class="comment">Visited</span> <span class="comment">Local</span> <span class="comment">Network</span>    <span class="comment">|</span>
+<span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+
+ <span class="comment">Figure</span> <span class="comment">2</span>.  <span class="comment">Architecture
+</pre></figure></code></pre>
+<p>HAA、LM和MR之间需要接口，它们被描述如下：</p>
+<pre><code><figure class="highlight"><pre>   <span class="transposed_variable">a.</span>  HAA和MR之间的接口支持当在MN依附MR时，IP前缀或地址的分配。
+
+   <span class="transposed_variable">b.</span>  LM和MR之间的接口支持MN路由位置管理，以及为MN设置最优路由。
+
+   <span class="transposed_variable">c.</span>  MR和MR之间的接口支持在控制平面MN从原MR（pMR）切换到新的MR（nMR），并支持在数据平面以分布式的方式分发MN与CN间的流量
+</pre></figure></code></pre>
+<p>一个管理域可能存在大量的移动节点，LM可能需要保存大量的信息，LM可以以分布式数据库的形式来部署。</p>
+<h2>Overview of the Distributed Mobility Management Approaches</h2>
+<h4>Initial Attachment</h4>
+<h4>Dynamic Mobility Management</h4>
+<ol>
+<li>pMR和nMR的HoA\HNP对于移动节点是可用</li>
+<li>nMR下新发起的会话，优选使用新的HoA\HNP作为源IP</li>
+<li>切换前发起的旧会话仍然可以使用旧的HoA\HNP作为源IP。</li>
+</ol>
+<p>上述策略基于以下前提：</p>
+<ol>
+<li><strong>移动节点应该可以管理多个HoAs\HNP</strong>。</li>
+<li><strong>MN可以在MN上的应用请求IP地址绑定时决定返回哪一个HoA</strong>。</li>
+</ol>
+<h4>Distributed Routing</h4>
+<pre><code><figure class="highlight"><pre><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+<span class="comment">|</span> <span class="comment">MN2</span> <span class="comment">|</span>      <span class="comment">|</span>  <span class="comment">MR31</span> <span class="comment">|</span>     <span class="comment">|</span>  <span class="comment">LM</span>   <span class="comment">|</span>    <span class="comment">|</span>  <span class="comment">MR11</span>  <span class="comment">|</span>     <span class="comment">|</span> <span class="comment">MN1</span> <span class="comment">|</span>
+<span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|1</span>.<span class="comment">IP</span> <span class="comment">Traffic</span> <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|===========</span>&gt; <span class="comment">|</span> <span class="comment">2</span>. <span class="comment">Query</span>   <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span> <span class="comment">3</span>. <span class="comment">Rsp</span>     <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>   <span class="comment">|</span> <span class="comment">4</span>.<span class="comment">Record</span> <span class="comment">Location|</span>   <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>   <span class="comment">|</span>   <span class="comment">of</span> <span class="comment">MN1</span> <span class="comment">Locally</span> <span class="comment">|</span>   <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>  <span class="comment">5</span>. <span class="comment">Distributed</span> <span class="comment">Routing</span>  <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|========================</span>&gt; <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|6</span>.<span class="comment">IP</span> <span class="comment">Traffic</span> <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|===========</span>&gt; <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+
+    <span class="comment">Figure</span> <span class="comment">3</span>.  <span class="comment">Optimized</span> <span class="comment">routing</span> <span class="comment">based</span> <span class="comment">on</span> <span class="comment">location</span> <span class="comment">query</span>
+
+
+
+<span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+<span class="comment">|</span> <span class="comment">MN2</span> <span class="comment">|</span>      <span class="comment">|</span>  <span class="comment">MR31</span> <span class="comment">|</span>     <span class="comment">|</span>  <span class="comment">LM1</span>  <span class="comment">|</span>    <span class="comment">|</span>  <span class="comment">MR12</span>  <span class="comment">|</span>   <span class="comment">|</span>  <span class="comment">MR11</span>  <span class="comment">|</span>   <span class="comment">|</span> <span class="comment">MN1</span> <span class="comment">|</span>
+<span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|1</span>.<span class="comment">IP</span> <span class="comment">Traffic</span> <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|============</span>&gt;<span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span> <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>    <span class="comment">|2</span>.<span class="comment">Don't</span> <span class="comment">have</span> <span class="comment">MN1's</span> <span class="comment">|</span> <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>    <span class="comment">|</span>  <span class="comment">Routing</span> <span class="comment">Location</span> <span class="comment">|</span> <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span> <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span> <span class="comment">3</span>. <span class="comment">Regular</span> <span class="comment">IPv6</span> <span class="comment">Routing</span>  <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|========================</span>&gt; <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>   <span class="comment">4</span>. <span class="comment">Query</span>  <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>   <span class="comment">5</span>. <span class="comment">Rsp</span>    <span class="comment">|</span> <span class="comment">6</span>. <span class="comment">Distributed</span>         <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>    <span class="comment">Routing</span>             <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>     <span class="comment">8</span>. <span class="comment">Redirect</span>          <span class="comment">|===========</span>&gt;<span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>            <span class="comment">7</span>.<span class="comment">IP</span> <span class="comment">Traffic|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|==========</span>&gt;<span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>         <span class="comment">9</span>. <span class="comment">Distributed</span> <span class="comment">Routing</span>        <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|======================================</span>&gt;<span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>           <span class="comment">10</span>.<span class="comment">IP</span> <span class="comment">Traffic|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|==========</span>&gt;<span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+
+       <span class="comment">Figure</span> <span class="comment">4</span>.  <span class="comment">Another</span> <span class="comment">approach</span> <span class="comment">for</span> <span class="comment">optimized</span> <span class="comment">routing</span>
+
+
+<span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+<span class="comment">|MN1|</span>     <span class="comment">|</span>  <span class="comment">MR11</span>  <span class="comment">|</span>   <span class="comment">|</span>   <span class="comment">MR2</span>  <span class="comment">|</span>   <span class="comment">|</span>  <span class="comment">LM1</span>  <span class="comment">|</span>  <span class="comment">|</span>  <span class="comment">MR31</span>  <span class="comment">|</span>     <span class="comment">|MN2|</span>
+<span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">1</span>. <span class="comment">Ongoing</span> <span class="comment">traffic</span>       <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>&lt;<span class="comment">==========</span>&gt;<span class="comment">|</span>&lt;<span class="comment">==================================</span>&gt;<span class="comment">|</span>&lt;<span class="comment">========</span>&gt; <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>  <span class="comment">2</span>. <span class="comment">Context|</span>           <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>  <span class="comment">Transfer</span>  <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span> <span class="comment">3</span>. <span class="comment">IP</span>     <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span> <span class="comment">Traffic</span>   <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">4</span>. <span class="comment">Distributed</span> <span class="comment">Routing</span>  <span class="comment">|</span>&lt;<span class="comment">=========</span> <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>&lt;<span class="comment">===================================|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|5</span>. <span class="comment">Transfer</span> <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|==========</span>&gt; <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>    <span class="comment">6</span>. <span class="comment">IP</span> <span class="comment">Traffic</span>        <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>&lt;<span class="comment">=======================</span> <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span> <span class="comment">7</span>. <span class="comment">Redirect</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span> <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span> <span class="comment">|</span> <span class="comment">8</span>. <span class="comment">Update</span>      <span class="comment">|</span>    <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span> <span class="comment">|</span> <span class="comment">Location</span> <span class="comment">of</span> <span class="comment">MN1|</span>    <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span> <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>  <span class="comment">9</span>. <span class="comment">IP</span>    <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>  <span class="comment">Traffic</span>  <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|10</span>. <span class="comment">Distributed</span> <span class="comment">Routing|</span>&lt;<span class="comment">==========|</span>
+  <span class="comment">|</span>    <span class="comment">11</span>. <span class="comment">IP</span> <span class="comment">Traffic</span>       <span class="comment">|</span>&lt;<span class="comment">======================|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>&lt;<span class="comment">========================|</span>                       <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>                       <span class="comment">|</span>           <span class="comment">|</span>
+
+        <span class="comment">Figure</span> <span class="comment">5</span>.  <span class="comment">Handover</span> <span class="comment">with</span> <span class="comment">Active</span> <span class="comment">Session
+</pre></figure></code></pre>
+<h2>Considerations of the Optimized Routing</h2>
+<p>CN被假定为移动节点。这意味着CN必须连接到一个确定的MR，而且这个MR必须跟踪CN的位置并解析从CN到MN的所有数据包。但是，当CN为固定节点时，可能就没有这样为CN服务的MR了。</p>
+<p>现实环境中，大多数的固定节点（CN）都以一种集中的方式被部署，例如CDN/IDC/Web服务器等。这些固定节点一般是由同一对接入路由器汇聚，即使那些固定的节点的接入运营商的IP承载网拓扑可能是非常复杂的。 图6是一个示例。</p>
+<pre><code><figure class="highlight"><pre>   <span class="comment">__________</span>
+  <span class="comment">/</span>    <span class="comment">CN</span>     <span class="comment">\</span>            <span class="string">,</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="string">.</span>
+<span class="comment">((CDN\IDC\Web</span> <span class="comment">)</span>-<span class="literal">-</span><span class="literal">-</span><span class="comment">Access</span> <span class="comment">Router</span>     <span class="comment">`</span>.
+<span class="comment">(</span>   <span class="comment">Server)</span>   <span class="comment">)</span>    <span class="string">,</span><span class="literal">-</span><span class="literal">-</span><span class="comment">'</span>               <span class="comment">`'</span>
+ <span class="comment">\___________/</span>     <span class="comment">\</span>                 <span class="comment">_</span> <span class="literal">-</span><span class="comment">'</span>
+                    <span class="comment">'</span>-<span class="literal">-</span>  <span class="comment">MR</span>  <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">''</span>
+                          <span class="comment">|</span>
+                          <span class="comment">|</span>
+                         <span class="comment">MN1</span>
+
+ <span class="comment">Figure</span> <span class="comment">6</span>.  <span class="comment">CNs</span> <span class="comment">are</span> <span class="comment">fixed</span> <span class="comment">nodes
+</pre></figure></code></pre>
+<p>对于在图6中描述的场景，直接的解决方案是利用所谓的汇聚接入路由器或网关路由器（即在上图标出的接入路由器）实现MR功能。</p>
+<p>另一种替代方法是使用<a href="http://tools.ietf.org/html/draft-chan-dmm-framework-gap-analysis-06">I-D.chan-dmm-framework-gap-analysis</a>和<a href="http://tools.ietf.org/html/draft-wakikawa-mext-global-haha-spec-02">I-D.wakikawa-mext-global-haha-spec</a>中所描述的anycast机制。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T02:50:00.000Z"><a href="/2013/05/06/draft-ma-dmm-armip-00/">5月 6 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/draft-ma-dmm-armip-00/">draft-ma-dmm-armip-00</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>An AR-level solution support for Distributed Mobility Management</h1>
+<h3><a href="https://tools.ietf.org/html/draft-ma-dmm-armip-00">draft-ma-dmm-armip-00</a></h3>
+<hr>
+<h2>1.  Introduction</h2>
+<p>这篇文档以主机的方式描述了MAAR和AAA对IP移动性管理的支持。这能够解决移动实体对第一次连接到网络和随后切换之间的区分这一问题。本文件严格遵守两个原则。第一个是，MN（移动节点）的移动对CN（核心网络）是透明的。另一个是MN（移动节点）不参与任何和移动性相关的信令传输。</p>
+<h2>2.  Terminology</h2>
+<ul>
+<li>MAAR(Mobility anchor and Access Router)</li>
+<li>AMAAR (Accessing MAAR).指当前MN连接到的MAAR.每个ALMN必须为当前注册过的移动节点建立并维护两个绑定的列表。一个是内部绑定列表，另一个是外部绑定列表。每一个AMAAR都为新用户配置IPv6地址。因此AMAAR代表每一个移动节点执行移动性管理。每个AMAAR负责检测移动节点的运动和接入链路，并且用于绑定注册的初始化。</li>
+<li>FMAAR (Forwarding MAAR).指被MN以前访问过的MAAR，仍有active flow。MN可以具有一个或多个FMAAR。</li>
+<li>AAA (Authentication, Authorization and Accounting). AAA服务器记录用户的静态和动态信息，而动态信息包括该MN当前注册的MAAR的地址信息。</li>
+<li><p>DBU/DBA (Distributed BU/BA).一个MAAR发送DBU/DBA消息给另一个MAAR来建立相应的绑定列表。在本文中，有两种DBU/DBA信息。一个是pDBU/pDBA消息，另一个是的fDBU/ fDBA消息。</p>
+</li>
+<li><p>pDBU/pDBA.pDBU消息是通过移动节点的AMAAR发送给PMAAR,目的是在移动节点的AMAAR和PMAAR之间建立绑定。这个消息包括了AMAAR的地址。收到pDBU消息后，PMAAR给AMAAR发送一个pDBA消息进行答复，此消息包括FMAAR的地址和由FMAAR分配的MN的地址。fDBU/fDBA.fDBA消息由移动节点的AMAAR发送给FMAAR（不包括PMAAR），目的是在移动节点的AMAAR和FMAAR(不包括PMAAR)之间建立绑定。这个消息包括AMAAR的地址。收到fDBU消息后，FMAAR会给AMAAR发送一个fDBA消息进行答复。</p>
+</li>
+</ul>
+<h2>3.  MAAR Operation</h2>
+<h4>关键操作</h4>
+<ul>
+<li>AMAAR MUST send diameter request message to the AAA after detecting the MN&#39;s movement to the access link.AAA能够区分MN是第一次连接，还是切换后的连接。</li>
+<li>MAAR 维护两个绑定列表，内部绑定列表和外部的绑定列表。内部列表里绑定FMAAR分配的MN地址和MN的FMAAR的地址；内部绑定列表里绑定AMAAR分配的MN的地址和FMAAR分配的此MN的地址。</li>
+<li>每个FMAAR必须为每个之前注册过的MN维护一个绑定列表。这张列表存储了由FMAAR分配的MN的地址的绑定和此MN的AMAAR的地址。</li>
+<li>AMAAR和PMAAR建立双向隧道转发属于MN的所有数据流量。（地址绑定——AMAAR从AAA那获取PMAAR地址，AMAAR向PMAAR发送pDBU）</li>
+</ul>
+<h2>4.  Description of the solution</h2>
+<p>分布式移动管理方法的目的是克服传统的集中式移动管理的限制，通过使移动锚点更接近MN.遵循这一理念，我们建议，中央锚移动到网络的边缘，被部署在所述移动节点的接入路由器。也就是说，提供MN IP连通性的第一个元素也就是这些MN的移动管理者。</p>
+<pre><code><figure class="highlight"><pre>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+    <span class="comment">|</span>  <span class="comment">MN</span> <span class="comment">|</span>     <span class="comment">|</span> <span class="comment">MAAR1|</span>   <span class="comment">|</span> <span class="comment">MAAR2|</span>       <span class="comment">|</span> <span class="comment">MAAR3|</span>          <span class="comment">|</span> <span class="comment">AAA|</span>
+    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+       <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>             <span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">1</span>.<span class="comment">RS(HoA1</span>,<span class="comment">HoA2)</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>             <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">2</span>.<span class="comment">request</span>-<span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>             <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">3</span>.<span class="comment">response</span>-<span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>
+       <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">4</span>.<span class="comment">RA(HoA3)</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>             <span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="comment">5</span>.<span class="comment">pDBU</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>-<span class="literal">-</span><span class="comment">6</span>. <span class="comment">pDBA</span> <span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">7</span>.<span class="comment">fDBU</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">8</span>.<span class="comment">fDBA</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>                         <span class="comment">|</span>                 <span class="comment">|</span>
+
+
+
+                 <span class="comment">Figure</span> <span class="comment">1:Signaling</span> <span class="comment">of</span> <span class="comment">MN</span> <span class="comment">handover
+</pre></figure></code></pre>
+<ol>
+<li>MN从MAAR1，MAAR2 切换到MAAR3，MN发送一个包含HoA1和HoA2的消息给MAAR3。</li>
+<li>MAAR3发送diameter请求信息给AAA</li>
+<li>AAA有MAAR2的地址信息。AAA发送包含MAAR2的diameter答复信息，然后AAA更新包括MAAR3地址信息在内的MN的动态信息。</li>
+<li>MAAR3分配给MN另一个IPv6地址（HoA3）。同时，MAAR3建立并维护存储HoA1和HoA3，HoA2和HoA3绑定的外部绑定列表。</li>
+<li>与此同时，MAAR3发送包含MAAR3地址的pDBU信息给MAAR2.</li>
+<li>现在MAAR2有两个绑定列表。一个是内部绑定列表，另一个是外部绑定列表。第一个存储MAAR1的地址和HoA1。第二个存储HoA1和HoA1的绑定。在收到pDBU信息之后，MAAR2发送包括内部绑定列表、HoA2和MAAR2的地址在内的pDBA信息。之后，MAAR2用一个存储了HoA2和MAAR3地址的绑定列表替换这两个绑定列表。</li>
+<li>在收到pDBA信息后，MAAR3建立并维护这个存储了HoA1和MAAR1的地址绑定、HoA2和MAAR2的地址绑定的内部绑定列表。MAAR3发送包含MAAR3地址的fDBU信息给MAAR1。</li>
+<li>在收到fDBU信息后，MAAR1回复一个fDBA信息，并且更新之前存储HoA1和MAAR2的地址的绑定列表。这个列表现在存储了HoA1和MAAR3的地址。</li>
+</ol>
+<h2>5.  Forwarding Considerations</h2>
+<p>在收到有MN发送的数据包后，AMAAR将会检查数据包的源地址。如果这个地址是由AMAAR分配的，AMAAR就会根据包的目的地址将包转发给CN。如果地址不是由AMAAR分配的，AMAAR就会根据源地址搜索内部绑定列表，然后找到相应的FMAAR的地址。然后，AMAAR封装这些包到相应的FMAAR。</p>
+<pre><code><figure class="highlight"><pre>    <span class="comment">_______</span>         <span class="comment">_______</span>          <span class="comment">_______</span>
+   <span class="comment">|</span>       <span class="comment">|</span>       <span class="comment">|</span>       <span class="comment">|</span>        <span class="comment">|</span>       <span class="comment">|</span>
+   <span class="comment">|</span>  <span class="comment">CN1</span>  <span class="comment">|</span>       <span class="comment">|</span>  <span class="comment">CN2</span>  <span class="comment">|</span>        <span class="comment">|</span>  <span class="comment">CN3</span>  <span class="comment">|</span>
+   <span class="comment">|_______|</span>       <span class="comment">|_______|</span>        <span class="comment">|_______|</span>
+       <span class="comment">'</span>               <span class="comment">*</span>  <span class="comment">Flow#2</span>         <span class="string">.</span>
+<span class="comment">Flow#1</span> <span class="comment">'</span>               <span class="comment">*</span>                 <span class="comment">|</span> <span class="comment">Flow#3</span>
+       <span class="comment">'</span>  <span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span> <span class="comment">'''''''*''''''''''''</span>.<span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span> <span class="string">.</span>
+     <span class="string">.</span><span class="string">.</span><span class="comment">'''</span>             <span class="comment">*</span>                 <span class="comment">'''</span>.<span class="string">.</span>
+   <span class="string">.</span><span class="comment">'</span>  <span class="comment">'</span>            <span class="comment">IP</span> <span class="comment">*</span> <span class="comment">network</span>         <span class="string">.</span>   <span class="comment">'</span>.
+   <span class="comment">:</span>   <span class="comment">'</span>               <span class="comment">*</span>                 <span class="comment">|</span>    <span class="comment">:</span>
+    <span class="comment">'</span>.<span class="string">.</span><span class="comment">'</span>           <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>             <span class="string">.</span> <span class="string">.</span><span class="string">.</span><span class="comment">'</span>
+       <span class="comment">'''</span>.<span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span>  <span class="comment">|</span>       <span class="comment">|</span>    <span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="comment">'''</span>
+       <span class="comment">'</span>           <span class="comment">|</span> <span class="comment">MAAR2</span> <span class="comment">|\</span>            <span class="string">.</span>
+       <span class="comment">'</span>           <span class="comment">|</span>       <span class="comment">|</span> <span class="comment">\</span>           <span class="comment">|</span>
+       <span class="comment">'</span>           <span class="comment">|</span>       <span class="comment">|*</span> <span class="comment">\</span>          <span class="string">.</span>
+       <span class="comment">'</span>           <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="comment">\*</span> <span class="comment">\</span>         <span class="comment">|</span>
+ <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                   <span class="comment">\*</span> <span class="comment">\</span> <span class="literal">+</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+ <span class="comment">|</span>       <span class="comment">|</span>                    <span class="comment">\*</span>  <span class="comment">|</span>       <span class="comment">|</span>
+ <span class="comment">|</span> <span class="comment">MAAR1</span> <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span> <span class="comment">MAAR3</span> <span class="comment">|</span>
+ <span class="comment">|</span>       <span class="comment">|''''''''''''''''''''''''|</span>       <span class="comment">|</span>
+ <span class="comment">|</span>       <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>       <span class="comment">|</span>
+ <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                                     <span class="comment">'</span> <span class="comment">*</span> <span class="comment">|</span>
+                             <span class="comment">Flow#1</span>  <span class="comment">'</span> <span class="comment">*</span> <span class="string">.</span> <span class="comment">Flow#3</span>
+                                     <span class="comment">'</span> <span class="comment">*</span> <span class="comment">|</span>
+   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                   <span class="comment">Flow#2</span> <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+   <span class="comment">|</span> <span class="comment">MN</span>  <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">move</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span> <span class="comment">MN</span>  <span class="comment">|</span>
+   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+
+
+              <span class="comment">Figure</span> <span class="comment">2:The</span> <span class="comment">transmission</span> <span class="comment">of</span> <span class="comment">data</span> <span class="comment">packets
+</pre></figure></code></pre>
+<h2>6.  Message Formats</h2>
+<p>略</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T02:45:00.000Z"><a href="/2013/05/06/draft-luo-dmm-with-ipv6-prefix-properties-00/">5月 6 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/draft-luo-dmm-with-ipv6-prefix-properties-00/">draft-luo-dmm-with-ipv6-prefix-properties-00</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>Distributed Mobility Management Approaches with IPv6 Prefix Properties</h1>
+<h3><a href="http://tools.ietf.org/html/draft-luo-dmm-with-ipv6-prefix-properties-00">draft-luo-dmm-with-ipv6-prefix-properties-00</a></h3>
+<p>为了支持一个更分布的模型，本文扩展了现有的基于PMIP的移动性管理协议，并通过引入两个新的逻辑功能来实现分布式锚定和定位管理。鉴于MN可能并不总是需要移动性支持，即需要应用全局性前缀和其他的网络资源，本草案支持该选项以此来补充IPv6前缀源地址选择提示（即IPv6邻居发现协议和它的前缀信息选项）的扩展属性，实现了UE可以根据其服务/应用的移动性支持需求来选择IPv6的前缀。当MN支持扩展的前缀属性功能时，该草案允许ＭＮ可以根据 I-D.korhonen-dmm-prefix-properties 里描述的机制来选择合适的前缀。一旦确定了IPv6前缀，其余的ＤＭＭ机制则与I-D.luo-dmm-pmip-based-dmm-approach 类似。</p>
+<hr>
+<h2>Solution Overview</h2>
+<p>两个新的逻辑功能:</p>
+<ul>
+<li>位置管理功能（LMF）， 用来维护IP地址与MN位置之间的匹配</li>
+<li>分布式定位功能（DAF）用来对MN的第一跳路由器提供本地定位支持，并在 I-D.luo-dmm-pmip-based-dmm-approach 第七部分中进行了描述，被称为增强型的LMA（eLMA）并且与在 RFC5213 中描述的LMA具有相似的性质。</li>
+</ul>
+<p>DAF由分布式路由子功能（DRF）和分布式移动子功能（DMF）组成：</p>
+<ul>
+<li>DRF在MN的第一跳路由器上作为分布式隧道端点进行操作，以此来支持在两个DMM端点（例如MN与其相应的节点，如CN）之间的优化的路由。</li>
+<li>DMF用来支持移动节点的移动性切换操作，减少在优化的路由建立的过程中数据包的丢失。</li>
+</ul>
+<p>在初始的MN附着中，本方案通过重新使用一个选项，即利用korhonen方案<a href="http://tools.ietf.org/html/draft-korhonen-dmm-prefix-properties-02">I-D.korhonen-dmm-prefix-properties</a>向MN传达IPv6前缀的源地址选择提示（例如在本草案中定义的前缀信息选项‘M’标志）。</p>
+<pre><code><figure class="highlight"><pre>     <span class="comment">Internet</span>
+        <span class="comment">|</span>           <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+        <span class="comment">|</span>           <span class="comment">|</span> <span class="comment">LMF</span> <span class="comment">|</span>
+  <span class="comment">Border</span> <span class="comment">Router</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+        <span class="comment">|</span>
+        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>
+                          <span class="comment">|</span>
+                      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                      <span class="comment">|</span> <span class="comment">eLMA1</span> <span class="comment">|</span>
+                      <span class="comment">|</span> <span class="comment">(DAF)</span> <span class="comment">|</span>
+                      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+           <span class="comment">Global</span> <span class="comment">Prefix</span> <span class="comment">|</span>  <span class="comment">|Local</span> <span class="comment">Prefix</span>
+               <span class="comment">(PreB)</span>    <span class="comment">|</span>  <span class="comment">|</span>  <span class="comment">(PreA)</span>
+                         <span class="comment">V</span>  <span class="comment">V</span>
+                        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                        <span class="comment">|</span> <span class="comment">MN</span> <span class="comment">|</span>
+                        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+        <span class="comment">IP1:</span> <span class="comment">From</span> <span class="comment">PreA</span> <span class="comment">(Local</span>, <span class="comment">without</span> <span class="comment">mobility)</span>
+        <span class="comment">IP2:</span> <span class="comment">From</span> <span class="comment">PreB</span> <span class="comment">(Global</span>, <span class="comment">with</span> <span class="comment">mobility)</span>
+
+              <span class="comment">Figure</span> <span class="comment">1</span>.  <span class="comment">Initial</span> <span class="comment">Attach
+</pre></figure></code></pre>
+<p>当eLMA检测到一个初始的MN附件时，它会像该MN发出一个RA消息。该RA包括IPv6前缀，每个前缀都被它的属性进行标记，包括它的移动管理属性。根据移动管理属性，IPv6前缀被MN区分为两类，即全局前缀和本地前缀。它们被定义如下:</p>
+<ul>
+<li>全局前缀：如果一个来自全局前缀的IPv6地址被用作一个会话的源地址，那么将通过使用本草案中规定的移动性管理机制来向该会话提供完全的移动性支持。这意味着即使连接点改变了，地址始终保持有效。</li>
+<li>本地前缀：如果一个来自本地前缀的IPv6地址被用作一个会话的源地址，不向该会话提供或者只提供有一定限制的移动性支持。那么当连接点改变的时候，地址可能不是有效的。</li>
+</ul>
+<p>根据已获取的移动性管理性质，MN根据IPv6前缀的两种分类来支持它的服务应用。如果MN的应用需要移动性支持，MN将通过让应用调用一个适当的API套接字扩展来从全局前缀中获取一个IPv6地址。反之，如果MN的应用不需要或者只要求有限的移动性支持，MN将通过调用另一个适当的API套接字扩展来从本地前缀中获取一个IPv6地址。</p>
+<p>网络不会向本地IPv6前缀提供移动性，这意味着当MN改变它的连接点时（如eLMA)，那么前一个eLMA分配的本地前缀将被弃用\无效。当连接到下一个eLMA时，新的eLMA会分配一个新的本地前缀。</p>
+<p>eLMA只为那些全局前缀向LMF更新位置信息。</p>
+<h2>Detailed Scenarios and Approaches</h2>
+<h4>Initial Attach</h4>
+<p>当eLMA1检测到一个移动节点的最初链接，它向该移动节点发送一条RA消息。该RA包含两种前缀：本地前缀（PreA）和全局前缀（PreB）。eLMA应该根据[I-D.korhonen-dmm-prefix-properties]给PreA(如本地前缀)(<a href="http://tools.ietf.org/html/draft-korhonen-dmm-prefix-properties-02)分配一个高优先级，同时给PreB(如全局前缀)分配一个低优先级。">http://tools.ietf.org/html/draft-korhonen-dmm-prefix-properties-02)分配一个高优先级，同时给PreB(如全局前缀)分配一个低优先级。</a></p>
+<p>移动节点的应用可以选择一个合适的IPv6地址作为它的源地址，如<a href="http://tools.ietf.org/html/draft-korhonen-dmm-prefix-properties-02">I-D.korhonen-dmm-prefix-properties</a>中第4节描述的。</p>
+<h4>Data forwarding</h4>
+<pre><code><figure class="highlight"><pre>                                <span class="comment">IP1</span> <span class="comment">as</span> <span class="comment">destination:</span>
+                                <span class="comment">common</span> <span class="comment">routing</span>
+                          <span class="comment">|</span>             <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                          <span class="comment">|</span>             <span class="comment">|</span> <span class="comment">eLMA3</span> <span class="comment">|_______|</span> <span class="comment">CN</span> <span class="comment">|</span>
+       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>            <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span> <span class="comment">(DAF)</span> <span class="comment">|</span>       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+       <span class="comment">|</span> <span class="comment">LMF</span> <span class="comment">|</span>            <span class="comment">|</span>             <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>            <span class="comment">|</span>     <span class="comment">IP2</span> <span class="comment">as</span> <span class="comment">destination:</span>
+                          <span class="comment">|</span>     <span class="comment">Routing</span> <span class="comment">based</span> <span class="comment">on</span> <span class="comment">location</span>
+       <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="comment">(e</span>.<span class="comment">g</span>. <span class="comment">IP</span> <span class="comment">in</span> <span class="comment">IP</span> <span class="comment">tunnel)</span>
+                     <span class="comment">|</span>
+                 <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                 <span class="comment">|</span> <span class="comment">eLMA1</span> <span class="comment">|</span>
+                 <span class="comment">|</span> <span class="comment">(DAF)</span> <span class="comment">|</span>
+                 <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+      <span class="comment">Global</span> <span class="comment">Prefix</span> <span class="comment">|</span>  <span class="comment">|Local</span> <span class="comment">Prefix</span>
+          <span class="comment">(PreB)</span>    <span class="comment">|</span>  <span class="comment">|</span>  <span class="comment">(PreA)</span>
+                    <span class="comment">V</span>  <span class="comment">V</span>
+                   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                   <span class="comment">|</span> <span class="comment">MN</span> <span class="comment">|</span>
+                   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+   <span class="comment">IP1:</span> <span class="comment">From</span> <span class="comment">PreA</span> <span class="comment">(Local</span>, <span class="comment">without</span> <span class="comment">mobility)</span>
+   <span class="comment">IP2:</span> <span class="comment">From</span> <span class="comment">PreB</span> <span class="comment">(Global</span>, <span class="comment">with</span> <span class="comment">mobility)</span>
+
+        <span class="comment">Figure</span> <span class="comment">2</span>.<span class="comment">1</span> <span class="comment">Data</span> <span class="comment">forwarding</span> <span class="comment">mechanism
+</pre></figure></code></pre>
+<p>当通信节点（CN）向MN发送消息时，首先到达CN的eLMA3。eLMA3将根据目的IPv6地址的类别进行操作：</p>
+<ol>
+<li>如果目的IPv6包含本地IPv6前缀（图2.1中的IP1），eLMA3将使用通用的路由机制来发送IP包。</li>
+<li>如果目的IPv6地址包含全局IPv6前缀（图2.1中的IP2），那么eLMA3将使用<a href="http://tools.ietf.org/id/draft-luo-dmm-pmip-based-dmm-approach-01.txt">I-D.luo-dmm-pmip-based-dmm-approach</a>7.2节中描述的路由机制来发送IP包。</li>
+</ol>
+<h4>Handoff Scenario</h4>
+<pre><code><figure class="highlight"><pre>                                          <span class="comment">IP1</span> <span class="comment">as</span> <span class="comment">destination:</span>
+                                          <span class="comment">can</span> <span class="comment">not</span> <span class="comment">be</span> <span class="comment">reachable</span>
+                                          <span class="comment">after</span> <span class="comment">handoff</span>
+    <span class="comment">Internet</span>                              <span class="comment">IP3</span> <span class="comment">as</span> <span class="comment">destination:</span>
+        <span class="comment">|</span>                                 <span class="comment">common</span> <span class="comment">routing</span>
+        <span class="comment">|</span>                                     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+        <span class="comment">|</span>                              <span class="comment">|</span>      <span class="comment">|</span> <span class="comment">eLMA3</span> <span class="comment">|_______|</span> <span class="comment">CN</span> <span class="comment">|</span>
+        <span class="comment">|</span>          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>             <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span> <span class="comment">(DAF)</span> <span class="comment">|</span>       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+  <span class="comment">Border</span> <span class="comment">Router</span>    <span class="comment">|</span> <span class="comment">LMF</span> <span class="comment">|</span>             <span class="comment">|</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+        <span class="comment">|</span>          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>             <span class="comment">|</span>  <span class="comment">IP2</span> <span class="comment">as</span> <span class="comment">destination:</span>
+        <span class="comment">|</span>                              <span class="comment">|</span>  <span class="comment">Routing</span> <span class="comment">based</span> <span class="comment">on</span> <span class="comment">location</span>
+        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+              <span class="comment">|</span>                     <span class="comment">|</span>
+          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>             <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+          <span class="comment">|</span> <span class="comment">eLMA2</span> <span class="comment">|</span>             <span class="comment">|</span> <span class="comment">eLMA1</span> <span class="comment">|</span>
+          <span class="comment">|</span> <span class="comment">(DAF)</span> <span class="comment">|</span>             <span class="comment">|</span> <span class="comment">(DAF)</span> <span class="comment">|</span>
+          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>             <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+<span class="comment">Local</span> <span class="comment">Prefix</span> <span class="comment">|</span>  <span class="comment">|</span>   <span class="comment">Global</span> <span class="comment">Prefix</span>   <span class="comment">|</span>  <span class="comment">|Local</span> <span class="comment">Prefix</span>
+  <span class="comment">(PreC)</span>     <span class="comment">|</span>  <span class="comment">|</span>       <span class="comment">(PreB)</span>      <span class="comment">|</span>  <span class="comment">|</span>  <span class="comment">(PreA)</span>
+             <span class="comment">V</span>  <span class="comment">V</span>                   <span class="comment">V</span>  <span class="comment">V</span>
+            <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                 <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+            <span class="comment">|</span> <span class="comment">MN</span> <span class="comment">|</span>   &lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">|</span> <span class="comment">MN</span> <span class="comment">|</span>
+            <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                 <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+ <span class="comment">IP3:</span> <span class="comment">From</span> <span class="comment">PreC</span>                <span class="comment">IP1:</span> <span class="comment">From</span> <span class="comment">PreA</span>
+ <span class="comment">(Local</span>, <span class="comment">without</span> <span class="comment">mobility)</span>     <span class="comment">(Local</span>, <span class="comment">without</span> <span class="comment">mobility)</span>
+ <span class="comment">IP2:Keep</span> <span class="comment">unchanged</span>            <span class="comment">IP2:</span> <span class="comment">From</span> <span class="comment">PreB</span>
+ <span class="comment">(Global</span>, <span class="comment">with</span> <span class="comment">mobility)</span>       <span class="comment">(Global</span>, <span class="comment">with</span> <span class="comment">mobility)</span>
+
+   <span class="comment">Figure</span> <span class="comment">3</span>.<span class="comment">1</span> <span class="comment">Handover</span> <span class="comment">Scenario
+</pre></figure></code></pre>
+<p>从CN发送到IP1（从PreA中配置的）的通信将被IPv6路由系统自动丢弃；除非在前一个和下一个分布式定位之间建立一条临时的隧道用来维护到前一个本地前缀的可达性。依赖这些本地前缀的应用可能会遇到源IP地址变化的情况。</p>
+<p>由eLMA2分配的RA消息携带的新的本地前缀（如图3.1中的PreC）目前有高优先级。MN将为PreC生成一个新的IPv6本地地址（图3.1中IP3）。</p>
+<p>MN初始连接过程中eLMA1分配的全局前缀在RA消息中保持不变。为了维护这些全局地址的可达性，eLMA2应该向LMF执行位置更新，来维持全局前缀的可达性。<a href="http://tools.ietf.org/id/draft-luo-dmm-pmip-based-dmm-approach-01.txt">I-D.luo-dmm-pmip-based-dmm-approach</a>中的7.2节对切换细节进行了详细的描述。</p>
+<p>因此，执行切换之后，既可以通过新的本地IPv6地址（如IP3）也可以通过全局IPv6地址（如IP2）来到达移动节点；如果在eLMA1和eLMA2之间有临时通道，也可以通过前一个本地IPv6地址（如IP1）到达。</p>
+<p>是否在eLMA1与eLMA2之间建立临时隧道来维持本地前缀的可达，这取决于网络策略。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T02:40:00.000Z"><a href="/2013/05/06/draft-liu-dmm-dynamic-anchor-discussion-00/">5月 6 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/draft-liu-dmm-dynamic-anchor-discussion-00/">draft-liu-dmm-dynamic-anchor-discussion-00</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>DMM Dynamic Anchor Discussion</h1>
+<p><em>给MN配置多个地址</em></p>
+<h3><a href="http://tools.ietf.org/html/draft-liu-dmm-dynamic-anchor-discussion-00">draft-liu-dmm-dynamic-anchor-discussion-00</a></h3>
+<p>There are many different proposals for DMM solution, one of those types of solution is called &quot;dynamic anchor&quot;. This document analyses the limitations of current dynamic anchor solution and discusses the possible solution to overcome those limitations.</p>
+<h2>Problem of dynamic anchor and potential solution</h2>
+<blockquote>
+<p>draft-seite-dmm-dma-00</p>
+</blockquote>
+<ol>
+<li><p>The main idea of dynamic anchor is <strong>distributing the mobility anchor function in the access router (MAR)</strong>. </p>
+</li>
+<li><p><strong>The newly initiated session is routed through the current MAR</strong>, only the <strong>original sessions that established before handover will be maintained at the previous anchor</strong>.</p>
+</li>
+<li>picture</li>
+</ol>
+<h3>Active session managment</h3>
+<blockquote>
+<p>Problem: how MAR2 know that there is an active session for HNP1 in MN?</p>
+<blockquote>
+<p>policy server to store</p>
+</blockquote>
+<p>MAR2/MAR1 has to have some mechanism to trigger the release HNP1</p>
+<blockquote>
+<p>Otherwise MAR1 will always be occupied by the MN, this leads system capacity waste</p>
+<p>One of possible solution is that MAR2 can inspect the traffic that has the source address prefix equals to HNP1.</p>
+<p>Need many Timers on MAR2, which leads system capacity consumed</p>
+</blockquote>
+</blockquote>
+<h3>Soure address selection</h3>
+<blockquote>
+<p>RFC3484 specifies the source address selection rules for IPv6 but RFC3484 is not enough to cope with this situation since RFC3284 does not specify how to select source address for a particular application.</p>
+</blockquote>
+<p><strong>Solution</strong> </p>
+<blockquote>
+<p>For any on-going session, keep to use the original address even there is a newly address been configured for the same interface.</p>
+<p>For any new session, always choose to use the newly allocated address. The new MAR need to advertise the newly allocated prefix as the highest priority.</p>
+</blockquote>
+<h3>CN address selection</h3>
+<p>From the CN’s perspective, the MN has multiple addresses, the CN needs to know which one it should use when it wants to initiate a session to MN.</p>
+<h3>IPv4 support</h3>
+<p>It will worse the IPv4 address depletion problem if use the dynamic anchor solution for IPv4 since each MN will need multiple IP addresses in that case.</p>
+<h3>Resource consumption consideration</h3>
+<ul>
+<li><p>MN在多个MAR间频繁切换，消耗网络资源</p>
+</li>
+<li><p>同时还有被hacker利用，消耗网络资源的危险</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T02:35:00.000Z"><a href="/2013/05/06/draft-liu-dmm-address-selection-01/">5月 6 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/draft-liu-dmm-address-selection-01/">draft-liu-dmm-address-selection-01</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>Address Selection for DMM</h1>
+<h3><a href="http://tools.ietf.org/html/draft-liu-dmm-address-selection-01">draft-liu-dmm-address-selection-01</a></h3>
+<pre><code><figure class="highlight"><pre>移动节点有可能有多个移动锚点以及相对应的前缀。
+在这种情况下，移动节点需要知道地址类型以选择一个正确的地址供应用使用。
+本篇文档描述了一种扩展路由通告消息的机制，通过携带一个标志以用来鉴别前缀的性质。
+</pre></figure></code></pre>
+<hr>
+<h2>Problem of address selection for DMM</h2>
+<blockquote>
+<p>draft-liu-dmm-dynamic-anchor-discussion-00</p>
+</blockquote>
+<p>分布式移动管理动态节点方案有地址选择的问题。这个问题的难点在于：移动节点并不知道多个前缀之间的区别。网络无法告知移动节点不同前缀性质之间的区别，而且也没有标准的机制让移动节点选择正确的前缀。</p>
+<h2>Extension to Router Advertisment</h2>
+<p>   移动IPv6 <a href="http://www.ietf.org/rfc/rfc3775.txt">RFC3775</a> 扩展了IPv6路由通告消息用来移动探测和本地代理信息广播。这篇文档建议对IPv6路由通告消息进行更多扩展以携带一个标志对它通告的前缀性质进行鉴别。<strong>H位</strong>被用来标识路由通告是由本地代理发送的。</p>
+<pre><code><figure class="highlight"><pre>                  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                  <span class="comment">|</span>  <span class="comment">Type</span>    <span class="comment">|</span>  <span class="comment">Code</span>   <span class="comment">|</span>     <span class="comment">Checksum</span>      <span class="comment">|</span>
+                  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                  <span class="comment">|Hop</span> <span class="comment">Limit</span> <span class="comment">|M|O|H|Re</span>-<span class="comment">|</span>    <span class="comment">Router</span> <span class="comment">Lifetime|</span>
+                  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                  <span class="comment">|</span>          <span class="comment">Reachable</span> <span class="comment">Time</span>                <span class="comment">|</span>
+                  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                  <span class="comment">|</span>          <span class="comment">Retrans</span> <span class="comment">Timer</span>                 <span class="comment">|</span>
+                  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                  <span class="comment">|</span>          <span class="comment">Options</span>                       <span class="comment">|</span>
+                  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+</pre></figure></code></pre>
+<p>扩展前缀消息选项，添加一个“T”标志，其定义如下：</p>
+<h4>T类型标志</h4>
+<ul>
+<li>00: 本地网络前缀。它表明这个前缀是由该移动节点所属的路由器分配和通告的。</li>
+<li>01: 远程网络前缀。它表明这个前缀是除这个移动节点所属的路由外的其他路由分配的。</li>
+<li>10: 保留</li>
+<li><p>11: 保留</p>
+<pre><code><figure class="highlight"><pre>          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+          <span class="comment">|</span>    <span class="comment">Type</span>     <span class="comment">|</span>    <span class="comment">Length</span>  <span class="comment">|PrefixLength|L|A|R|T</span> <span class="comment">|R</span>- <span class="comment">|</span>
+          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+          <span class="comment">|</span>                 <span class="comment">Valid</span> <span class="comment">Lifetime</span>                     <span class="comment">|</span>
+          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+          <span class="comment">|</span>                 <span class="comment">Preferred</span> <span class="comment">Lifetime</span>                 <span class="comment">|</span>
+          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+          <span class="comment">|</span>                 <span class="comment">Reserved</span>                           <span class="comment">|</span>
+          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+          <span class="comment">|</span>                                                    <span class="comment">|</span>
+          <span class="comment">|</span>                 <span class="comment">Prefix</span>                             <span class="comment">|</span>
+          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+</pre></figure></code></pre>
+</li>
+</ul>
+<p><strong>路由用来鉴别前缀类型的机制在这篇文档的范围之外。比如说，路由能通过查询策略服务器来知道由哪个路由分配特定的前缀。</strong></p>
+<h2>Mobile Node Operation</h2>
+<p>移动节点通过路由通告消息的T标志识别前缀类型。移动节点上的应用可以通过这个信息来选择正确的IP地址。比如说，在一个在会话中，应用一直选择之前使用的前缀直至其被移交到新的位置。对于新初始的应用，他会使用被当前路由分配的前缀。</p>
+<h4>An Example of How This Draft Works</h4>
+<pre><code><figure class="highlight"><pre>     <span class="comment">_______</span>     <span class="comment">_______</span>    <span class="comment">_______</span>
+    <span class="comment">|</span>       <span class="comment">|</span>   <span class="comment">|</span>       <span class="comment">|</span>  <span class="comment">|</span>       <span class="comment">|</span>
+    <span class="comment">|</span>  <span class="comment">CN1</span>  <span class="comment">|</span>   <span class="comment">|</span>  <span class="comment">CN2</span>  <span class="comment">|</span>  <span class="comment">|</span>  <span class="comment">CN3</span>  <span class="comment">|</span>
+    <span class="comment">|_______|</span>   <span class="comment">|_______|</span>  <span class="comment">|_______|</span>
+        <span class="comment">'</span>           <span class="string">.</span>            <span class="string">.</span>
+ <span class="comment">Flow#1</span> <span class="comment">'</span>    <span class="comment">Flow#2</span> <span class="string">.</span>            <span class="comment">|</span>  <span class="comment">Flow#3</span>
+        <span class="comment">'</span>   <span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="comment">'''''</span>.<span class="comment">'''''''</span>.<span class="string">.</span><span class="string">.</span><span class="string">.</span> <span class="string">.</span>
+      <span class="string">.</span><span class="string">.</span><span class="comment">'''</span>         <span class="string">.</span>           <span class="comment">'''</span>.<span class="string">.</span>
+    <span class="string">.</span><span class="comment">'</span>  <span class="comment">'</span>      <span class="comment">IP</span> <span class="comment">network</span>        <span class="string">.</span>   <span class="comment">'</span>.
+    <span class="comment">:</span>   <span class="comment">'</span>           <span class="string">.</span>            <span class="comment">|</span>    <span class="comment">:</span>
+     <span class="comment">'</span>.<span class="string">.</span><span class="comment">'</span>       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>        <span class="string">.</span> <span class="string">.</span><span class="string">.</span><span class="comment">'</span>
+        <span class="comment">'''</span>.<span class="string">.</span><span class="string">.</span>  <span class="comment">|</span>       <span class="comment">|</span>.<span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="comment">'''</span>
+        <span class="comment">'</span>       <span class="comment">|</span> <span class="comment">MAR2</span>  <span class="comment">|</span> <span class="comment">\</span>      <span class="string">.</span>
+        <span class="comment">'</span>       <span class="comment">|</span>       <span class="comment">|</span>. <span class="comment">\</span>     <span class="comment">|</span>
+        <span class="comment">'</span>       <span class="comment">|</span>       <span class="comment">|</span> <span class="string">.</span> <span class="comment">\</span>    <span class="string">.</span>
+        <span class="comment">'</span>       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="comment">\</span>  <span class="string">.</span><span class="comment">\</span>   <span class="comment">|</span>
+   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="comment">HNP2(T=00)</span> <span class="comment">\</span>  <span class="literal">+</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+   <span class="comment">|</span>       <span class="comment">|</span>   <span class="comment">HNP1(T=01)</span>  <span class="comment">\</span> <span class="comment">|</span>       <span class="comment">|</span> <span class="comment">HNP3(T=00)</span>
+   <span class="comment">|</span> <span class="comment">MAR1</span>  <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>  <span class="comment">MAR3</span> <span class="comment">|</span> <span class="comment">HNP2(T=01)</span>
+   <span class="comment">|</span>       <span class="comment">|</span> <span class="comment">''''''''''''''''|</span>       <span class="comment">|</span> <span class="comment">HNP1(T=01)</span>
+   <span class="comment">|</span>       <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>       <span class="comment">|</span>
+   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                 <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+   <span class="comment">HNP1(T=00)</span>                   <span class="comment">'</span> <span class="string">.</span> <span class="comment">|</span>
+                        <span class="comment">Flow#1</span>  <span class="comment">'</span> <span class="string">.</span> <span class="string">.</span>  <span class="comment">Flow#3</span>
+                                <span class="comment">'</span> <span class="string">.</span> <span class="comment">|</span>
+     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>            <span class="comment">Flow#2</span> <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+     <span class="comment">|</span> <span class="comment">MN</span>  <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">move</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span> <span class="comment">MN</span>  <span class="comment">|</span>
+     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+</pre></figure></code></pre>
+<ol>
+<li>当移动节点附属到MAR1，MAR1发送了路由通告消息，包含前缀信息选项的移动节点的HNP1以及T标志位设置为00。这表明HNP1是由当前路由（MAR1）分配和通告的本地网络前缀。移动节点能通过取自HNP1的IPv6地址初始化与CN1的会话（如图中的flow#1）。</li>
+<li>当移动节点切换至MAR2（flow#1在移动节点切换时仍在持续），MAR2发送包含了移动节点的HNP2的路由通告消息，其类型标志T被设置成00，同时之前的前缀（HNP1）被设置成01。移动节点就会识别HNP2是当前本地网络前缀，而HNP1是远程网络前缀。这时，移动节点会用取自HNP2的IPv6地址作为源地址初始化一个新的与CN2（如图中的flow#2）会话。因为IPv6地址取自本地网络前缀（HNP2），flow#2会使用常规的IPv6协议。对于flow#1，MAR1充当LMA，MAR2充当MAG。</li>
+<li>当移动节点切换至MAR3时（移动节点切换时flow#1和flow#2仍在持续），MAR3发送包含了移动节点新的前缀（HNP3）的路由通告消息，类型标志（T）被置为00，而之前的前缀（HNP1、HNP2）的类型标志（T）被置为01。这表明HNP3是本地网络前缀，而HNP1和HNP2是远程网络前缀。这时，移动节点把从HNP3取得的IPv6地址作为原地址，初始化与CN3的会话（比如图中的flow#3）。flow#3使用常规的IPv6协议。</li>
+</ol>
+<h4>MN Handoffs From MAR Back to Its Previous MAR</h4>
+<p>上述过程的逆过程。略。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T02:29:00.000Z"><a href="/2013/05/06/draft-korhonen-dmm-prefix-properties-03/">5月 6 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/draft-korhonen-dmm-prefix-properties-03/">draft-korhonen-dmm-prefix-properties-03</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>IPv6 Prefix Mobility Management Properties</h1>
+<h3><a href="http://tools.ietf.org/html/draft-korhonen-dmm-prefix-properties-03">draft-korhonen-dmm-prefix-properties-03.txt</a></h3>
+<pre><code><figure class="highlight"><pre>这篇规范定义并扩展IPv6邻居发现协议的前缀信息选项，扩展其标志位来描述与前缀相关的移动管理性质。
+这篇draft更新了<span class="link_label">[RFC4861]</span>(<span class="link_url">http://tools.ietf.org/rfc/rfc4861.txt</span>)。
+</pre></figure></code></pre>
+<hr>
+<h2>Background and Motivation</h2>
+<ul>
+<li>非最优路由</li>
+<li>过多的隧道，为了维护移动性相关绑定而增加的信令</li>
+<li>集中式的MAG下流量聚合</li>
+</ul>
+<p>In general, it is observed that most applications do not need IP level mobility, and work just
+fine with &quot;temporary&quot; IP addresses that come and go. However, IP mobility still has its virtues making the applications unaware of mobility, and certain wireless mobile networking architecture make extensive use of network based IP mobility.</p>
+<p>在许多情况下，这可能会导致MN有多个地址被使用，但是其中一些提供了移动性，而另一些没有提供。不得不提供方法来让终端主机区分是否是提供了移动性的地址，还是一些生存期很短并且只能在一个受限的拓扑域使用的地址。</p>
+<p><strong>这篇draft提供了IPv6地址管理的扩展以及源地址的选择，这样终端主机（以及它的应用）就能够为它们的需求选择一个合适的地址。</strong></p>
+<h2>Option Formats</h2>
+<pre><code><figure class="highlight"><pre><span class="attribute">'M</span>' 长为<span class="number">1</span>位的标志，描述了前缀的移动性，其性质被定义为：
+<span class="number">0</span> 这个前缀没有相关的基于网络的移动性，这个前缀以RFC4861中所提供的方式进行处理。
+<span class="number">1</span> 这个前缀提供了基于网络的移动性并且可能保持前缀未改变的有效时间。
+
+
+<span class="attribute">'S</span>' 长为<span class="number">1</span>位的标志，它能够提供与使用前缀相关的安全性质的提示。
+
+<span class="attribute">'Class</span>' 长达<span class="number">14</span>位的前缀分类，这个前缀分类加上了移动性与安全性的补充信息。<span class="number">0</span>被保留，该值没有描述前缀的任何信息。对于未知的分类都将其值置为<span class="number">0</span>。
+
+我们将<span class="attribute">'M</span>'位、<span class="attribute">'S</span>'位以及<span class="attribute">'class</span>’的结合称之为前缀性质。
+</pre></figure></code></pre>
+<h2>Host Considerations</h2>
+<blockquote>
+<p>[I-D.liu-dmm-mobility-api]</p>
+</blockquote>
+<h4>内部数据结构</h4>
+<p>主机内部数据结构需要被前缀性质信息扩展，这些信息与已学习的前缀及配置地址相关联。关于这一点是如何完成是需要由具体的主机来指定的。一个应用怎样才能够知道或询问到一个地址或一个前缀的移动性也是由具体主机的实现来决定的。一个可能性是通过socket API的扩展来提供这样的信息。（关于这点可以看 <a href="http://tools.ietf.org/id/draft-korhonen-dmm-prefix-properties-03.txt">I-D.liu-dmm-mobility-api</a> 中的讨论）。其它的可能性包括ioctl（）的扩展以及NetLink的扩展。</p>
+<h4>默认地址选择</h4>
+<p>“前缀性质”提供的信息只能用来作为一种提示。它并不会自动的影响已经存在了的东西<a href="http://tools.ietf.org/rfc/rfc6724.txt">RFC6724</a>，除了稍后将要描述的&#39;M&#39;标志位之外。对于主机的策略表来说，一个详细的规则不得不被一个应用或者一些守护进程插入。在可选情况下，一个应用能够通过在<a href="http://tools.ietf.org/id/draft-korhonen-dmm-prefix-properties-03.txt">I-D.liu-dmm-mobility-api</a>中讨论的socket API的扩展来表达地址移动性的优先级，这就意味着库文件或中间件不得不修改策略表或算法。</p>
+<blockquote>
+<p>The ’M’ flag defines the prefix preference for an IP stack that
+understands the extensions defined in this specification. The IP
+stack SHOULD use the following preferences to supersede [RFC6724]
+Source Address Selection Rule 8 when selecting a default source
+address among multiple choices and an application has not explicitly
+indicate what kind of source address it prefers:</p>
+<ul>
+<li><p>0 Default preference.</p>
+</li>
+<li><p>1 Low preference.</p>
+</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T02:21:00.000Z"><a href="/2013/05/06/draft-bernardos-dmm-distributed-anchoring-01/">5月 6 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/draft-bernardos-dmm-distributed-anchoring-01/">draft-bernardos-dmm-distributed-anchoring-01</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>PMIPv6-based distributed anchoring</h1>
+<h3><a href="http://tools.ietf.org/html/draft-bernardos-dmm-distributed-anchoring-01">draft-bernardos-dmm-distributed-anchoring-01</a></h3>
+<blockquote>
+<p> <a href="http://tools.ietf.org/html/draft-bernardos-dmm-distributed-anchoring-02">draft-bernardos-dmm-distributed-anchoring-02</a> April 8, 2013</p>
+<p>02相比01变化很小，可以忽略两者间的差异</p>
+</blockquote>
+<p>The draft focuses on the required extensions to effectively support simultaneously anchoring several flows at different distributed gateways.</p>
+<hr>
+<h2>1.  Introduction</h2>
+<p>The main contribution of this draft is the definition of the mechanisms required to support the operation of such a network-based mobility solution when several flows are simultaneously anchored at different D-GWs, by introducing the concept of <strong>Distributed Logical Interface (DLIF)</strong>.  </p>
+<p>The document also defines the <strong>required PMIPv6 signaling extensions</strong>.</p>
+<p> Last, but not least, the solution is also extended to <strong>provide session continuity across different domains</strong>.</p>
+<h2>2.  Terminology</h2>
+<ul>
+<li>D-GW (Distributed Gateway).移动节点使用的第一跳IP路由器。它为每一个附加的移动节点提供一个IPv6前缀。</li>
+</ul>
+<ul>
+<li>Anchoring D-GW. 前访问过的锚定一个仍被移动节点使用的IPv6地址前缀的D-GW。</li>
+</ul>
+<ul>
+<li>Serving D-GW.MN当前连接到的D-GW。</li>
+</ul>
+<ul>
+<li>DLIF (Distributed Logical Interface).位于D-GW的IP协议栈的逻辑接口。对于每个活动的由移动节点使用的前缀，Serving D-GW具有DLIF配置（相关联到Anchoring D-GW）。这种方式下，Serving D-GW对每一个MN充当多个路由器，每一个对应到 active Anchoring D-GW。</li>
+<li>HSS(Home Subscriber Server).3GPP....</li>
+</ul>
+<h2>3.  Solution&#39;s overview</h2>
+<p>当移动节点连接到一个D-GW（初始连接或切换），D-GW作为路由器提供给MN一个IPv6前缀。MN独占前缀。D-GW充当普通路由器。</p>
+<p>当移动节点进行切换时，会附加到一个新的D-GW并且由于获得新的地址前缀和锚定到新的服务D-GW，将配置新的IPv6地址。D-GW充当普通路由器。
+如果anchoring D-GWs下发的前缀上还有active traffic，或者仅仅是想维持这个前缀的可达，serving D-GW充当MAG，anchoring D-GWs充当LMA。PBU，PBA。隧道。</p>
+<p>serving D-GW上获取相关联的anchoring D-GWs超出本文范围。Among the possible mechanisms that can be used to
+let the D-GW know about the prefixes that should be kept reachable, we can cite for instance layer-2 triggers/signaling.Regarding the mapping of IPv6 prefixes to anchoring D-GWs, there might be either fully distributed mechanisms in place, or the information can be maintained in a centralized repository (e.g.,in the HSS, using a centralized LMA <a href="http://tools.ietf.org/html/draft-bernardos-dmm-pmip-01">I-D.bernardos-dmm-pmip</a>, etc.).</p>
+<pre><code><figure class="highlight"><pre>        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+        <span class="comment">|</span> <span class="comment">MN1</span> <span class="comment">|</span>      <span class="comment">|</span> <span class="comment">D</span>-<span class="comment">GW1</span> <span class="comment">|</span>      <span class="comment">|</span> <span class="comment">D</span>-<span class="comment">GW2</span> <span class="comment">|</span>      <span class="comment">|</span> <span class="comment">CN@Internet</span> <span class="comment">|</span>
+        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+           <span class="comment">|</span>             <span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
+           <span class="comment">|</span>  <span class="comment">attachment</span> <span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
+           <span class="comment">|</span>&lt;<span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span>&gt;<span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
+           <span class="comment">|</span>  <span class="comment">prefA::/64</span> <span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
+           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
+<span class="comment">configures</span> <span class="comment">|</span>             <span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
+<span class="comment">prefA::MN1</span> <span class="comment">|</span>             <span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
+           <span class="comment">|</span>          <span class="comment">(traffic</span> <span class="comment">using</span> <span class="comment">prefA::MN1)</span>          <span class="comment">|</span>
+           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>
+           <span class="comment">|</span>             <span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
+           <span class="comment">|</span>         <span class="comment">handover</span>           <span class="comment">|</span>                 <span class="comment">|</span>
+           <span class="comment">/</span>.<span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="comment">/</span>                 <span class="comment">|</span>
+           <span class="comment">|</span>             <span class="comment">|</span>   <span class="comment">prefB::/64</span> <span class="comment">|</span>                 <span class="comment">|</span>
+           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>                 <span class="comment">|</span>
+<span class="comment">configures</span> <span class="comment">|</span>             <span class="comment">|</span>         <span class="comment">PBU</span>  <span class="comment">|</span>                 <span class="comment">|</span>
+<span class="comment">prefB::MN1</span> <span class="comment">|</span>      <span class="comment">tunnel</span> <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>                 <span class="comment">|</span>
+<span class="comment">and</span> <span class="comment">keeps</span>  <span class="comment">|</span>      <span class="comment">set</span>-<span class="comment">up</span> <span class="comment">|</span>  <span class="comment">PBA</span>         <span class="comment">|</span>                 <span class="comment">|</span>
+  <span class="comment">using</span>    <span class="comment">|</span>             <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span> <span class="comment">tunnel</span>          <span class="comment">|</span>
+<span class="comment">prefA::MN1</span> <span class="comment">|</span>             <span class="comment">|</span>              <span class="comment">|</span> <span class="comment">set</span>-<span class="comment">up</span>          <span class="comment">|</span>
+           <span class="comment">|</span>          <span class="comment">(traffic</span> <span class="comment">using</span> <span class="comment">prefB::MN1)</span>          <span class="comment">|</span>
+           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>
+           <span class="comment">|</span>          <span class="comment">(traffic</span> <span class="comment">using</span> <span class="comment">prefA::MN1)</span>          <span class="comment">|</span>
+           <span class="comment">|</span>             <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>
+           <span class="comment">|</span>             <span class="comment">|</span>&lt;<span class="comment">============</span>&gt;<span class="comment">|</span>                 <span class="comment">|</span>
+           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>                 <span class="comment">|</span>
+           <span class="comment">|</span>             <span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
+
+              <span class="comment">Figure</span> <span class="comment">1:</span> <span class="comment">Basic</span> <span class="comment">operation</span> <span class="comment">of</span> <span class="comment">the</span> <span class="comment">solution
+</pre></figure></code></pre>
+<h2>4.  Simultaneous anchoring of multiple flows (single operator)</h2>
+<pre><code><figure class="highlight"><pre>如何给MN配置多个地址，并使地址具有优先级
+</pre></figure></code></pre>
+<h2>5.  Simultaneous anchoring of multiple flows (multiple operators)</h2>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:210.25.132.159">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/DMM/">DMM</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 Peng Feixiang
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

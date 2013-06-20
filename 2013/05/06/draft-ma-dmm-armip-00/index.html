@@ -1,0 +1,238 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>draft-ma-dmm-armip-00 | Peng's Blog</title>
+  <meta name="author" content="Peng Feixiang">
+  
+  <meta name="description" content="Hello everyone">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="draft-ma-dmm-armip-00"/>
+  <meta property="og:site_name" content="Peng's Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Peng's Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Peng's Blog</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T02:50:00.000Z"><a href="/2013/05/06/draft-ma-dmm-armip-00/">5月 6 2013</a></time>
+      
+      
+  
+    <h1 class="title">draft-ma-dmm-armip-00</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>An AR-level solution support for Distributed Mobility Management</h1>
+<h3><a href="https://tools.ietf.org/html/draft-ma-dmm-armip-00">draft-ma-dmm-armip-00</a></h3>
+<hr>
+<h2>1.  Introduction</h2>
+<p>这篇文档以主机的方式描述了MAAR和AAA对IP移动性管理的支持。这能够解决移动实体对第一次连接到网络和随后切换之间的区分这一问题。本文件严格遵守两个原则。第一个是，MN（移动节点）的移动对CN（核心网络）是透明的。另一个是MN（移动节点）不参与任何和移动性相关的信令传输。</p>
+<h2>2.  Terminology</h2>
+<ul>
+<li>MAAR(Mobility anchor and Access Router)</li>
+<li>AMAAR (Accessing MAAR).指当前MN连接到的MAAR.每个ALMN必须为当前注册过的移动节点建立并维护两个绑定的列表。一个是内部绑定列表，另一个是外部绑定列表。每一个AMAAR都为新用户配置IPv6地址。因此AMAAR代表每一个移动节点执行移动性管理。每个AMAAR负责检测移动节点的运动和接入链路，并且用于绑定注册的初始化。</li>
+<li>FMAAR (Forwarding MAAR).指被MN以前访问过的MAAR，仍有active flow。MN可以具有一个或多个FMAAR。</li>
+<li>AAA (Authentication, Authorization and Accounting). AAA服务器记录用户的静态和动态信息，而动态信息包括该MN当前注册的MAAR的地址信息。</li>
+<li><p>DBU/DBA (Distributed BU/BA).一个MAAR发送DBU/DBA消息给另一个MAAR来建立相应的绑定列表。在本文中，有两种DBU/DBA信息。一个是pDBU/pDBA消息，另一个是的fDBU/ fDBA消息。</p>
+</li>
+<li><p>pDBU/pDBA.pDBU消息是通过移动节点的AMAAR发送给PMAAR,目的是在移动节点的AMAAR和PMAAR之间建立绑定。这个消息包括了AMAAR的地址。收到pDBU消息后，PMAAR给AMAAR发送一个pDBA消息进行答复，此消息包括FMAAR的地址和由FMAAR分配的MN的地址。fDBU/fDBA.fDBA消息由移动节点的AMAAR发送给FMAAR（不包括PMAAR），目的是在移动节点的AMAAR和FMAAR(不包括PMAAR)之间建立绑定。这个消息包括AMAAR的地址。收到fDBU消息后，FMAAR会给AMAAR发送一个fDBA消息进行答复。</p>
+</li>
+</ul>
+<h2>3.  MAAR Operation</h2>
+<h4>关键操作</h4>
+<ul>
+<li>AMAAR MUST send diameter request message to the AAA after detecting the MN&#39;s movement to the access link.AAA能够区分MN是第一次连接，还是切换后的连接。</li>
+<li>MAAR 维护两个绑定列表，内部绑定列表和外部的绑定列表。内部列表里绑定FMAAR分配的MN地址和MN的FMAAR的地址；内部绑定列表里绑定AMAAR分配的MN的地址和FMAAR分配的此MN的地址。</li>
+<li>每个FMAAR必须为每个之前注册过的MN维护一个绑定列表。这张列表存储了由FMAAR分配的MN的地址的绑定和此MN的AMAAR的地址。</li>
+<li>AMAAR和PMAAR建立双向隧道转发属于MN的所有数据流量。（地址绑定——AMAAR从AAA那获取PMAAR地址，AMAAR向PMAAR发送pDBU）</li>
+</ul>
+<h2>4.  Description of the solution</h2>
+<p>分布式移动管理方法的目的是克服传统的集中式移动管理的限制，通过使移动锚点更接近MN.遵循这一理念，我们建议，中央锚移动到网络的边缘，被部署在所述移动节点的接入路由器。也就是说，提供MN IP连通性的第一个元素也就是这些MN的移动管理者。</p>
+<pre><code><figure class="highlight"><pre>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+    <span class="comment">|</span>  <span class="comment">MN</span> <span class="comment">|</span>     <span class="comment">|</span> <span class="comment">MAAR1|</span>   <span class="comment">|</span> <span class="comment">MAAR2|</span>       <span class="comment">|</span> <span class="comment">MAAR3|</span>          <span class="comment">|</span> <span class="comment">AAA|</span>
+    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+       <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>             <span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">1</span>.<span class="comment">RS(HoA1</span>,<span class="comment">HoA2)</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>             <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">2</span>.<span class="comment">request</span>-<span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>             <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">3</span>.<span class="comment">response</span>-<span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>
+       <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">4</span>.<span class="comment">RA(HoA3)</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>             <span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="comment">5</span>.<span class="comment">pDBU</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>-<span class="literal">-</span><span class="comment">6</span>. <span class="comment">pDBA</span> <span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">7</span>.<span class="comment">fDBU</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">8</span>.<span class="comment">fDBA</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>                 <span class="comment">|</span>
+       <span class="comment">|</span>           <span class="comment">|</span>                         <span class="comment">|</span>                 <span class="comment">|</span>
+
+
+
+                 <span class="comment">Figure</span> <span class="comment">1:Signaling</span> <span class="comment">of</span> <span class="comment">MN</span> <span class="comment">handover
+</pre></figure></code></pre>
+<ol>
+<li>MN从MAAR1，MAAR2 切换到MAAR3，MN发送一个包含HoA1和HoA2的消息给MAAR3。</li>
+<li>MAAR3发送diameter请求信息给AAA</li>
+<li>AAA有MAAR2的地址信息。AAA发送包含MAAR2的diameter答复信息，然后AAA更新包括MAAR3地址信息在内的MN的动态信息。</li>
+<li>MAAR3分配给MN另一个IPv6地址（HoA3）。同时，MAAR3建立并维护存储HoA1和HoA3，HoA2和HoA3绑定的外部绑定列表。</li>
+<li>与此同时，MAAR3发送包含MAAR3地址的pDBU信息给MAAR2.</li>
+<li>现在MAAR2有两个绑定列表。一个是内部绑定列表，另一个是外部绑定列表。第一个存储MAAR1的地址和HoA1。第二个存储HoA1和HoA1的绑定。在收到pDBU信息之后，MAAR2发送包括内部绑定列表、HoA2和MAAR2的地址在内的pDBA信息。之后，MAAR2用一个存储了HoA2和MAAR3地址的绑定列表替换这两个绑定列表。</li>
+<li>在收到pDBA信息后，MAAR3建立并维护这个存储了HoA1和MAAR1的地址绑定、HoA2和MAAR2的地址绑定的内部绑定列表。MAAR3发送包含MAAR3地址的fDBU信息给MAAR1。</li>
+<li>在收到fDBU信息后，MAAR1回复一个fDBA信息，并且更新之前存储HoA1和MAAR2的地址的绑定列表。这个列表现在存储了HoA1和MAAR3的地址。</li>
+</ol>
+<h2>5.  Forwarding Considerations</h2>
+<p>在收到有MN发送的数据包后，AMAAR将会检查数据包的源地址。如果这个地址是由AMAAR分配的，AMAAR就会根据包的目的地址将包转发给CN。如果地址不是由AMAAR分配的，AMAAR就会根据源地址搜索内部绑定列表，然后找到相应的FMAAR的地址。然后，AMAAR封装这些包到相应的FMAAR。</p>
+<pre><code><figure class="highlight"><pre>    <span class="comment">_______</span>         <span class="comment">_______</span>          <span class="comment">_______</span>
+   <span class="comment">|</span>       <span class="comment">|</span>       <span class="comment">|</span>       <span class="comment">|</span>        <span class="comment">|</span>       <span class="comment">|</span>
+   <span class="comment">|</span>  <span class="comment">CN1</span>  <span class="comment">|</span>       <span class="comment">|</span>  <span class="comment">CN2</span>  <span class="comment">|</span>        <span class="comment">|</span>  <span class="comment">CN3</span>  <span class="comment">|</span>
+   <span class="comment">|_______|</span>       <span class="comment">|_______|</span>        <span class="comment">|_______|</span>
+       <span class="comment">'</span>               <span class="comment">*</span>  <span class="comment">Flow#2</span>         <span class="string">.</span>
+<span class="comment">Flow#1</span> <span class="comment">'</span>               <span class="comment">*</span>                 <span class="comment">|</span> <span class="comment">Flow#3</span>
+       <span class="comment">'</span>  <span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span> <span class="comment">'''''''*''''''''''''</span>.<span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span> <span class="string">.</span>
+     <span class="string">.</span><span class="string">.</span><span class="comment">'''</span>             <span class="comment">*</span>                 <span class="comment">'''</span>.<span class="string">.</span>
+   <span class="string">.</span><span class="comment">'</span>  <span class="comment">'</span>            <span class="comment">IP</span> <span class="comment">*</span> <span class="comment">network</span>         <span class="string">.</span>   <span class="comment">'</span>.
+   <span class="comment">:</span>   <span class="comment">'</span>               <span class="comment">*</span>                 <span class="comment">|</span>    <span class="comment">:</span>
+    <span class="comment">'</span>.<span class="string">.</span><span class="comment">'</span>           <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>             <span class="string">.</span> <span class="string">.</span><span class="string">.</span><span class="comment">'</span>
+       <span class="comment">'''</span>.<span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span>  <span class="comment">|</span>       <span class="comment">|</span>    <span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="comment">'''</span>
+       <span class="comment">'</span>           <span class="comment">|</span> <span class="comment">MAAR2</span> <span class="comment">|\</span>            <span class="string">.</span>
+       <span class="comment">'</span>           <span class="comment">|</span>       <span class="comment">|</span> <span class="comment">\</span>           <span class="comment">|</span>
+       <span class="comment">'</span>           <span class="comment">|</span>       <span class="comment">|*</span> <span class="comment">\</span>          <span class="string">.</span>
+       <span class="comment">'</span>           <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="comment">\*</span> <span class="comment">\</span>         <span class="comment">|</span>
+ <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                   <span class="comment">\*</span> <span class="comment">\</span> <span class="literal">+</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+ <span class="comment">|</span>       <span class="comment">|</span>                    <span class="comment">\*</span>  <span class="comment">|</span>       <span class="comment">|</span>
+ <span class="comment">|</span> <span class="comment">MAAR1</span> <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span> <span class="comment">MAAR3</span> <span class="comment">|</span>
+ <span class="comment">|</span>       <span class="comment">|''''''''''''''''''''''''|</span>       <span class="comment">|</span>
+ <span class="comment">|</span>       <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>       <span class="comment">|</span>
+ <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                                     <span class="comment">'</span> <span class="comment">*</span> <span class="comment">|</span>
+                             <span class="comment">Flow#1</span>  <span class="comment">'</span> <span class="comment">*</span> <span class="string">.</span> <span class="comment">Flow#3</span>
+                                     <span class="comment">'</span> <span class="comment">*</span> <span class="comment">|</span>
+   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                   <span class="comment">Flow#2</span> <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+   <span class="comment">|</span> <span class="comment">MN</span>  <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">move</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span> <span class="comment">MN</span>  <span class="comment">|</span>
+   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+
+
+              <span class="comment">Figure</span> <span class="comment">2:The</span> <span class="comment">transmission</span> <span class="comment">of</span> <span class="comment">data</span> <span class="comment">packets
+</pre></figure></code></pre>
+<h2>6.  Message Formats</h2>
+<p>略</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/DMM/">DMM</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:210.25.132.159">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/DMM/">DMM</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 Peng Feixiang
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

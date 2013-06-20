@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>draft-liu-dmm-dynamic-anchor-discussion-00 | Peng's Blog</title>
+  <meta name="author" content="Peng Feixiang">
+  
+  <meta name="description" content="Hello everyone">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="draft-liu-dmm-dynamic-anchor-discussion-00"/>
+  <meta property="og:site_name" content="Peng's Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Peng's Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Peng's Blog</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T02:40:00.000Z"><a href="/2013/05/06/draft-liu-dmm-dynamic-anchor-discussion-00/">5月 6 2013</a></time>
+      
+      
+  
+    <h1 class="title">draft-liu-dmm-dynamic-anchor-discussion-00</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>DMM Dynamic Anchor Discussion</h1>
+<p><em>给MN配置多个地址</em></p>
+<h3><a href="http://tools.ietf.org/html/draft-liu-dmm-dynamic-anchor-discussion-00">draft-liu-dmm-dynamic-anchor-discussion-00</a></h3>
+<p>There are many different proposals for DMM solution, one of those types of solution is called &quot;dynamic anchor&quot;. This document analyses the limitations of current dynamic anchor solution and discusses the possible solution to overcome those limitations.</p>
+<h2>Problem of dynamic anchor and potential solution</h2>
+<blockquote>
+<p>draft-seite-dmm-dma-00</p>
+</blockquote>
+<ol>
+<li><p>The main idea of dynamic anchor is <strong>distributing the mobility anchor function in the access router (MAR)</strong>. </p>
+</li>
+<li><p><strong>The newly initiated session is routed through the current MAR</strong>, only the <strong>original sessions that established before handover will be maintained at the previous anchor</strong>.</p>
+</li>
+<li>picture</li>
+</ol>
+<h3>Active session managment</h3>
+<blockquote>
+<p>Problem: how MAR2 know that there is an active session for HNP1 in MN?</p>
+<blockquote>
+<p>policy server to store</p>
+</blockquote>
+<p>MAR2/MAR1 has to have some mechanism to trigger the release HNP1</p>
+<blockquote>
+<p>Otherwise MAR1 will always be occupied by the MN, this leads system capacity waste</p>
+<p>One of possible solution is that MAR2 can inspect the traffic that has the source address prefix equals to HNP1.</p>
+<p>Need many Timers on MAR2, which leads system capacity consumed</p>
+</blockquote>
+</blockquote>
+<h3>Soure address selection</h3>
+<blockquote>
+<p>RFC3484 specifies the source address selection rules for IPv6 but RFC3484 is not enough to cope with this situation since RFC3284 does not specify how to select source address for a particular application.</p>
+</blockquote>
+<p><strong>Solution</strong> </p>
+<blockquote>
+<p>For any on-going session, keep to use the original address even there is a newly address been configured for the same interface.</p>
+<p>For any new session, always choose to use the newly allocated address. The new MAR need to advertise the newly allocated prefix as the highest priority.</p>
+</blockquote>
+<h3>CN address selection</h3>
+<p>From the CN’s perspective, the MN has multiple addresses, the CN needs to know which one it should use when it wants to initiate a session to MN.</p>
+<h3>IPv4 support</h3>
+<p>It will worse the IPv4 address depletion problem if use the dynamic anchor solution for IPv4 since each MN will need multiple IP addresses in that case.</p>
+<h3>Resource consumption consideration</h3>
+<ul>
+<li><p>MN在多个MAR间频繁切换，消耗网络资源</p>
+</li>
+<li><p>同时还有被hacker利用，消耗网络资源的危险</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/DMM/">DMM</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:210.25.132.159">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/DMM/">DMM</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 Peng Feixiang
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

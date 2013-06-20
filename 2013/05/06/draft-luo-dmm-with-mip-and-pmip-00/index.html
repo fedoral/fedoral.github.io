@@ -1,0 +1,328 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>draft-luo-dmm-with-mip-and-pmip-00 | Peng's Blog</title>
+  <meta name="author" content="Peng Feixiang">
+  
+  <meta name="description" content="Hello everyone">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="draft-luo-dmm-with-mip-and-pmip-00"/>
+  <meta property="og:site_name" content="Peng's Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Peng's Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Peng's Blog</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T02:50:00.000Z"><a href="/2013/05/06/draft-luo-dmm-with-mip-and-pmip-00/">5月 6 2013</a></time>
+      
+      
+  
+    <h1 class="title">draft-luo-dmm-with-mip-and-pmip-00</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>Distributed Mobility Management Approach with Mobile IP and Proxy Mobile IP</h1>
+<h3><a href="http://tools.ietf.org/html/draft-luo-dmm-with-mip-and-pmip-00">draft-luo-dmm-with-mip-and-pmip-00</a></h3>
+<pre><code><figure class="highlight"><pre>本文提出了分布式移动管理体系结构的概念以及该结构的一些主要处理方法。
+这些处理方法可以兼容现有的移动IP和代理移动IP协议。
+</pre></figure></code></pre>
+<hr>
+<h2>Introduction</h2>
+<p>集中式移动锚定有一些诸如单点故障、非最优路径路由等缺点。这些缺点在<a href="http://tools.ietf.org/html/draft-liu-mext-distributed-mobile-ip-00">I-D.liu-mext-distributed-mobile-ip</a>中讨论过了。</p>
+<p>本文提出了分布式移动管理体系结构的概念以及该结构的一些主要处理方法。这些处理方法可以兼容现有的移动IP和代理移动IP协议。</p>
+<p>本文只是一个初稿，并不为了解决<a href="http://tools.ietf.org/html/draft-liu-mext-distributed-mobile-ip-00">I-D.liu-mext-distributed-mobile-ip</a>中所提出的所有问题。</p>
+<h2>Terminology</h2>
+<p>移动路由(MR)，这是一个逻辑功能，用于拦截从移动节点和HoA发送/接收的数据包并转发数据包，根据位置信息执行分布式路由选择。</p>
+<p>主地址分配(HAA)，这是一个逻辑功能，用于向一个移动节点分配主网络前缀或主地址。</p>
+<p>位置管理(LM)，这是一个逻辑功能，用于管理并跟踪移动节点位置信息，其中包括MN的HoA与MN路由地址(或另一网络元素，它知道如何对MN的数据包进行转发)的映射。</p>
+<h2>Solution Overview</h2>
+<p>本方案将集中式锚点分解为下列逻辑功能，来允许使用更灵活的设计来实现DMM：</p>
+<ul>
+<li><p>主地址分配功能 </p>
+</li>
+<li><p>移动路由功能</p>
+</li>
+<li><p>位置管理功能</p>
+</li>
+</ul>
+<pre><code><figure class="highlight"><pre>            <span class="comment">One</span> <span class="comment">Administrative</span> <span class="comment">Domain</span>
+
+    <span class="comment">(</span>     <span class="comment">LM1/HAA1</span>    <span class="comment">)(</span>  <span class="comment">LM2/HAA2</span> <span class="comment">)(</span>   <span class="comment">LM3</span>   <span class="comment">HAA3</span>  <span class="comment">)</span>
+    <span class="comment">(</span>                 <span class="comment">)(</span>           <span class="comment">)(</span>               <span class="comment">)</span>
+    <span class="comment">(</span>                 <span class="comment">)(</span>           <span class="comment">)(</span>               <span class="comment">)</span>
+    <span class="comment">(</span>  <span class="comment">MR11</span>     <span class="comment">MR12</span>  <span class="comment">)(</span>     <span class="comment">MR2</span>   <span class="comment">)(</span> <span class="comment">MR31</span>    <span class="comment">MR32</span>  <span class="comment">)</span>
+        <span class="literal">+</span>                               <span class="literal">+</span>
+        <span class="comment">|</span>     <span class="comment">Local</span>        <span class="comment">Local</span>        <span class="comment">|</span>     <span class="comment">Local</span>
+        <span class="comment">|</span>    <span class="comment">Network1</span>     <span class="comment">Network2</span>      <span class="comment">|</span>    <span class="comment">Network3</span>
+        <span class="literal">+</span>                               <span class="literal">+</span>
+       <span class="comment">MN1</span>                             <span class="comment">MN2</span>
+
+       <span class="comment">Figure</span> <span class="comment">1</span>.  <span class="comment">An</span> <span class="comment">example</span> <span class="comment">of</span> <span class="comment">DMM</span> <span class="comment">deployment
+</pre></figure></code></pre>
+<p>本文中假设所有本地网络均属于同一个管理域。</p>
+<p>MN最初连接的本地网络被称为它的Home Local Network。HAA功能是负责移动节点的IP地址\分配（例如HoA\HNP）。在移动过程中，移动节点可以离开它的Home Local Network进入另一个本地网络——Visited Local Network。</p>
+<pre><code><figure class="highlight"><pre><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+<span class="comment">|</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>         <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="comment">|</span>  <span class="comment">|</span>        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="comment">|</span>
+<span class="comment">|</span>  <span class="comment">|</span>   <span class="comment">HAA</span>   <span class="comment">|</span>         <span class="comment">|</span>   <span class="comment">LM</span>    <span class="literal">+</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="literal">+</span>   <span class="comment">LM</span>    <span class="comment">|</span>       <span class="comment">|</span>
+<span class="comment">|</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>         <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="comment">|</span>  <span class="comment">|</span>        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="comment">|</span>
+<span class="comment">|</span>      <span class="comment">;</span>                   <span class="comment">/|\</span>        <span class="comment">|</span>  <span class="comment">|</span>            <span class="comment">/|\</span>           <span class="comment">|</span>
+<span class="comment">|</span>     <span class="comment">/|\</span>                   <span class="comment">|</span>         <span class="comment">|</span>  <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>
+<span class="comment">|</span>      <span class="comment">|</span>                   <span class="comment">\|/</span>        <span class="comment">|</span>  <span class="comment">|</span>            <span class="comment">\|/</span>           <span class="comment">|</span>
+<span class="comment">|</span>      <span class="comment">|</span>               <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="comment">|</span>  <span class="comment">|</span>        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="comment">|</span>
+<span class="comment">|</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>   <span class="comment">MR</span>    <span class="literal">+</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="literal">+</span>   <span class="comment">MR</span>    <span class="comment">|</span>       <span class="comment">|</span>
+<span class="comment">|</span>                      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="comment">|</span>  <span class="comment">|</span>        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="comment">|</span>
+<span class="comment">|</span>                        <span class="comment">/|\</span> <span class="comment">/|\</span>      <span class="comment">|</span>  <span class="comment">|</span>          <span class="comment">/|\</span> <span class="comment">/|\</span>         <span class="comment">|</span>
+<span class="comment">|</span>                         <span class="comment">|</span>   <span class="comment">|</span>       <span class="comment">|</span>  <span class="comment">|</span>           <span class="comment">|</span>   <span class="comment">|</span>          <span class="comment">|</span>
+<span class="comment">|</span>                         <span class="comment">|___|</span>       <span class="comment">|</span>  <span class="comment">|</span>           <span class="comment">|___|</span>          <span class="comment">|</span>
+<span class="comment">|</span>                                     <span class="comment">|</span>  <span class="comment">|</span>                          <span class="comment">|</span>
+<span class="comment">|</span> <span class="comment">Home</span> <span class="comment">Local</span> <span class="comment">Network</span>                  <span class="comment">|</span>  <span class="comment">|</span> <span class="comment">Visited</span> <span class="comment">Local</span> <span class="comment">Network</span>    <span class="comment">|</span>
+<span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+
+ <span class="comment">Figure</span> <span class="comment">2</span>.  <span class="comment">Architecture
+</pre></figure></code></pre>
+<p>HAA、LM和MR之间需要接口，它们被描述如下：</p>
+<pre><code><figure class="highlight"><pre>   <span class="transposed_variable">a.</span>  HAA和MR之间的接口支持当在MN依附MR时，IP前缀或地址的分配。
+
+   <span class="transposed_variable">b.</span>  LM和MR之间的接口支持MN路由位置管理，以及为MN设置最优路由。
+
+   <span class="transposed_variable">c.</span>  MR和MR之间的接口支持在控制平面MN从原MR（pMR）切换到新的MR（nMR），并支持在数据平面以分布式的方式分发MN与CN间的流量
+</pre></figure></code></pre>
+<p>一个管理域可能存在大量的移动节点，LM可能需要保存大量的信息，LM可以以分布式数据库的形式来部署。</p>
+<h2>Overview of the Distributed Mobility Management Approaches</h2>
+<h4>Initial Attachment</h4>
+<h4>Dynamic Mobility Management</h4>
+<ol>
+<li>pMR和nMR的HoA\HNP对于移动节点是可用</li>
+<li>nMR下新发起的会话，优选使用新的HoA\HNP作为源IP</li>
+<li>切换前发起的旧会话仍然可以使用旧的HoA\HNP作为源IP。</li>
+</ol>
+<p>上述策略基于以下前提：</p>
+<ol>
+<li><strong>移动节点应该可以管理多个HoAs\HNP</strong>。</li>
+<li><strong>MN可以在MN上的应用请求IP地址绑定时决定返回哪一个HoA</strong>。</li>
+</ol>
+<h4>Distributed Routing</h4>
+<pre><code><figure class="highlight"><pre><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+<span class="comment">|</span> <span class="comment">MN2</span> <span class="comment">|</span>      <span class="comment">|</span>  <span class="comment">MR31</span> <span class="comment">|</span>     <span class="comment">|</span>  <span class="comment">LM</span>   <span class="comment">|</span>    <span class="comment">|</span>  <span class="comment">MR11</span>  <span class="comment">|</span>     <span class="comment">|</span> <span class="comment">MN1</span> <span class="comment">|</span>
+<span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|1</span>.<span class="comment">IP</span> <span class="comment">Traffic</span> <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|===========</span>&gt; <span class="comment">|</span> <span class="comment">2</span>. <span class="comment">Query</span>   <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span> <span class="comment">3</span>. <span class="comment">Rsp</span>     <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>   <span class="comment">|</span> <span class="comment">4</span>.<span class="comment">Record</span> <span class="comment">Location|</span>   <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>   <span class="comment">|</span>   <span class="comment">of</span> <span class="comment">MN1</span> <span class="comment">Locally</span> <span class="comment">|</span>   <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>  <span class="comment">5</span>. <span class="comment">Distributed</span> <span class="comment">Routing</span>  <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|========================</span>&gt; <span class="comment">|</span>             <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|6</span>.<span class="comment">IP</span> <span class="comment">Traffic</span> <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|===========</span>&gt; <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>             <span class="comment">|</span>
+
+    <span class="comment">Figure</span> <span class="comment">3</span>.  <span class="comment">Optimized</span> <span class="comment">routing</span> <span class="comment">based</span> <span class="comment">on</span> <span class="comment">location</span> <span class="comment">query</span>
+
+
+
+<span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+<span class="comment">|</span> <span class="comment">MN2</span> <span class="comment">|</span>      <span class="comment">|</span>  <span class="comment">MR31</span> <span class="comment">|</span>     <span class="comment">|</span>  <span class="comment">LM1</span>  <span class="comment">|</span>    <span class="comment">|</span>  <span class="comment">MR12</span>  <span class="comment">|</span>   <span class="comment">|</span>  <span class="comment">MR11</span>  <span class="comment">|</span>   <span class="comment">|</span> <span class="comment">MN1</span> <span class="comment">|</span>
+<span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|1</span>.<span class="comment">IP</span> <span class="comment">Traffic</span> <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|============</span>&gt;<span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span> <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>    <span class="comment">|2</span>.<span class="comment">Don't</span> <span class="comment">have</span> <span class="comment">MN1's</span> <span class="comment">|</span> <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>    <span class="comment">|</span>  <span class="comment">Routing</span> <span class="comment">Location</span> <span class="comment">|</span> <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span> <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span> <span class="comment">3</span>. <span class="comment">Regular</span> <span class="comment">IPv6</span> <span class="comment">Routing</span>  <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|========================</span>&gt; <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>   <span class="comment">4</span>. <span class="comment">Query</span>  <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>   <span class="comment">5</span>. <span class="comment">Rsp</span>    <span class="comment">|</span> <span class="comment">6</span>. <span class="comment">Distributed</span>         <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>    <span class="comment">Routing</span>             <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>     <span class="comment">8</span>. <span class="comment">Redirect</span>          <span class="comment">|===========</span>&gt;<span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>            <span class="comment">7</span>.<span class="comment">IP</span> <span class="comment">Traffic|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|==========</span>&gt;<span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>         <span class="comment">9</span>. <span class="comment">Distributed</span> <span class="comment">Routing</span>        <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|======================================</span>&gt;<span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>           <span class="comment">10</span>.<span class="comment">IP</span> <span class="comment">Traffic|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|==========</span>&gt;<span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+   <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>             <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>
+
+       <span class="comment">Figure</span> <span class="comment">4</span>.  <span class="comment">Another</span> <span class="comment">approach</span> <span class="comment">for</span> <span class="comment">optimized</span> <span class="comment">routing</span>
+
+
+<span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+<span class="comment">|MN1|</span>     <span class="comment">|</span>  <span class="comment">MR11</span>  <span class="comment">|</span>   <span class="comment">|</span>   <span class="comment">MR2</span>  <span class="comment">|</span>   <span class="comment">|</span>  <span class="comment">LM1</span>  <span class="comment">|</span>  <span class="comment">|</span>  <span class="comment">MR31</span>  <span class="comment">|</span>     <span class="comment">|MN2|</span>
+<span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>  <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">1</span>. <span class="comment">Ongoing</span> <span class="comment">traffic</span>       <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>&lt;<span class="comment">==========</span>&gt;<span class="comment">|</span>&lt;<span class="comment">==================================</span>&gt;<span class="comment">|</span>&lt;<span class="comment">========</span>&gt; <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>  <span class="comment">2</span>. <span class="comment">Context|</span>           <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>  <span class="comment">Transfer</span>  <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span> <span class="comment">3</span>. <span class="comment">IP</span>     <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span> <span class="comment">Traffic</span>   <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">4</span>. <span class="comment">Distributed</span> <span class="comment">Routing</span>  <span class="comment">|</span>&lt;<span class="comment">=========</span> <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>&lt;<span class="comment">===================================|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|5</span>. <span class="comment">Transfer</span> <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|==========</span>&gt; <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>    <span class="comment">6</span>. <span class="comment">IP</span> <span class="comment">Traffic</span>        <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>&lt;<span class="comment">=======================</span> <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span> <span class="comment">7</span>. <span class="comment">Redirect</span>           <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span> <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span> <span class="comment">|</span> <span class="comment">8</span>. <span class="comment">Update</span>      <span class="comment">|</span>    <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span> <span class="comment">|</span> <span class="comment">Location</span> <span class="comment">of</span> <span class="comment">MN1|</span>    <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span> <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>    <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>  <span class="comment">9</span>. <span class="comment">IP</span>    <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>  <span class="comment">Traffic</span>  <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|10</span>. <span class="comment">Distributed</span> <span class="comment">Routing|</span>&lt;<span class="comment">==========|</span>
+  <span class="comment">|</span>    <span class="comment">11</span>. <span class="comment">IP</span> <span class="comment">Traffic</span>       <span class="comment">|</span>&lt;<span class="comment">======================|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>&lt;<span class="comment">========================|</span>                       <span class="comment">|</span>           <span class="comment">|</span>
+  <span class="comment">|</span>            <span class="comment">|</span>            <span class="comment">|</span>                       <span class="comment">|</span>           <span class="comment">|</span>
+
+        <span class="comment">Figure</span> <span class="comment">5</span>.  <span class="comment">Handover</span> <span class="comment">with</span> <span class="comment">Active</span> <span class="comment">Session
+</pre></figure></code></pre>
+<h2>Considerations of the Optimized Routing</h2>
+<p>CN被假定为移动节点。这意味着CN必须连接到一个确定的MR，而且这个MR必须跟踪CN的位置并解析从CN到MN的所有数据包。但是，当CN为固定节点时，可能就没有这样为CN服务的MR了。</p>
+<p>现实环境中，大多数的固定节点（CN）都以一种集中的方式被部署，例如CDN/IDC/Web服务器等。这些固定节点一般是由同一对接入路由器汇聚，即使那些固定的节点的接入运营商的IP承载网拓扑可能是非常复杂的。 图6是一个示例。</p>
+<pre><code><figure class="highlight"><pre>   <span class="comment">__________</span>
+  <span class="comment">/</span>    <span class="comment">CN</span>     <span class="comment">\</span>            <span class="string">,</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="string">.</span>
+<span class="comment">((CDN\IDC\Web</span> <span class="comment">)</span>-<span class="literal">-</span><span class="literal">-</span><span class="comment">Access</span> <span class="comment">Router</span>     <span class="comment">`</span>.
+<span class="comment">(</span>   <span class="comment">Server)</span>   <span class="comment">)</span>    <span class="string">,</span><span class="literal">-</span><span class="literal">-</span><span class="comment">'</span>               <span class="comment">`'</span>
+ <span class="comment">\___________/</span>     <span class="comment">\</span>                 <span class="comment">_</span> <span class="literal">-</span><span class="comment">'</span>
+                    <span class="comment">'</span>-<span class="literal">-</span>  <span class="comment">MR</span>  <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">''</span>
+                          <span class="comment">|</span>
+                          <span class="comment">|</span>
+                         <span class="comment">MN1</span>
+
+ <span class="comment">Figure</span> <span class="comment">6</span>.  <span class="comment">CNs</span> <span class="comment">are</span> <span class="comment">fixed</span> <span class="comment">nodes
+</pre></figure></code></pre>
+<p>对于在图6中描述的场景，直接的解决方案是利用所谓的汇聚接入路由器或网关路由器（即在上图标出的接入路由器）实现MR功能。</p>
+<p>另一种替代方法是使用<a href="http://tools.ietf.org/html/draft-chan-dmm-framework-gap-analysis-06">I-D.chan-dmm-framework-gap-analysis</a>和<a href="http://tools.ietf.org/html/draft-wakikawa-mext-global-haha-spec-02">I-D.wakikawa-mext-global-haha-spec</a>中所描述的anycast机制。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/DMM/">DMM</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:210.25.132.159">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/DMM/">DMM</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 Peng Feixiang
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>draft-luo-dmm-with-ipv6-prefix-properties-00 | Peng's Blog</title>
+  <meta name="author" content="Peng Feixiang">
+  
+  <meta name="description" content="Hello everyone">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="draft-luo-dmm-with-ipv6-prefix-properties-00"/>
+  <meta property="og:site_name" content="Peng's Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Peng's Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Peng's Blog</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T02:45:00.000Z"><a href="/2013/05/06/draft-luo-dmm-with-ipv6-prefix-properties-00/">5月 6 2013</a></time>
+      
+      
+  
+    <h1 class="title">draft-luo-dmm-with-ipv6-prefix-properties-00</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>Distributed Mobility Management Approaches with IPv6 Prefix Properties</h1>
+<h3><a href="http://tools.ietf.org/html/draft-luo-dmm-with-ipv6-prefix-properties-00">draft-luo-dmm-with-ipv6-prefix-properties-00</a></h3>
+<p>为了支持一个更分布的模型，本文扩展了现有的基于PMIP的移动性管理协议，并通过引入两个新的逻辑功能来实现分布式锚定和定位管理。鉴于MN可能并不总是需要移动性支持，即需要应用全局性前缀和其他的网络资源，本草案支持该选项以此来补充IPv6前缀源地址选择提示（即IPv6邻居发现协议和它的前缀信息选项）的扩展属性，实现了UE可以根据其服务/应用的移动性支持需求来选择IPv6的前缀。当MN支持扩展的前缀属性功能时，该草案允许ＭＮ可以根据 I-D.korhonen-dmm-prefix-properties 里描述的机制来选择合适的前缀。一旦确定了IPv6前缀，其余的ＤＭＭ机制则与I-D.luo-dmm-pmip-based-dmm-approach 类似。</p>
+<hr>
+<h2>Solution Overview</h2>
+<p>两个新的逻辑功能:</p>
+<ul>
+<li>位置管理功能（LMF）， 用来维护IP地址与MN位置之间的匹配</li>
+<li>分布式定位功能（DAF）用来对MN的第一跳路由器提供本地定位支持，并在 I-D.luo-dmm-pmip-based-dmm-approach 第七部分中进行了描述，被称为增强型的LMA（eLMA）并且与在 RFC5213 中描述的LMA具有相似的性质。</li>
+</ul>
+<p>DAF由分布式路由子功能（DRF）和分布式移动子功能（DMF）组成：</p>
+<ul>
+<li>DRF在MN的第一跳路由器上作为分布式隧道端点进行操作，以此来支持在两个DMM端点（例如MN与其相应的节点，如CN）之间的优化的路由。</li>
+<li>DMF用来支持移动节点的移动性切换操作，减少在优化的路由建立的过程中数据包的丢失。</li>
+</ul>
+<p>在初始的MN附着中，本方案通过重新使用一个选项，即利用korhonen方案<a href="http://tools.ietf.org/html/draft-korhonen-dmm-prefix-properties-02">I-D.korhonen-dmm-prefix-properties</a>向MN传达IPv6前缀的源地址选择提示（例如在本草案中定义的前缀信息选项‘M’标志）。</p>
+<pre><code><figure class="highlight"><pre>     <span class="comment">Internet</span>
+        <span class="comment">|</span>           <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+        <span class="comment">|</span>           <span class="comment">|</span> <span class="comment">LMF</span> <span class="comment">|</span>
+  <span class="comment">Border</span> <span class="comment">Router</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+        <span class="comment">|</span>
+        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>
+                          <span class="comment">|</span>
+                      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                      <span class="comment">|</span> <span class="comment">eLMA1</span> <span class="comment">|</span>
+                      <span class="comment">|</span> <span class="comment">(DAF)</span> <span class="comment">|</span>
+                      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+           <span class="comment">Global</span> <span class="comment">Prefix</span> <span class="comment">|</span>  <span class="comment">|Local</span> <span class="comment">Prefix</span>
+               <span class="comment">(PreB)</span>    <span class="comment">|</span>  <span class="comment">|</span>  <span class="comment">(PreA)</span>
+                         <span class="comment">V</span>  <span class="comment">V</span>
+                        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                        <span class="comment">|</span> <span class="comment">MN</span> <span class="comment">|</span>
+                        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+        <span class="comment">IP1:</span> <span class="comment">From</span> <span class="comment">PreA</span> <span class="comment">(Local</span>, <span class="comment">without</span> <span class="comment">mobility)</span>
+        <span class="comment">IP2:</span> <span class="comment">From</span> <span class="comment">PreB</span> <span class="comment">(Global</span>, <span class="comment">with</span> <span class="comment">mobility)</span>
+
+              <span class="comment">Figure</span> <span class="comment">1</span>.  <span class="comment">Initial</span> <span class="comment">Attach
+</pre></figure></code></pre>
+<p>当eLMA检测到一个初始的MN附件时，它会像该MN发出一个RA消息。该RA包括IPv6前缀，每个前缀都被它的属性进行标记，包括它的移动管理属性。根据移动管理属性，IPv6前缀被MN区分为两类，即全局前缀和本地前缀。它们被定义如下:</p>
+<ul>
+<li>全局前缀：如果一个来自全局前缀的IPv6地址被用作一个会话的源地址，那么将通过使用本草案中规定的移动性管理机制来向该会话提供完全的移动性支持。这意味着即使连接点改变了，地址始终保持有效。</li>
+<li>本地前缀：如果一个来自本地前缀的IPv6地址被用作一个会话的源地址，不向该会话提供或者只提供有一定限制的移动性支持。那么当连接点改变的时候，地址可能不是有效的。</li>
+</ul>
+<p>根据已获取的移动性管理性质，MN根据IPv6前缀的两种分类来支持它的服务应用。如果MN的应用需要移动性支持，MN将通过让应用调用一个适当的API套接字扩展来从全局前缀中获取一个IPv6地址。反之，如果MN的应用不需要或者只要求有限的移动性支持，MN将通过调用另一个适当的API套接字扩展来从本地前缀中获取一个IPv6地址。</p>
+<p>网络不会向本地IPv6前缀提供移动性，这意味着当MN改变它的连接点时（如eLMA)，那么前一个eLMA分配的本地前缀将被弃用\无效。当连接到下一个eLMA时，新的eLMA会分配一个新的本地前缀。</p>
+<p>eLMA只为那些全局前缀向LMF更新位置信息。</p>
+<h2>Detailed Scenarios and Approaches</h2>
+<h4>Initial Attach</h4>
+<p>当eLMA1检测到一个移动节点的最初链接，它向该移动节点发送一条RA消息。该RA包含两种前缀：本地前缀（PreA）和全局前缀（PreB）。eLMA应该根据[I-D.korhonen-dmm-prefix-properties]给PreA(如本地前缀)(<a href="http://tools.ietf.org/html/draft-korhonen-dmm-prefix-properties-02)分配一个高优先级，同时给PreB(如全局前缀)分配一个低优先级。">http://tools.ietf.org/html/draft-korhonen-dmm-prefix-properties-02)分配一个高优先级，同时给PreB(如全局前缀)分配一个低优先级。</a></p>
+<p>移动节点的应用可以选择一个合适的IPv6地址作为它的源地址，如<a href="http://tools.ietf.org/html/draft-korhonen-dmm-prefix-properties-02">I-D.korhonen-dmm-prefix-properties</a>中第4节描述的。</p>
+<h4>Data forwarding</h4>
+<pre><code><figure class="highlight"><pre>                                <span class="comment">IP1</span> <span class="comment">as</span> <span class="comment">destination:</span>
+                                <span class="comment">common</span> <span class="comment">routing</span>
+                          <span class="comment">|</span>             <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                          <span class="comment">|</span>             <span class="comment">|</span> <span class="comment">eLMA3</span> <span class="comment">|_______|</span> <span class="comment">CN</span> <span class="comment">|</span>
+       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>            <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span> <span class="comment">(DAF)</span> <span class="comment">|</span>       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+       <span class="comment">|</span> <span class="comment">LMF</span> <span class="comment">|</span>            <span class="comment">|</span>             <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>            <span class="comment">|</span>     <span class="comment">IP2</span> <span class="comment">as</span> <span class="comment">destination:</span>
+                          <span class="comment">|</span>     <span class="comment">Routing</span> <span class="comment">based</span> <span class="comment">on</span> <span class="comment">location</span>
+       <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="comment">(e</span>.<span class="comment">g</span>. <span class="comment">IP</span> <span class="comment">in</span> <span class="comment">IP</span> <span class="comment">tunnel)</span>
+                     <span class="comment">|</span>
+                 <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                 <span class="comment">|</span> <span class="comment">eLMA1</span> <span class="comment">|</span>
+                 <span class="comment">|</span> <span class="comment">(DAF)</span> <span class="comment">|</span>
+                 <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+      <span class="comment">Global</span> <span class="comment">Prefix</span> <span class="comment">|</span>  <span class="comment">|Local</span> <span class="comment">Prefix</span>
+          <span class="comment">(PreB)</span>    <span class="comment">|</span>  <span class="comment">|</span>  <span class="comment">(PreA)</span>
+                    <span class="comment">V</span>  <span class="comment">V</span>
+                   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+                   <span class="comment">|</span> <span class="comment">MN</span> <span class="comment">|</span>
+                   <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+   <span class="comment">IP1:</span> <span class="comment">From</span> <span class="comment">PreA</span> <span class="comment">(Local</span>, <span class="comment">without</span> <span class="comment">mobility)</span>
+   <span class="comment">IP2:</span> <span class="comment">From</span> <span class="comment">PreB</span> <span class="comment">(Global</span>, <span class="comment">with</span> <span class="comment">mobility)</span>
+
+        <span class="comment">Figure</span> <span class="comment">2</span>.<span class="comment">1</span> <span class="comment">Data</span> <span class="comment">forwarding</span> <span class="comment">mechanism
+</pre></figure></code></pre>
+<p>当通信节点（CN）向MN发送消息时，首先到达CN的eLMA3。eLMA3将根据目的IPv6地址的类别进行操作：</p>
+<ol>
+<li>如果目的IPv6包含本地IPv6前缀（图2.1中的IP1），eLMA3将使用通用的路由机制来发送IP包。</li>
+<li>如果目的IPv6地址包含全局IPv6前缀（图2.1中的IP2），那么eLMA3将使用<a href="http://tools.ietf.org/id/draft-luo-dmm-pmip-based-dmm-approach-01.txt">I-D.luo-dmm-pmip-based-dmm-approach</a>7.2节中描述的路由机制来发送IP包。</li>
+</ol>
+<h4>Handoff Scenario</h4>
+<pre><code><figure class="highlight"><pre>                                          <span class="comment">IP1</span> <span class="comment">as</span> <span class="comment">destination:</span>
+                                          <span class="comment">can</span> <span class="comment">not</span> <span class="comment">be</span> <span class="comment">reachable</span>
+                                          <span class="comment">after</span> <span class="comment">handoff</span>
+    <span class="comment">Internet</span>                              <span class="comment">IP3</span> <span class="comment">as</span> <span class="comment">destination:</span>
+        <span class="comment">|</span>                                 <span class="comment">common</span> <span class="comment">routing</span>
+        <span class="comment">|</span>                                     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+        <span class="comment">|</span>                              <span class="comment">|</span>      <span class="comment">|</span> <span class="comment">eLMA3</span> <span class="comment">|_______|</span> <span class="comment">CN</span> <span class="comment">|</span>
+        <span class="comment">|</span>          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>             <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span> <span class="comment">(DAF)</span> <span class="comment">|</span>       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+  <span class="comment">Border</span> <span class="comment">Router</span>    <span class="comment">|</span> <span class="comment">LMF</span> <span class="comment">|</span>             <span class="comment">|</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+        <span class="comment">|</span>          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>             <span class="comment">|</span>  <span class="comment">IP2</span> <span class="comment">as</span> <span class="comment">destination:</span>
+        <span class="comment">|</span>                              <span class="comment">|</span>  <span class="comment">Routing</span> <span class="comment">based</span> <span class="comment">on</span> <span class="comment">location</span>
+        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+              <span class="comment">|</span>                     <span class="comment">|</span>
+          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>             <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+          <span class="comment">|</span> <span class="comment">eLMA2</span> <span class="comment">|</span>             <span class="comment">|</span> <span class="comment">eLMA1</span> <span class="comment">|</span>
+          <span class="comment">|</span> <span class="comment">(DAF)</span> <span class="comment">|</span>             <span class="comment">|</span> <span class="comment">(DAF)</span> <span class="comment">|</span>
+          <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>             <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+<span class="comment">Local</span> <span class="comment">Prefix</span> <span class="comment">|</span>  <span class="comment">|</span>   <span class="comment">Global</span> <span class="comment">Prefix</span>   <span class="comment">|</span>  <span class="comment">|Local</span> <span class="comment">Prefix</span>
+  <span class="comment">(PreC)</span>     <span class="comment">|</span>  <span class="comment">|</span>       <span class="comment">(PreB)</span>      <span class="comment">|</span>  <span class="comment">|</span>  <span class="comment">(PreA)</span>
+             <span class="comment">V</span>  <span class="comment">V</span>                   <span class="comment">V</span>  <span class="comment">V</span>
+            <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                 <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+            <span class="comment">|</span> <span class="comment">MN</span> <span class="comment">|</span>   &lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">|</span> <span class="comment">MN</span> <span class="comment">|</span>
+            <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>                 <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+ <span class="comment">IP3:</span> <span class="comment">From</span> <span class="comment">PreC</span>                <span class="comment">IP1:</span> <span class="comment">From</span> <span class="comment">PreA</span>
+ <span class="comment">(Local</span>, <span class="comment">without</span> <span class="comment">mobility)</span>     <span class="comment">(Local</span>, <span class="comment">without</span> <span class="comment">mobility)</span>
+ <span class="comment">IP2:Keep</span> <span class="comment">unchanged</span>            <span class="comment">IP2:</span> <span class="comment">From</span> <span class="comment">PreB</span>
+ <span class="comment">(Global</span>, <span class="comment">with</span> <span class="comment">mobility)</span>       <span class="comment">(Global</span>, <span class="comment">with</span> <span class="comment">mobility)</span>
+
+   <span class="comment">Figure</span> <span class="comment">3</span>.<span class="comment">1</span> <span class="comment">Handover</span> <span class="comment">Scenario
+</pre></figure></code></pre>
+<p>从CN发送到IP1（从PreA中配置的）的通信将被IPv6路由系统自动丢弃；除非在前一个和下一个分布式定位之间建立一条临时的隧道用来维护到前一个本地前缀的可达性。依赖这些本地前缀的应用可能会遇到源IP地址变化的情况。</p>
+<p>由eLMA2分配的RA消息携带的新的本地前缀（如图3.1中的PreC）目前有高优先级。MN将为PreC生成一个新的IPv6本地地址（图3.1中IP3）。</p>
+<p>MN初始连接过程中eLMA1分配的全局前缀在RA消息中保持不变。为了维护这些全局地址的可达性，eLMA2应该向LMF执行位置更新，来维持全局前缀的可达性。<a href="http://tools.ietf.org/id/draft-luo-dmm-pmip-based-dmm-approach-01.txt">I-D.luo-dmm-pmip-based-dmm-approach</a>中的7.2节对切换细节进行了详细的描述。</p>
+<p>因此，执行切换之后，既可以通过新的本地IPv6地址（如IP3）也可以通过全局IPv6地址（如IP2）来到达移动节点；如果在eLMA1和eLMA2之间有临时通道，也可以通过前一个本地IPv6地址（如IP1）到达。</p>
+<p>是否在eLMA1与eLMA2之间建立临时隧道来维持本地前缀的可达，这取决于网络策略。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/DMM/">DMM</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:210.25.132.159">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/DMM/">DMM</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 Peng Feixiang
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
