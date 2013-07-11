@@ -51,6 +51,67 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-07-11T13:56:17.000Z"><a href="/2013/07/11/learn-mapreduce/">7月 11 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/07/11/learn-mapreduce/">Learn MapReduce</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>MapReduce: 分布式计算框架</h1>
+<p><a href="http://en.wikipedia.org/wiki/MapReduce">维基百科</a>中对MapReduce这样描述——&quot;<strong>MapReduce is a programming model for processing large data sets with a parallel, distributed algorithm on a cluster</strong>.&quot;
+MapReduce的名字由函数式编程中常用的map和reduce两个单词组成。2004年Google公司的Jeffrey Dean 和 Sanjay Ghemawat在论文<a href="http://research.google.com/archive/mapreduce.html">MapReduce: Simplified Data Processing on Large Clusters</a>首次提出了MapReduce的思想。</p>
+<p>MapReduce被广泛地应用于日志分析、海量数据排序、在海量数据中查找特定模式等场景中。Apache下的Hadoop项目是根据Google论文所实现的一个MapReduce框架。</p>
+<h3>MapReduce</h3>
+<ul>
+<li>优点：可在段时间内完成大量工作。</li>
+<li>缺点：算法必须经过重写，需要对系统工程有一定的了解。</li>
+<li>适用数据类型：数值型和标称型。</li>
+</ul>
+<h2>工作流程</h2>
+<p>MapReduce 在大量节点组成的集群上运行。它的工作流程是：单个作业被分成很多小份，输入数据也被切片(split)分发到每个节点，各个节点只在本地数据上做运算，对应的运算代码称为mapper，这个过程被称为map阶段。每个mapper的输出通过某种方式组合（一般还会做排序）。排序后的结果再被分成小份分发到各个节点进行下一步的工作，对应的运算代码称为reducer，此过程被称为reduce阶段。reducer的输出就是程序的最终执行结果。</p>
+<p><img src="http://www.baidupcs.com/thumbnail/6f030510f65769b8589e9d6000b6615e?fid=1713097195-250528-3812473492&amp;time=1373523273&amp;rt=pr&amp;sign=FDTAR-DCb740ccc5511e5e8fedcff06b081203-iXuESSvGOr3KVQjh8kaoniEZEQk%3D&amp;expires=8h&amp;size=c850_u580&amp;quality=100" alt="image"></p>
+<ul>
+<li>主节点控制MapReduce的作业流程。</li>
+<li>MapReduce的作业可以分为map任务和reduce任务。</li>
+<li>map任务之间不做数据交流，reduce任务也一样。</li>
+<li>map和reduce阶段中间，有一个sort或combine</li>
+<li>数据被重复存放在不同的机器上，以防某个机器失效。</li>
+<li>mapper和reducer传输的数据形式为key/value对。</li>
+</ul>
+<p>（论文学习待补充……）</p>
+<h2>参考</h2>
+<ul>
+<li><a href="http://www.manning.com/pharrington/">Machine Learning in Action</a></li>
+</ul>
+<h2>拓展阅读</h2>
+<ul>
+<li><a href="http://www.pgsqldb.org:8079/mwiki/index.php/MapReduce:_%E4%B8%80%E4%B8%AA%E5%B7%A8%E5%A4%A7%E7%9A%84%E5%80%92%E9%80%80">MapReduce: 一个巨大的倒退</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-06-20T02:26:05.000Z"><a href="/2013/06/20/hello-world/">6月 20 2013</a></time>
       
       
@@ -983,108 +1044,11 @@ indicate what kind of source address it prefers:</p>
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-06T02:21:00.000Z"><a href="/2013/05/06/draft-bernardos-dmm-distributed-anchoring-01/">5月 6 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/06/draft-bernardos-dmm-distributed-anchoring-01/">draft-bernardos-dmm-distributed-anchoring-01</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1>PMIPv6-based distributed anchoring</h1>
-<h3><a href="http://tools.ietf.org/html/draft-bernardos-dmm-distributed-anchoring-01">draft-bernardos-dmm-distributed-anchoring-01</a></h3>
-<blockquote>
-<p> <a href="http://tools.ietf.org/html/draft-bernardos-dmm-distributed-anchoring-02">draft-bernardos-dmm-distributed-anchoring-02</a> April 8, 2013</p>
-<p>02相比01变化很小，可以忽略两者间的差异</p>
-</blockquote>
-<p>The draft focuses on the required extensions to effectively support simultaneously anchoring several flows at different distributed gateways.</p>
-<hr>
-<h2>1.  Introduction</h2>
-<p>The main contribution of this draft is the definition of the mechanisms required to support the operation of such a network-based mobility solution when several flows are simultaneously anchored at different D-GWs, by introducing the concept of <strong>Distributed Logical Interface (DLIF)</strong>.  </p>
-<p>The document also defines the <strong>required PMIPv6 signaling extensions</strong>.</p>
-<p> Last, but not least, the solution is also extended to <strong>provide session continuity across different domains</strong>.</p>
-<h2>2.  Terminology</h2>
-<ul>
-<li>D-GW (Distributed Gateway).移动节点使用的第一跳IP路由器。它为每一个附加的移动节点提供一个IPv6前缀。</li>
-</ul>
-<ul>
-<li>Anchoring D-GW. 前访问过的锚定一个仍被移动节点使用的IPv6地址前缀的D-GW。</li>
-</ul>
-<ul>
-<li>Serving D-GW.MN当前连接到的D-GW。</li>
-</ul>
-<ul>
-<li>DLIF (Distributed Logical Interface).位于D-GW的IP协议栈的逻辑接口。对于每个活动的由移动节点使用的前缀，Serving D-GW具有DLIF配置（相关联到Anchoring D-GW）。这种方式下，Serving D-GW对每一个MN充当多个路由器，每一个对应到 active Anchoring D-GW。</li>
-<li>HSS(Home Subscriber Server).3GPP....</li>
-</ul>
-<h2>3.  Solution&#39;s overview</h2>
-<p>当移动节点连接到一个D-GW（初始连接或切换），D-GW作为路由器提供给MN一个IPv6前缀。MN独占前缀。D-GW充当普通路由器。</p>
-<p>当移动节点进行切换时，会附加到一个新的D-GW并且由于获得新的地址前缀和锚定到新的服务D-GW，将配置新的IPv6地址。D-GW充当普通路由器。
-如果anchoring D-GWs下发的前缀上还有active traffic，或者仅仅是想维持这个前缀的可达，serving D-GW充当MAG，anchoring D-GWs充当LMA。PBU，PBA。隧道。</p>
-<p>serving D-GW上获取相关联的anchoring D-GWs超出本文范围。Among the possible mechanisms that can be used to
-let the D-GW know about the prefixes that should be kept reachable, we can cite for instance layer-2 triggers/signaling.Regarding the mapping of IPv6 prefixes to anchoring D-GWs, there might be either fully distributed mechanisms in place, or the information can be maintained in a centralized repository (e.g.,in the HSS, using a centralized LMA <a href="http://tools.ietf.org/html/draft-bernardos-dmm-pmip-01">I-D.bernardos-dmm-pmip</a>, etc.).</p>
-<pre><code><figure class="highlight"><pre>        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
-        <span class="comment">|</span> <span class="comment">MN1</span> <span class="comment">|</span>      <span class="comment">|</span> <span class="comment">D</span>-<span class="comment">GW1</span> <span class="comment">|</span>      <span class="comment">|</span> <span class="comment">D</span>-<span class="comment">GW2</span> <span class="comment">|</span>      <span class="comment">|</span> <span class="comment">CN@Internet</span> <span class="comment">|</span>
-        <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>      <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
-           <span class="comment">|</span>             <span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
-           <span class="comment">|</span>  <span class="comment">attachment</span> <span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
-           <span class="comment">|</span>&lt;<span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span>&gt;<span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
-           <span class="comment">|</span>  <span class="comment">prefA::/64</span> <span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
-           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
-<span class="comment">configures</span> <span class="comment">|</span>             <span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
-<span class="comment">prefA::MN1</span> <span class="comment">|</span>             <span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
-           <span class="comment">|</span>          <span class="comment">(traffic</span> <span class="comment">using</span> <span class="comment">prefA::MN1)</span>          <span class="comment">|</span>
-           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>
-           <span class="comment">|</span>             <span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
-           <span class="comment">|</span>         <span class="comment">handover</span>           <span class="comment">|</span>                 <span class="comment">|</span>
-           <span class="comment">/</span>.<span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="string">.</span><span class="comment">/</span>                 <span class="comment">|</span>
-           <span class="comment">|</span>             <span class="comment">|</span>   <span class="comment">prefB::/64</span> <span class="comment">|</span>                 <span class="comment">|</span>
-           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>                 <span class="comment">|</span>
-<span class="comment">configures</span> <span class="comment">|</span>             <span class="comment">|</span>         <span class="comment">PBU</span>  <span class="comment">|</span>                 <span class="comment">|</span>
-<span class="comment">prefB::MN1</span> <span class="comment">|</span>      <span class="comment">tunnel</span> <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>                 <span class="comment">|</span>
-<span class="comment">and</span> <span class="comment">keeps</span>  <span class="comment">|</span>      <span class="comment">set</span>-<span class="comment">up</span> <span class="comment">|</span>  <span class="comment">PBA</span>         <span class="comment">|</span>                 <span class="comment">|</span>
-  <span class="comment">using</span>    <span class="comment">|</span>             <span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span> <span class="comment">tunnel</span>          <span class="comment">|</span>
-<span class="comment">prefA::MN1</span> <span class="comment">|</span>             <span class="comment">|</span>              <span class="comment">|</span> <span class="comment">set</span>-<span class="comment">up</span>          <span class="comment">|</span>
-           <span class="comment">|</span>          <span class="comment">(traffic</span> <span class="comment">using</span> <span class="comment">prefB::MN1)</span>          <span class="comment">|</span>
-           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">|</span>-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>
-           <span class="comment">|</span>          <span class="comment">(traffic</span> <span class="comment">using</span> <span class="comment">prefA::MN1)</span>          <span class="comment">|</span>
-           <span class="comment">|</span>             <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>
-           <span class="comment">|</span>             <span class="comment">|</span>&lt;<span class="comment">============</span>&gt;<span class="comment">|</span>                 <span class="comment">|</span>
-           <span class="comment">|</span>&lt;<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;<span class="comment">|</span>                 <span class="comment">|</span>
-           <span class="comment">|</span>             <span class="comment">|</span>              <span class="comment">|</span>                 <span class="comment">|</span>
-
-              <span class="comment">Figure</span> <span class="comment">1:</span> <span class="comment">Basic</span> <span class="comment">operation</span> <span class="comment">of</span> <span class="comment">the</span> <span class="comment">solution
-</pre></figure></code></pre>
-<h2>4.  Simultaneous anchoring of multiple flows (single operator)</h2>
-<pre><code><figure class="highlight"><pre>如何给MN配置多个地址，并使地址具有优先级
-</pre></figure></code></pre>
-<h2>5.  Simultaneous anchoring of multiple flows (multiple operators)</h2>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
 
 <nav id="pagination">
   
+  
+    <a href="/page/2/" class="alignright next">下一页</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
@@ -1104,6 +1068,8 @@ let the D-GW know about the prefixes that should be kept reachable, we can cite 
   <ul class="entry">
   
     <li><a href="/tags/DMM/">DMM</a><small>9</small></li>
+  
+    <li><a href="/tags/hadoop/">hadoop</a><small>1</small></li>
   
   </ul>
 </div>
