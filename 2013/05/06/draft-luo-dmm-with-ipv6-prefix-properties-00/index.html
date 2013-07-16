@@ -21,26 +21,18 @@
   <link href="/favicon.png" rel="icon">
   <link rel="alternate" href="/atom.xml" title="Peng's Blog" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   
 </head>
 
 
 <body>
-  <div id="container" class="container">
-    <header id="sidebar" role="banner" class="sidebar"><div id="branding" class="branding">
-  <a href="/">
-    <img class="circle" src="/img/koala.jpg" alt="Anthem">
-  </a>
-  <h1 id="site-title" class="title">
-    <a href="/">Peng's Blog</a>
-  </h1>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Peng's Blog</a></h1>
+  <h2><a href="/"></a></h2>
 </div>
-<a href="#" id="toggle">信息</a>
-<div class="about" style="display: none">
-  <p></p>
-</div>
-<nav class="menu-navigation-container">
+<nav id="main-nav" class="alignright">
   <ul>
     
       <li><a href="/">Home</a></li>
@@ -48,53 +40,27 @@
       <li><a href="/archives">Archives</a></li>
     
   </ul>
+  <div class="clearfix"></div>
 </nav>
-<div class="widget">
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
-  <nav class="search">
-  <form action="http://google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜索">
-    <input type="hidden" name="q" value="site:210.25.132.159">
-  </form>
-</nav>
-
-  
-
-  
-<nav class="tags">
-  <h3 class="title">标签</h3>
-  <ul>
-  
-    <li><a href="/tags/DMM/">DMM</a>&nbsp;<small>(9)</small></li>
-  
-    <li><a href="/tags/hadoop/">hadoop</a>&nbsp;<small>(1)</small></li>
-  
-  </ul>
-</nav>
-
-
-  <nav class="other">
-  <ul>
-    <li>
-      <a href="http://weibo.com/xiaoguizi1314" target="_blank">关注我的微博</a>
-    </li>
-  </ul>
-</nav>
-
-</div></header>
-    <section id="content" class="blog">
-      <article class="post">
-  <header>
-    
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T02:45:00.000Z"><a href="/2013/05/06/draft-luo-dmm-with-ipv6-prefix-properties-00/">5月 6 2013</a></time>
+      
+      
   
     <h1 class="title">draft-luo-dmm-with-ipv6-prefix-properties-00</h1>
   
 
-    
-  </header>
-  <section class="entry">
-    
-      <h1>Distributed Mobility Management Approaches with IPv6 Prefix Properties</h1>
+    </header>
+    <div class="entry">
+      
+        <h1>Distributed Mobility Management Approaches with IPv6 Prefix Properties</h1>
 <h3><a href="http://tools.ietf.org/html/draft-luo-dmm-with-ipv6-prefix-properties-00">draft-luo-dmm-with-ipv6-prefix-properties-00</a></h3>
 <p>为了支持一个更分布的模型，本文扩展了现有的基于PMIP的移动性管理协议，并通过引入两个新的逻辑功能来实现分布式锚定和定位管理。鉴于MN可能并不总是需要移动性支持，即需要应用全局性前缀和其他的网络资源，本草案支持该选项以此来补充IPv6前缀源地址选择提示（即IPv6邻居发现协议和它的前缀信息选项）的扩展属性，实现了UE可以根据其服务/应用的移动性支持需求来选择IPv6的前缀。当MN支持扩展的前缀属性功能时，该草案允许ＭＮ可以根据 I-D.korhonen-dmm-prefix-properties 里描述的机制来选择合适的前缀。一旦确定了IPv6前缀，其余的ＤＭＭ机制则与I-D.luo-dmm-pmip-based-dmm-approach 类似。</p>
 <hr>
@@ -212,59 +178,87 @@
 <p>因此，执行切换之后，既可以通过新的本地IPv6地址（如IP3）也可以通过全局IPv6地址（如IP2）来到达移动节点；如果在eLMA1和eLMA2之间有临时通道，也可以通过前一个本地IPv6地址（如IP1）到达。</p>
 <p>是否在eLMA1与eLMA2之间建立临时隧道来维持本地前缀的可达，这取决于网络策略。</p>
 
-    
-  </section>
-  <footer>
-    
-    <div class="clearfix"></div>
-    
-      <div class="widget">
-        
-          <time datetime="2013-05-06T02:45:00.000Z"><a href="/2013/05/06/draft-luo-dmm-with-ipv6-prefix-properties-00/">5月 6 2013</a></time>
-        
+      
+    </div>
+    <footer>
+      
         
         
   
-  <a href="/tags/DMM/">#DMM</a>
+  <div class="tags">
+    <a href="/tags/DMM/">DMM</a>
+  </div>
 
         
-      </div>
+  <div class="addthis addthis_toolbox addthis_default_style">
     
-    <div class="clearfix"></div>
-  </footer>
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
 </article>
 
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:fedoral.github.io/">
+  </form>
+</div>
 
-    </section>
-    <footer id="footer" class="clearfix footer"><div class="alignleft">
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/DMM/">DMM</a><small>9</small></li>
+  
+    <li><a href="/tags/hadoop/">hadoop</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
   
   &copy; 2013 Peng Feixiang
   
 </div>
 <div class="clearfix"></div></footer>
-  </div>
-  <script src="http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/main.js"></script>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
 
 
 
 
-<link rel="stylesheet" type="text/css" href="/fancybox/jquery.fancybox.css">
-<script type="text/javascript" src="/fancybox/jquery.fancybox.js"></script>
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
-  $('.fancybox').fancybox({
-    prevEffect: 'none',
-    nextEffect: 'none',
-    closeBtn: false,
-    helpers: {
-        title: {type: 'inside'},
-        buttons: {
-            position: 'bottom'
-        }
-    }
-  });
+  $('.fancybox').fancybox();
 })(jQuery);
 </script>
 
