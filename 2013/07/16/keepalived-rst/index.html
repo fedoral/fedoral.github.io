@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>归档：2013/7 | Peng's Blog</title>
+  <title>keepalived RST | Peng's Blog</title>
   <meta name="author" content="Peng Feixiang">
   
   <meta name="description" content="Hello everyone">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="keepalived RST"/>
   <meta property="og:site_name" content="Peng's Blog"/>
 
   
@@ -44,12 +44,7 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title">2013/7</h2>
-
-
-  
-    <article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
   <div class="post-content">
     <header>
@@ -59,7 +54,7 @@
       
       
   
-    <h1 class="title"><a href="/2013/07/16/keepalived-rst/">keepalived RST</a></h1>
+    <h1 class="title">keepalived RST</h1>
   
 
     </header>
@@ -122,81 +117,30 @@ API必须提供产生异常关闭而不是正常关闭的手段。参考(2)</li>
       
         
         
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
       
       <div class="clearfix"></div>
     </footer>
   </div>
 </article>
 
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-07-11T13:56:17.000Z"><a href="/2013/07/11/learn-mapreduce/">7月 11 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/07/11/learn-mapreduce/">Learn MapReduce</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1>MapReduce: 分布式计算框架</h1>
-<p><a href="http://en.wikipedia.org/wiki/MapReduce">维基百科</a>中对MapReduce这样描述——&quot;<strong>MapReduce is a programming model for processing large data sets with a parallel, distributed algorithm on a cluster</strong>.&quot;
-MapReduce的名字由函数式编程中常用的map和reduce两个单词组成。2004年Google公司的Jeffrey Dean 和 Sanjay Ghemawat在论文<a href="http://research.google.com/archive/mapreduce.html">MapReduce: Simplified Data Processing on Large Clusters</a>首次提出了MapReduce的思想。</p>
-<p>MapReduce被广泛地应用于日志分析、海量数据排序、在海量数据中查找特定模式等场景中。Apache下的Hadoop项目是根据Google论文所实现的一个MapReduce框架。</p>
-<h3>MapReduce</h3>
-<ul>
-<li>优点：可在段时间内完成大量工作。</li>
-<li>缺点：算法必须经过重写，需要对系统工程有一定的了解。</li>
-<li>适用数据类型：数值型和标称型。</li>
-</ul>
-<h2>工作流程</h2>
-<p>MapReduce 在大量节点组成的集群上运行。它的工作流程是：单个作业被分成很多小份，输入数据也被切片(split)分发到每个节点，各个节点只在本地数据上做运算，对应的运算代码称为mapper，这个过程被称为map阶段。每个mapper的输出通过某种方式组合（一般还会做排序）。排序后的结果再被分成小份分发到各个节点进行下一步的工作，对应的运算代码称为reducer，此过程被称为reduce阶段。reducer的输出就是程序的最终执行结果。</p>
-<p><img src="/img/mapreduce.png" alt="image"></p>
-<ul>
-<li>主节点控制MapReduce的作业流程。</li>
-<li>MapReduce的作业可以分为map任务和reduce任务。</li>
-<li>map任务之间不做数据交流，reduce任务也一样。</li>
-<li>map和reduce阶段中间，有一个sort或combine</li>
-<li>数据被重复存放在不同的机器上，以防某个机器失效。</li>
-<li>mapper和reducer传输的数据形式为key/value对。</li>
-</ul>
-<p>（论文学习待补充……）</p>
-<h2>参考</h2>
-<ul>
-<li><a href="http://www.manning.com/pharrington/">Machine Learning in Action</a></li>
-</ul>
-<h2>拓展阅读</h2>
-<ul>
-<li><a href="http://www.pgsqldb.org:8079/mwiki/index.php/MapReduce:_%E4%B8%80%E4%B8%AA%E5%B7%A8%E5%A4%A7%E7%9A%84%E5%80%92%E9%80%80">MapReduce: 一个巨大的倒退</a></li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-
-  <nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
