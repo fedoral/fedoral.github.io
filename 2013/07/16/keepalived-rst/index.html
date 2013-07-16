@@ -96,7 +96,7 @@ API必须提供产生异常关闭而不是正常关闭的手段。参考(2)</li>
 <p><img src="http://tech.ccidnet.com/pub/attachment/2004/8/322252.png" alt=""></p>
 <p>一般来说服务器执行被动关闭，服务器不会进入TIME_WAIT状态。在Keepalived Server+ Real Server中 Server中Keepalived Server充当客户端主动发起关闭。两种方式：（1）关闭的时候使用RST的方式
 （2）对处于TIME_WAIT状态的TCP允许重用。当前Keepalived 就被设计成使用RST关闭。</p>
-<p>如果使用有序释放代替RST报文，Keepalived + NAT方式中，所有从Keepalived Server 到 Real Server的IP包的 source address都是一样的(对内地址）。TCP连接建立和关闭，会在Keepalived Server上留下TIME_WAIT状态，根据TIME_WAIT黑名单规则，Keepalived Server在240秒内不能再使用此端口建立和Real Server的连接。这样对于一个Real server 假定6秒检查一次，则需要240/6=40个端口来独占使用。对于有60000端口的Keepalived Server来说，可以支撑1000+的Real Server。</p>
+<p>如果使用有序释放代替RST报文，Keepalived + NAT方式中，所有从Keepalived Server 到 Real Server的IP包的 source address都是一样的(对内地址）。TCP连接建立和关闭，会在Keepalived Server上留下TIME_WAIT状态，根据TIME_WAIT黑名单规则，Keepalived Server在240秒内不能再使用此端口建立和Real Server的连接。这样对于一个Real server 假定6秒检查一次，则需要240/6=40个端口来使用。<del>对于有60000端口的Keepalived Server来说，可以支撑1000+的Real Server</del>(若身指正，不同的RS对应不同的remote ip address，这40个端口不会被独占)。</p>
 <p>至于“对处于TIME_WAIT状态的TCP允许重用”，这种做法不建议使用，无非是减少端口的使用。更好的做法是减小MSL。</p>
 <h3>使用TCP的KeepAlive机制</h3>
 <p>很多应用层协议都有HeartBeat机制，通常是客户端每隔一小段时间向服务器发送一个数据包，通知服务器自己仍然在线，并传输一些可能必要的数据。使用心跳包的典型协议是IM，比如QQ/MSN/飞信等协议。</p>
