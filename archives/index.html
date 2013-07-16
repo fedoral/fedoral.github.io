@@ -65,20 +65,25 @@
     </header>
     <div class="entry">
       
-        <h2>keepalived RST报文</h2>
-<h3>keepalived</h3>
+        <h3>keepalived</h3>
 <p>假定keepalived服务器是<code>192.168.1.1</code>，http服务器是<code>192.168.1.183</code>.</p>
 <p>启动keepalived后，从<code>192.168.1.1</code>或<code>192.168.1.183</code>上抓包可以看到很多<code>192.168.1.1</code>到<code>192.168.1.183</code>的<code>[RST ACK]</code>报文，6秒一个。</p>
-<blockquote>
-<p><strong>16:09:08</strong>.981844 IP 192.168.1.1.34318 &gt; 192.168.1.183.http: Flags [S], seq 108636079, win 14600, options [mss 1460,sackOK,TS val 250265385 ecr 0,nop,wscale 7], length 0</p>
-<p><strong>16:09:08</strong>.982003 IP 192.168.1.183.http &gt; 192.168.1.1.34318: Flags [S.], seq 2574714220, ack 108636080, win 14480, options [mss 1460,sackOK,TS val 1724897103 ecr 250265385,nop,wscale 7], length 0</p>
-<p><strong>16:09:08</strong>.982020 IP 192.168.1.1.34318 &gt; 192.168.1.183.http: Flags [.], ack 1, win 115, options [nop,nop,TS val 250265385 ecr 1724897103], length 0</p>
-<p><strong>16:09:08</strong>.982096 IP 192.168.1.1.34318 &gt; 192.168.1.183.http: <strong>Flags [R.]</strong>, seq 1, ack 1, win 115, options [nop,nop,TS val 250265385 ecr 1724897103], length 0</p>
-<p><strong>16:09:14</strong>.982592 IP 192.168.1.1.34320 &gt; 192.168.1.183.http: Flags [S], seq 2384928787, win 14600, options [mss 1460,sackOK,TS val 250271386 ecr 0,nop,wscale 7], length 0</p>
-<p><strong>16:09:14</strong>.982733 IP 192.168.1.183.http &gt; 192.168.1.1.34320: Flags [S.], seq 1294088960, ack 2384928788, win 14480, options [mss 1460,sackOK,TS val 1724903103 ecr 250271386,nop,wscale 7], length 0</p>
-<p><strong>16:09:14</strong>.982750 IP 192.168.1.1.34320 &gt; 192.168.1.183.http: Flags [.], ack 1, win 115, options [nop,nop,TS val 250271386 ecr 1724903103], length 0</p>
-<p><strong>16:09:14</strong>.982826 IP 192.168.1.1.34320 &gt; 192.168.1.183.http: <strong>Flags [R.]</strong>, seq 1, ack 1, win 115, options [nop,nop,TS val 250271386 ecr 1724903103], length 0</p>
-</blockquote>
+<pre><code><figure class="highlight"><pre>16<span class="pseudo">:09</span><span class="pseudo">:08</span><span class="class">.981844</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34318</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: <span class="tag">Flags</span> <span class="attr_selector">[S]</span>, <span class="tag">seq</span> 108636079, <span class="tag">win</span> 14600, <span class="tag">options</span> <span class="attr_selector">[mss 1460,sackOK,TS val 250265385 ecr 0,nop,wscale 7]</span>, <span class="tag">length</span> 0
+
+16<span class="pseudo">:09</span><span class="pseudo">:08</span><span class="class">.982003</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34318</span>: <span class="tag">Flags</span> <span class="attr_selector">[S.]</span>, <span class="tag">seq</span> 2574714220, <span class="tag">ack</span> 108636080, <span class="tag">win</span> 14480, <span class="tag">options</span> <span class="attr_selector">[mss 1460,sackOK,TS val 1724897103 ecr 250265385,nop,wscale 7]</span>, <span class="tag">length</span> 0
+
+16<span class="pseudo">:09</span><span class="pseudo">:08</span><span class="class">.982020</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34318</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: <span class="tag">Flags</span> <span class="attr_selector">[.]</span>, <span class="tag">ack</span> 1, <span class="tag">win</span> 115, <span class="tag">options</span> <span class="attr_selector">[nop,nop,TS val 250265385 ecr 1724897103]</span>, <span class="tag">length</span> 0
+
+16<span class="pseudo">:09</span><span class="pseudo">:08</span><span class="class">.982096</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34318</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: **<span class="tag">Flags</span> <span class="attr_selector">[R.]</span>**, <span class="tag">seq</span> 1, <span class="tag">ack</span> 1, <span class="tag">win</span> 115, <span class="tag">options</span> <span class="attr_selector">[nop,nop,TS val 250265385 ecr 1724897103]</span>, <span class="tag">length</span> 0
+
+16<span class="pseudo">:09</span><span class="pseudo">:14</span><span class="class">.982592</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34320</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: <span class="tag">Flags</span> <span class="attr_selector">[S]</span>, <span class="tag">seq</span> 2384928787, <span class="tag">win</span> 14600, <span class="tag">options</span> <span class="attr_selector">[mss 1460,sackOK,TS val 250271386 ecr 0,nop,wscale 7]</span>, <span class="tag">length</span> 0
+
+16<span class="pseudo">:09</span><span class="pseudo">:14</span><span class="class">.982733</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34320</span>: <span class="tag">Flags</span> <span class="attr_selector">[S.]</span>, <span class="tag">seq</span> 1294088960, <span class="tag">ack</span> 2384928788, <span class="tag">win</span> 14480, <span class="tag">options</span> <span class="attr_selector">[mss 1460,sackOK,TS val 1724903103 ecr 250271386,nop,wscale 7]</span>, <span class="tag">length</span> 0
+
+16<span class="pseudo">:09</span><span class="pseudo">:14</span><span class="class">.982750</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34320</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: <span class="tag">Flags</span> <span class="attr_selector">[.]</span>, <span class="tag">ack</span> 1, <span class="tag">win</span> 115, <span class="tag">options</span> <span class="attr_selector">[nop,nop,TS val 250271386 ecr 1724903103]</span>, <span class="tag">length</span> 0
+
+16<span class="pseudo">:09</span><span class="pseudo">:14</span><span class="class">.982826</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34320</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: **<span class="tag">Flags</span> <span class="attr_selector">[R.]</span>**, <span class="tag">seq</span> 1, <span class="tag">ack</span> 1, <span class="tag">win</span> 115, <span class="tag">options</span> <span class="attr_selector">[nop,nop,TS val 250271386 ecr 1724903103]</span>, <span class="tag">length</span> 0
+</pre></figure></code></pre>
 <p>这是keepalived的健康检查机制，192.168.1.1会定期（默认6秒）向192.168.1.183发送一个TCP连接来检测http是否正常，为了减少TCP连接带来的资源浪费，检测（TCP三次握手）完毕后会发送一个RST报文来断开这个连接，释放资源。</p>
 <p>如果业务服务器不是http，有时会在业务服务器日志里还会看到类似<a href="http://nginx.2469901.n2.nabble.com/Keep-alive-connection-errors-in-my-logs-td3385507.html"><code>connection reset by peer</code></a>的日志。</p>
 <h3>RST报文</h3>
@@ -101,12 +106,14 @@ API必须提供产生异常关闭而不是正常关闭的手段。参考(2)</li>
 <h3>使用TCP的KeepAlive机制</h3>
 <p>很多应用层协议都有HeartBeat机制，通常是客户端每隔一小段时间向服务器发送一个数据包，通知服务器自己仍然在线，并传输一些可能必要的数据。使用心跳包的典型协议是IM，比如QQ/MSN/飞信等协议。</p>
 <p>TCP的KeepAlive 是更低层次的“心跳检测”机制，主要为探测长连接的存活状况。默认如果一个给定的连接在两小时内没有任何的动作，则服务器就向客户发一个探测报文段，客户主机必须处于以下4个状态之一：</p>
-<blockquote>
-<p>客户主机依然正常运行，并从服务器可达。客户的TCP响应正常，而服务器也知道对方是正常的，服务器在两小时后将保活定时器复位。</p>
-<p>客户主机已经崩溃，并且关闭或者正在重新启动。在任何一种情况下，客户的TCP都没有响应。服务端将不能收到对探测的响应，并在75秒后超时。服务器总共发送10个这样的探测 ，每个间隔75秒。如果服务器没有收到一个响应，它就认为客户主机已经关闭并终止连接。</p>
-<p>客户主机崩溃并已经重新启动。服务器将收到一个对其保活探测的响应，这个响应是一个复位，使得服务器终止这个连接。</p>
-<p>客户机正常运行，但是服务器不可达，这种情况与第二种类似，TCP能发现的就是没有收到探查的响应。</p>
-</blockquote>
+<ol>
+<li>客户主机依然正常运行，并从服务器可达。客户的TCP响应正常，而服务器也知道对方是正常的，服务器在两小时后将保活定时器复位。</li>
+<li>客户主机已经崩溃，并且关闭或者正在重新启动。在任何一种情况下，客户的TCP都没有响应。服务端将不能收到对探测的响应，并在75秒后超时。服务器总共发送10个这样的探测 ，每个间隔75秒。如果服务器没有收到一个响应，它就认为客户主机已经关闭并终止连接。</li>
+<li><p>客户主机崩溃并已经重新启动。服务器将收到一个对其保活探测的响应，这个响应是一个复位，使得服务器终止这个连接。</p>
+</li>
+<li><p>客户机正常运行，但是服务器不可达，这种情况与第2种类似，TCP能发现的就是没有收到探查的响应。</p>
+</li>
+</ol>
 <p>TCP的KeepAlive功能开启需要做一些配置。参考<a href="http://www.tldp.org/HOWTO/html_single/TCP-Keepalive-HOWTO/#codeneeding">这里</a>，包括了KeepAlive的介绍、相关内核参数、C编程接口、如何为现有应用（可以或者不可以修改源码的）启用KeepAlive机制。</p>
 <h3>总结</h3>
 <p>使用TCP的KeepAlive机制，对Keepalived的调整会很大，大量代码修改。个人倾向“ 用有序释放来代替异常释放”，释放过程虽然不如RST方式简单明了，但性能可以接受，代码相对来说好修改一些。</p>
@@ -176,38 +183,6 @@ MapReduce的名字由函数式编程中常用的map和reduce两个单词组成�
 <ul>
 <li><a href="http://www.pgsqldb.org:8079/mwiki/index.php/MapReduce:_%E4%B8%80%E4%B8%AA%E5%B7%A8%E5%A4%A7%E7%9A%84%E5%80%92%E9%80%80">MapReduce: 一个巨大的倒退</a></li>
 </ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-06-20T02:26:05.000Z"><a href="/2013/06/20/hello-world/">6月 20 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/06/20/hello-world/">Hello World</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Welcome to <a href="http://zespia.tw/hexo">Hexo</a>! This is your very first post. Check <a href="http://zespia.tw/hexo/docs">documentation</a> to learn how to use.</p>
 
       
     </div>
@@ -1048,6 +1023,87 @@ MapReduce的名字由函数式编程中常用的map和reduce两个单词组成�
 
 
   
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T02:29:00.000Z"><a href="/2013/05/06/draft-korhonen-dmm-prefix-properties-03/">5月 6 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/draft-korhonen-dmm-prefix-properties-03/">draft-korhonen-dmm-prefix-properties-03</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>IPv6 Prefix Mobility Management Properties</h1>
+<h3><a href="http://tools.ietf.org/html/draft-korhonen-dmm-prefix-properties-03">draft-korhonen-dmm-prefix-properties-03.txt</a></h3>
+<pre><code><figure class="highlight"><pre>这篇规范定义并扩展IPv6邻居发现协议的前缀信息选项，扩展其标志位来描述与前缀相关的移动管理性质。
+这篇draft更新了<span class="link_label">[RFC4861]</span>(<span class="link_url">http://tools.ietf.org/rfc/rfc4861.txt</span>)。
+</pre></figure></code></pre>
+<hr>
+<h2>Background and Motivation</h2>
+<ul>
+<li>非最优路由</li>
+<li>过多的隧道，为了维护移动性相关绑定而增加的信令</li>
+<li>集中式的MAG下流量聚合</li>
+</ul>
+<p>In general, it is observed that most applications do not need IP level mobility, and work just
+fine with &quot;temporary&quot; IP addresses that come and go. However, IP mobility still has its virtues making the applications unaware of mobility, and certain wireless mobile networking architecture make extensive use of network based IP mobility.</p>
+<p>在许多情况下，这可能会导致MN有多个地址被使用，但是其中一些提供了移动性，而另一些没有提供。不得不提供方法来让终端主机区分是否是提供了移动性的地址，还是一些生存期很短并且只能在一个受限的拓扑域使用的地址。</p>
+<p><strong>这篇draft提供了IPv6地址管理的扩展以及源地址的选择，这样终端主机（以及它的应用）就能够为它们的需求选择一个合适的地址。</strong></p>
+<h2>Option Formats</h2>
+<pre><code><figure class="highlight"><pre><span class="attribute">'M</span>' 长为<span class="number">1</span>位的标志，描述了前缀的移动性，其性质被定义为：
+<span class="number">0</span> 这个前缀没有相关的基于网络的移动性，这个前缀以RFC4861中所提供的方式进行处理。
+<span class="number">1</span> 这个前缀提供了基于网络的移动性并且可能保持前缀未改变的有效时间。
+
+
+<span class="attribute">'S</span>' 长为<span class="number">1</span>位的标志，它能够提供与使用前缀相关的安全性质的提示。
+
+<span class="attribute">'Class</span>' 长达<span class="number">14</span>位的前缀分类，这个前缀分类加上了移动性与安全性的补充信息。<span class="number">0</span>被保留，该值没有描述前缀的任何信息。对于未知的分类都将其值置为<span class="number">0</span>。
+
+我们将<span class="attribute">'M</span>'位、<span class="attribute">'S</span>'位以及<span class="attribute">'class</span>’的结合称之为前缀性质。
+</pre></figure></code></pre>
+<h2>Host Considerations</h2>
+<blockquote>
+<p>[I-D.liu-dmm-mobility-api]</p>
+</blockquote>
+<h4>内部数据结构</h4>
+<p>主机内部数据结构需要被前缀性质信息扩展，这些信息与已学习的前缀及配置地址相关联。关于这一点是如何完成是需要由具体的主机来指定的。一个应用怎样才能够知道或询问到一个地址或一个前缀的移动性也是由具体主机的实现来决定的。一个可能性是通过socket API的扩展来提供这样的信息。（关于这点可以看 <a href="http://tools.ietf.org/id/draft-korhonen-dmm-prefix-properties-03.txt">I-D.liu-dmm-mobility-api</a> 中的讨论）。其它的可能性包括ioctl（）的扩展以及NetLink的扩展。</p>
+<h4>默认地址选择</h4>
+<p>“前缀性质”提供的信息只能用来作为一种提示。它并不会自动的影响已经存在了的东西<a href="http://tools.ietf.org/rfc/rfc6724.txt">RFC6724</a>，除了稍后将要描述的&#39;M&#39;标志位之外。对于主机的策略表来说，一个详细的规则不得不被一个应用或者一些守护进程插入。在可选情况下，一个应用能够通过在<a href="http://tools.ietf.org/id/draft-korhonen-dmm-prefix-properties-03.txt">I-D.liu-dmm-mobility-api</a>中讨论的socket API的扩展来表达地址移动性的优先级，这就意味着库文件或中间件不得不修改策略表或算法。</p>
+<blockquote>
+<p>The ’M’ flag defines the prefix preference for an IP stack that
+understands the extensions defined in this specification. The IP
+stack SHOULD use the following preferences to supersede [RFC6724]
+Source Address Selection Rule 8 when selecting a default source
+address among multiple choices and an application has not explicitly
+indicate what kind of source address it prefers:</p>
+<ul>
+<li><p>0 Default preference.</p>
+</li>
+<li><p>1 Low preference.</p>
+</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
 
   <nav id="pagination">
   
@@ -1075,6 +1131,8 @@ MapReduce的名字由函数式编程中常用的map和reduce两个单词组成�
     <li><a href="/tags/DMM/">DMM</a><small>9</small></li>
   
     <li><a href="/tags/hadoop/">hadoop</a><small>1</small></li>
+  
+    <li><a href="/tags/lvs/">lvs</a><small>1</small></li>
   
   </ul>
 </div>
