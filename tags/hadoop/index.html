@@ -5,20 +5,12 @@
   
   <title>hadoop | Peng's Blog</title>
   <meta name="author" content="Peng Feixiang">
+
   
   <meta name="description" content="Hello everyone">
   
   
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
-  <meta property="og:site_name" content="Peng's Blog"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.png" rel="icon">
   <link rel="alternate" href="/atom.xml" title="Peng's Blog" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -26,13 +18,8 @@
   
 </head>
 
-
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Peng's Blog</a></h1>
-  <h2><a href="/"></a></h2>
-</div>
-<nav id="main-nav" class="alignright">
+  <header id="header" class="inner"><nav>
   <ul>
     
       <li><a href="/">Home</a></li>
@@ -40,32 +27,36 @@
       <li><a href="/archives">Archives</a></li>
     
   </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div></header>
+</nav></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">hadoop</h2>
+
+<header id="archive-header">
+  <h1 class="alignleft">Tag: hadoop</h1>
+  <div class="search alignright">
+    <form action="http://google.com/search" method="get" accept-charset="utf-8">
+      <input type="search" name="q" results="0" placeholder="Search">
+      <input type="hidden" name="q" value="site:210.25.132.159">
+    </form>
+  </div>
+</header>
 
 
   
     <article class="post">
   
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-07-11T13:56:17.000Z"><a href="/2013/07/11/learn-mapreduce/">7月 11 2013</a></time>
-      
-      
+  <header>
+    
   
     <h1 class="title"><a href="/2013/07/11/learn-mapreduce/">Learn MapReduce</a></h1>
   
 
-    </header>
-    <div class="entry">
-      
-        <h1>MapReduce: 分布式计算框架</h1>
+    <time datetime="2013-07-11T13:56:17.000Z">
+  <span class="day">11</span><span class="month">7月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h1>MapReduce: 分布式计算框架</h1>
 <p><a href="http://en.wikipedia.org/wiki/MapReduce">维基百科</a>中对MapReduce这样描述——&quot;<strong>MapReduce is a programming model for processing large data sets with a parallel, distributed algorithm on a cluster</strong>.&quot;
 MapReduce的名字由函数式编程中常用的map和reduce两个单词组成。2004年Google公司的Jeffrey Dean 和 Sanjay Ghemawat在论文<a href="http://research.google.com/archive/mapreduce.html">MapReduce: Simplified Data Processing on Large Clusters</a>首次提出了MapReduce的思想。</p>
 <p>MapReduce被广泛地应用于日志分析、海量数据排序、在海量数据中查找特定模式等场景中。Apache下的Hadoop项目是根据Google论文所实现的一个MapReduce框架。</p>
@@ -96,60 +87,40 @@ MapReduce的名字由函数式编程中常用的map和reduce两个单词组成�
 <li><a href="http://www.pgsqldb.org:8079/mwiki/index.php/MapReduce:_%E4%B8%80%E4%B8%AA%E5%B7%A8%E5%A4%A7%E7%9A%84%E5%80%92%E9%80%80">MapReduce: 一个巨大的倒退</a></li>
 </ul>
 
+    
+    
+    <footer class="meta">
       
-    </div>
-    <footer>
       
-        
-        
+  <div class="tags">
+<a href="/tags/hadoop/">hadoop</a></div>
+
       
-      <div class="clearfix"></div>
     </footer>
+    
   </div>
+  
 </article>
-
-
   
 
-  <nav id="pagination">
+  <nav id="pagenavi">
   
   
   <div class="clearfix"></div>
 </nav>
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜索">
-    <input type="hidden" name="q" value="site:210.25.132.159">
-  </form>
 </div>
-
+  <footer id="footer" class="inner"><div class="social alignright">
   
-
   
-<div class="widget tag">
-  <h3 class="title">标签</h3>
-  <ul class="entry">
   
-    <li><a href="/tags/DMM/">DMM</a><small>9</small></li>
   
-    <li><a href="/tags/hadoop/">hadoop</a><small>1</small></li>
-  
-  </ul>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
 </div>
-
-
-  
-
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
+<p>
   
   &copy; 2013 Peng Feixiang
   
-</div>
+</p>
 <div class="clearfix"></div></footer>
   <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
@@ -165,5 +136,12 @@ MapReduce的名字由函数式编程中常用的map和reduce两个单词组成�
 })(jQuery);
 </script>
 
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
 </body>
 </html>
