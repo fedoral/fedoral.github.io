@@ -21,18 +21,26 @@
   <link href="/favicon.png" rel="icon">
   <link rel="alternate" href="/atom.xml" title="Peng's Blog" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
   
 </head>
 
 
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Peng's Blog</a></h1>
-  <h2><a href="/"></a></h2>
+  <div id="container" class="container">
+    <header id="sidebar" role="banner" class="sidebar"><div id="branding" class="branding">
+  <a href="/">
+    <img class="circle" src="/img/koala.jpg" alt="Anthem">
+  </a>
+  <h1 id="site-title" class="title">
+    <a href="/">Peng's Blog</a>
+  </h1>
 </div>
-<nav id="main-nav" class="alignright">
+<a href="#" id="toggle">信息</a>
+<div class="about" style="display: none">
+  <p></p>
+</div>
+<nav class="menu-navigation-container">
   <ul>
     
       <li><a href="/">Home</a></li>
@@ -40,32 +48,58 @@
       <li><a href="/archives">Archives</a></li>
     
   </ul>
-  <div class="clearfix"></div>
 </nav>
-<div class="clearfix"></div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
+<div class="widget">
+  
+  <nav class="search">
+  <form action="http://google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:fedoral.github.io/">
+  </form>
+</nav>
+
+  
+
+  
+<nav class="tags">
+  <h3 class="title">标签</h3>
+  <ul>
+  
+    <li><a href="/tags/DMM/">DMM</a>&nbsp;<small>(9)</small></li>
+  
+    <li><a href="/tags/hadoop/">hadoop</a>&nbsp;<small>(1)</small></li>
+  
+  </ul>
+</nav>
+
+
+  <nav class="other">
+  <ul>
+    <li>
+      <a href="http://weibo.com/xiaoguizi1314" target="_blank">关注我的微博</a>
+    </li>
+  </ul>
+</nav>
+
+</div></header>
+    <section id="content" class="blog">
+      
 <h2 class="archive-title">2013</h2>
 
 
   
     <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-07-16T03:29:50.000Z"><a href="/2013/07/16/keepalived-rst/">7月 16 2013</a></time>
-      
-      
+  <header>
+    
   
     <h1 class="title"><a href="/2013/07/16/keepalived-rst/">keepalived RST</a></h1>
   
 
-    </header>
-    <div class="entry">
-      
-        <h2>keepalived RST报文</h2>
+    
+  </header>
+  <section class="entry">
+    
+      <h2>keepalived RST报文</h2>
 <h3>keepalived</h3>
 <p>假定keepalived服务器是<code>192.168.1.1</code>，http服务器是<code>192.168.1.183</code>.</p>
 <p>启动keepalived后，从<code>192.168.1.1</code>或<code>192.168.1.183</code>上抓包可以看到很多<code>192.168.1.1</code>到<code>192.168.1.183</code>的<code>[RST ACK]</code>报文，6秒一个。</p>
@@ -116,37 +150,40 @@ API必须提供产生异常关闭而不是正常关闭的手段。参考(2)</li>
 <p>(1)<a href="http://blog.chinaunix.net/uid-192452-id-3279122.html"><a href="http://blog.chinaunix.net/uid-192452-id-3279122.html">http://blog.chinaunix.net/uid-192452-id-3279122.html</a></a></p>
 <p>(2)TCP/IP 详解卷一：协议 p187</p>
 
-      
-    </div>
-    <footer>
-      
+    
+  </section>
+  <footer>
+    
+    <div class="clearfix"></div>
+    
+      <div class="alignleft widget">
         
         
+          <time datetime="2013-07-16T03:29:50.000Z"><a href="/2013/07/16/keepalived-rst/">7月 16 2013</a></time>
+        
+        
+        
+      </div>
       
-      <div class="clearfix"></div>
-    </footer>
-  </div>
+    
+    <div class="clearfix"></div>
+  </footer>
 </article>
 
 
   
     <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-07-11T13:56:17.000Z"><a href="/2013/07/11/learn-mapreduce/">7月 11 2013</a></time>
-      
-      
+  <header>
+    
   
     <h1 class="title"><a href="/2013/07/11/learn-mapreduce/">Learn MapReduce</a></h1>
   
 
-    </header>
-    <div class="entry">
-      
-        <h1>MapReduce: 分布式计算框架</h1>
+    
+  </header>
+  <section class="entry">
+    
+      <h1>MapReduce: 分布式计算框架</h1>
 <p><a href="http://en.wikipedia.org/wiki/MapReduce">维基百科</a>中对MapReduce这样描述——&quot;<strong>MapReduce is a programming model for processing large data sets with a parallel, distributed algorithm on a cluster</strong>.&quot;
 MapReduce的名字由函数式编程中常用的map和reduce两个单词组成。2004年Google公司的Jeffrey Dean 和 Sanjay Ghemawat在论文<a href="http://research.google.com/archive/mapreduce.html">MapReduce: Simplified Data Processing on Large Clusters</a>首次提出了MapReduce的思想。</p>
 <p>MapReduce被广泛地应用于日志分析、海量数据排序、在海量数据中查找特定模式等场景中。Apache下的Hadoop项目是根据Google论文所实现的一个MapReduce框架。</p>
@@ -177,104 +214,119 @@ MapReduce的名字由函数式编程中常用的map和reduce两个单词组成�
 <li><a href="http://www.pgsqldb.org:8079/mwiki/index.php/MapReduce:_%E4%B8%80%E4%B8%AA%E5%B7%A8%E5%A4%A7%E7%9A%84%E5%80%92%E9%80%80">MapReduce: 一个巨大的倒退</a></li>
 </ul>
 
-      
-    </div>
-    <footer>
-      
+    
+  </section>
+  <footer>
+    
+    <div class="clearfix"></div>
+    
+      <div class="alignleft widget">
         
         
+          <time datetime="2013-07-11T13:56:17.000Z"><a href="/2013/07/11/learn-mapreduce/">7月 11 2013</a></time>
+        
+        
+        
+  
+  <a href="/tags/hadoop/">#hadoop</a>
+
+      </div>
       
-      <div class="clearfix"></div>
-    </footer>
-  </div>
+    
+    <div class="clearfix"></div>
+  </footer>
 </article>
 
 
   
     <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-06-20T02:26:05.000Z"><a href="/2013/06/20/hello-world/">6月 20 2013</a></time>
-      
-      
+  <header>
+    
   
     <h1 class="title"><a href="/2013/06/20/hello-world/">Hello World</a></h1>
   
 
-    </header>
-    <div class="entry">
-      
-        <p>Welcome to <a href="http://zespia.tw/hexo">Hexo</a>! This is your very first post. Check <a href="http://zespia.tw/hexo/docs">documentation</a> to learn how to use.</p>
+    
+  </header>
+  <section class="entry">
+    
+      <p>Welcome to <a href="http://zespia.tw/hexo">Hexo</a>! This is your very first post. Check <a href="http://zespia.tw/hexo/docs">documentation</a> to learn how to use.</p>
 
-      
-    </div>
-    <footer>
-      
+    
+  </section>
+  <footer>
+    
+    <div class="clearfix"></div>
+    
+      <div class="alignleft widget">
         
         
+          <time datetime="2013-06-20T02:26:05.000Z"><a href="/2013/06/20/hello-world/">6月 20 2013</a></time>
+        
+        
+        
+      </div>
       
-      <div class="clearfix"></div>
-    </footer>
-  </div>
+    
+    <div class="clearfix"></div>
+  </footer>
 </article>
 
 
   
     <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-06T02:59:00.000Z"><a href="/2013/05/06/draft-mccann-dmm-flatarch-00/">5月 6 2013</a></time>
-      
-      
+  <header>
+    
   
     <h1 class="title"><a href="/2013/05/06/draft-mccann-dmm-flatarch-00/">draft-mccann-dmm-flatarch-00</a></h1>
   
 
-    </header>
-    <div class="entry">
-      
-        <h1>Authentication and Mobility Management in a Flat Architecture</h1>
+    
+  </header>
+  <section class="entry">
+    
+      <h1>Authentication and Mobility Management in a Flat Architecture</h1>
 <h3><a href="http://tools.ietf.org/html/draft-mccann-dmm-flatarch-00">draft-mccann-dmm-flatarch-00</a></h3>
 <p>从运营商角度看待移动性管理，包含部署、身份认证等，略之</p>
 <hr>
 
-      
-    </div>
-    <footer>
-      
+    
+  </section>
+  <footer>
+    
+    <div class="clearfix"></div>
+    
+      <div class="alignleft widget">
         
         
+          <time datetime="2013-05-06T02:59:00.000Z"><a href="/2013/05/06/draft-mccann-dmm-flatarch-00/">5月 6 2013</a></time>
+        
+        
+        
+  
+  <a href="/tags/DMM/">#DMM</a>
+
+      </div>
       
-      <div class="clearfix"></div>
-    </footer>
-  </div>
+    
+    <div class="clearfix"></div>
+  </footer>
 </article>
 
 
   
     <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-06T02:55:00.000Z"><a href="/2013/05/06/draft-ma-dmm-romip-00/">5月 6 2013</a></time>
-      
-      
+  <header>
+    
   
     <h1 class="title"><a href="/2013/05/06/draft-ma-dmm-romip-00/">draft-ma-dmm-romip-00</a></h1>
   
 
-    </header>
-    <div class="entry">
-      
-        <h1>A Route Optimization solution support for Distributed Mobility Management</h1>
+    
+  </header>
+  <section class="entry">
+    
+      <h1>A Route Optimization solution support for Distributed Mobility Management</h1>
 <h3><a href="http://tools.ietf.org/id/draft-ma-dmm-romip-00.txt">draft-ma-dmm-romip-00</a></h3>
 <p>The first elements that provide IP connectivity to a set of MNs are also the mobility managers for those MNs.</p>
 <ul>
@@ -354,37 +406,43 @@ MapReduce的名字由函数式编程中常用的map和reduce两个单词组成�
              <span class="comment">Figure</span> <span class="comment">2:The</span> <span class="comment">transmission</span> <span class="comment">of</span> <span class="comment">data</span> <span class="comment">packets
 </pre></figure></code></pre>
 
-      
-    </div>
-    <footer>
-      
+    
+  </section>
+  <footer>
+    
+    <div class="clearfix"></div>
+    
+      <div class="alignleft widget">
         
         
+          <time datetime="2013-05-06T02:55:00.000Z"><a href="/2013/05/06/draft-ma-dmm-romip-00/">5月 6 2013</a></time>
+        
+        
+        
+  
+  <a href="/tags/DMM/">#DMM</a>
+
+      </div>
       
-      <div class="clearfix"></div>
-    </footer>
-  </div>
+    
+    <div class="clearfix"></div>
+  </footer>
 </article>
 
 
   
     <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-06T02:50:00.000Z"><a href="/2013/05/06/draft-luo-dmm-with-mip-and-pmip-00/">5月 6 2013</a></time>
-      
-      
+  <header>
+    
   
     <h1 class="title"><a href="/2013/05/06/draft-luo-dmm-with-mip-and-pmip-00/">draft-luo-dmm-with-mip-and-pmip-00</a></h1>
   
 
-    </header>
-    <div class="entry">
-      
-        <h1>Distributed Mobility Management Approach with Mobile IP and Proxy Mobile IP</h1>
+    
+  </header>
+  <section class="entry">
+    
+      <h1>Distributed Mobility Management Approach with Mobile IP and Proxy Mobile IP</h1>
 <h3><a href="http://tools.ietf.org/html/draft-luo-dmm-with-mip-and-pmip-00">draft-luo-dmm-with-mip-and-pmip-00</a></h3>
 <pre><code><figure class="highlight"><pre>本文提出了分布式移动管理体系结构的概念以及该结构的一些主要处理方法。
 这些处理方法可以兼容现有的移动IP和代理移动IP协议。
@@ -566,37 +624,43 @@ MapReduce的名字由函数式编程中常用的map和reduce两个单词组成�
 <p>对于在图6中描述的场景，直接的解决方案是利用所谓的汇聚接入路由器或网关路由器（即在上图标出的接入路由器）实现MR功能。</p>
 <p>另一种替代方法是使用<a href="http://tools.ietf.org/html/draft-chan-dmm-framework-gap-analysis-06">I-D.chan-dmm-framework-gap-analysis</a>和<a href="http://tools.ietf.org/html/draft-wakikawa-mext-global-haha-spec-02">I-D.wakikawa-mext-global-haha-spec</a>中所描述的anycast机制。</p>
 
-      
-    </div>
-    <footer>
-      
+    
+  </section>
+  <footer>
+    
+    <div class="clearfix"></div>
+    
+      <div class="alignleft widget">
         
         
+          <time datetime="2013-05-06T02:50:00.000Z"><a href="/2013/05/06/draft-luo-dmm-with-mip-and-pmip-00/">5月 6 2013</a></time>
+        
+        
+        
+  
+  <a href="/tags/DMM/">#DMM</a>
+
+      </div>
       
-      <div class="clearfix"></div>
-    </footer>
-  </div>
+    
+    <div class="clearfix"></div>
+  </footer>
 </article>
 
 
   
     <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-06T02:50:00.000Z"><a href="/2013/05/06/draft-ma-dmm-armip-00/">5月 6 2013</a></time>
-      
-      
+  <header>
+    
   
     <h1 class="title"><a href="/2013/05/06/draft-ma-dmm-armip-00/">draft-ma-dmm-armip-00</a></h1>
   
 
-    </header>
-    <div class="entry">
-      
-        <h1>An AR-level solution support for Distributed Mobility Management</h1>
+    
+  </header>
+  <section class="entry">
+    
+      <h1>An AR-level solution support for Distributed Mobility Management</h1>
 <h3><a href="https://tools.ietf.org/html/draft-ma-dmm-armip-00">draft-ma-dmm-armip-00</a></h3>
 <hr>
 <h2>1.  Introduction</h2>
@@ -688,37 +752,43 @@ MapReduce的名字由函数式编程中常用的map和reduce两个单词组成�
 <h2>6.  Message Formats</h2>
 <p>略</p>
 
-      
-    </div>
-    <footer>
-      
+    
+  </section>
+  <footer>
+    
+    <div class="clearfix"></div>
+    
+      <div class="alignleft widget">
         
         
+          <time datetime="2013-05-06T02:50:00.000Z"><a href="/2013/05/06/draft-ma-dmm-armip-00/">5月 6 2013</a></time>
+        
+        
+        
+  
+  <a href="/tags/DMM/">#DMM</a>
+
+      </div>
       
-      <div class="clearfix"></div>
-    </footer>
-  </div>
+    
+    <div class="clearfix"></div>
+  </footer>
 </article>
 
 
   
     <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-06T02:45:00.000Z"><a href="/2013/05/06/draft-luo-dmm-with-ipv6-prefix-properties-00/">5月 6 2013</a></time>
-      
-      
+  <header>
+    
   
     <h1 class="title"><a href="/2013/05/06/draft-luo-dmm-with-ipv6-prefix-properties-00/">draft-luo-dmm-with-ipv6-prefix-properties-00</a></h1>
   
 
-    </header>
-    <div class="entry">
-      
-        <h1>Distributed Mobility Management Approaches with IPv6 Prefix Properties</h1>
+    
+  </header>
+  <section class="entry">
+    
+      <h1>Distributed Mobility Management Approaches with IPv6 Prefix Properties</h1>
 <h3><a href="http://tools.ietf.org/html/draft-luo-dmm-with-ipv6-prefix-properties-00">draft-luo-dmm-with-ipv6-prefix-properties-00</a></h3>
 <p>为了支持一个更分布的模型，本文扩展了现有的基于PMIP的移动性管理协议，并通过引入两个新的逻辑功能来实现分布式锚定和定位管理。鉴于MN可能并不总是需要移动性支持，即需要应用全局性前缀和其他的网络资源，本草案支持该选项以此来补充IPv6前缀源地址选择提示（即IPv6邻居发现协议和它的前缀信息选项）的扩展属性，实现了UE可以根据其服务/应用的移动性支持需求来选择IPv6的前缀。当MN支持扩展的前缀属性功能时，该草案允许ＭＮ可以根据 I-D.korhonen-dmm-prefix-properties 里描述的机制来选择合适的前缀。一旦确定了IPv6前缀，其余的ＤＭＭ机制则与I-D.luo-dmm-pmip-based-dmm-approach 类似。</p>
 <hr>
@@ -836,37 +906,43 @@ MapReduce的名字由函数式编程中常用的map和reduce两个单词组成�
 <p>因此，执行切换之后，既可以通过新的本地IPv6地址（如IP3）也可以通过全局IPv6地址（如IP2）来到达移动节点；如果在eLMA1和eLMA2之间有临时通道，也可以通过前一个本地IPv6地址（如IP1）到达。</p>
 <p>是否在eLMA1与eLMA2之间建立临时隧道来维持本地前缀的可达，这取决于网络策略。</p>
 
-      
-    </div>
-    <footer>
-      
+    
+  </section>
+  <footer>
+    
+    <div class="clearfix"></div>
+    
+      <div class="alignleft widget">
         
         
+          <time datetime="2013-05-06T02:45:00.000Z"><a href="/2013/05/06/draft-luo-dmm-with-ipv6-prefix-properties-00/">5月 6 2013</a></time>
+        
+        
+        
+  
+  <a href="/tags/DMM/">#DMM</a>
+
+      </div>
       
-      <div class="clearfix"></div>
-    </footer>
-  </div>
+    
+    <div class="clearfix"></div>
+  </footer>
 </article>
 
 
   
     <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-06T02:40:00.000Z"><a href="/2013/05/06/draft-liu-dmm-dynamic-anchor-discussion-00/">5月 6 2013</a></time>
-      
-      
+  <header>
+    
   
     <h1 class="title"><a href="/2013/05/06/draft-liu-dmm-dynamic-anchor-discussion-00/">draft-liu-dmm-dynamic-anchor-discussion-00</a></h1>
   
 
-    </header>
-    <div class="entry">
-      
-        <h1>DMM Dynamic Anchor Discussion</h1>
+    
+  </header>
+  <section class="entry">
+    
+      <h1>DMM Dynamic Anchor Discussion</h1>
 <p><em>给MN配置多个地址</em></p>
 <h3><a href="http://tools.ietf.org/html/draft-liu-dmm-dynamic-anchor-discussion-00">draft-liu-dmm-dynamic-anchor-discussion-00</a></h3>
 <p>There are many different proposals for DMM solution, one of those types of solution is called &quot;dynamic anchor&quot;. This document analyses the limitations of current dynamic anchor solution and discusses the possible solution to overcome those limitations.</p>
@@ -915,37 +991,43 @@ MapReduce的名字由函数式编程中常用的map和reduce两个单词组成�
 </li>
 </ul>
 
-      
-    </div>
-    <footer>
-      
+    
+  </section>
+  <footer>
+    
+    <div class="clearfix"></div>
+    
+      <div class="alignleft widget">
         
         
+          <time datetime="2013-05-06T02:40:00.000Z"><a href="/2013/05/06/draft-liu-dmm-dynamic-anchor-discussion-00/">5月 6 2013</a></time>
+        
+        
+        
+  
+  <a href="/tags/DMM/">#DMM</a>
+
+      </div>
       
-      <div class="clearfix"></div>
-    </footer>
-  </div>
+    
+    <div class="clearfix"></div>
+  </footer>
 </article>
 
 
   
     <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-06T02:35:00.000Z"><a href="/2013/05/06/draft-liu-dmm-address-selection-01/">5月 6 2013</a></time>
-      
-      
+  <header>
+    
   
     <h1 class="title"><a href="/2013/05/06/draft-liu-dmm-address-selection-01/">draft-liu-dmm-address-selection-01</a></h1>
   
 
-    </header>
-    <div class="entry">
-      
-        <h1>Address Selection for DMM</h1>
+    
+  </header>
+  <section class="entry">
+    
+      <h1>Address Selection for DMM</h1>
 <h3><a href="http://tools.ietf.org/html/draft-liu-dmm-address-selection-01">draft-liu-dmm-address-selection-01</a></h3>
 <pre><code><figure class="highlight"><pre>移动节点有可能有多个移动锚点以及相对应的前缀。
 在这种情况下，移动节点需要知道地址类型以选择一个正确的地址供应用使用。
@@ -1034,74 +1116,72 @@ MapReduce的名字由函数式编程中常用的map和reduce两个单词组成�
 <h4>MN Handoffs From MAR Back to Its Previous MAR</h4>
 <p>上述过程的逆过程。略。</p>
 
-      
-    </div>
-    <footer>
-      
+    
+  </section>
+  <footer>
+    
+    <div class="clearfix"></div>
+    
+      <div class="alignleft widget">
         
         
+          <time datetime="2013-05-06T02:35:00.000Z"><a href="/2013/05/06/draft-liu-dmm-address-selection-01/">5月 6 2013</a></time>
+        
+        
+        
+  
+  <a href="/tags/DMM/">#DMM</a>
+
+      </div>
       
-      <div class="clearfix"></div>
-    </footer>
-  </div>
+    
+    <div class="clearfix"></div>
+  </footer>
 </article>
 
 
   
 
-  <nav id="pagination">
+  
+<nav id="pagination">
   
   
     <a href="/archives/2013/page/2/" class="alignright next">下一页</a>
   
   <div class="clearfix"></div>
 </nav>
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜索">
-    <input type="hidden" name="q" value="site:fedoral.github.io/">
-  </form>
-</div>
-
-  
-
-  
-<div class="widget tag">
-  <h3 class="title">标签</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/DMM/">DMM</a><small>9</small></li>
-  
-    <li><a href="/tags/hadoop/">hadoop</a><small>1</small></li>
-  
-  </ul>
-</div>
 
 
-  
-
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
+    </section>
+    <footer id="footer" class="clearfix footer"><div class="alignleft">
   
   &copy; 2013 Peng Feixiang
   
 </div>
 <div class="clearfix"></div></footer>
-  <script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+  </div>
+  <script src="http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/main.js"></script>
 
 
 
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="/fancybox/jquery.fancybox.css">
+<script type="text/javascript" src="/fancybox/jquery.fancybox.js"></script>
 <script type="text/javascript">
 (function($){
-  $('.fancybox').fancybox();
+  $('.fancybox').fancybox({
+    prevEffect: 'none',
+    nextEffect: 'none',
+    closeBtn: false,
+    helpers: {
+        title: {type: 'inside'},
+        buttons: {
+            position: 'bottom'
+        }
+    }
+  });
 })(jQuery);
 </script>
 

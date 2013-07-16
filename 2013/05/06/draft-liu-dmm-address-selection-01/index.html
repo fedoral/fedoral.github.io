@@ -21,18 +21,26 @@
   <link href="/favicon.png" rel="icon">
   <link rel="alternate" href="/atom.xml" title="Peng's Blog" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
   
 </head>
 
 
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Peng's Blog</a></h1>
-  <h2><a href="/"></a></h2>
+  <div id="container" class="container">
+    <header id="sidebar" role="banner" class="sidebar"><div id="branding" class="branding">
+  <a href="/">
+    <img class="circle" src="/img/koala.jpg" alt="Anthem">
+  </a>
+  <h1 id="site-title" class="title">
+    <a href="/">Peng's Blog</a>
+  </h1>
 </div>
-<nav id="main-nav" class="alignright">
+<a href="#" id="toggle">信息</a>
+<div class="about" style="display: none">
+  <p></p>
+</div>
+<nav class="menu-navigation-container">
   <ul>
     
       <li><a href="/">Home</a></li>
@@ -40,27 +48,53 @@
       <li><a href="/archives">Archives</a></li>
     
   </ul>
-  <div class="clearfix"></div>
 </nav>
-<div class="clearfix"></div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+<div class="widget">
   
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-06T02:35:00.000Z"><a href="/2013/05/06/draft-liu-dmm-address-selection-01/">5月 6 2013</a></time>
-      
-      
+  <nav class="search">
+  <form action="http://google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:fedoral.github.io/">
+  </form>
+</nav>
+
+  
+
+  
+<nav class="tags">
+  <h3 class="title">标签</h3>
+  <ul>
+  
+    <li><a href="/tags/DMM/">DMM</a>&nbsp;<small>(9)</small></li>
+  
+    <li><a href="/tags/hadoop/">hadoop</a>&nbsp;<small>(1)</small></li>
+  
+  </ul>
+</nav>
+
+
+  <nav class="other">
+  <ul>
+    <li>
+      <a href="http://weibo.com/xiaoguizi1314" target="_blank">关注我的微博</a>
+    </li>
+  </ul>
+</nav>
+
+</div></header>
+    <section id="content" class="blog">
+      <article class="post">
+  <header>
+    
   
     <h1 class="title">draft-liu-dmm-address-selection-01</h1>
   
 
-    </header>
-    <div class="entry">
-      
-        <h1>Address Selection for DMM</h1>
+    
+  </header>
+  <section class="entry">
+    
+      <h1>Address Selection for DMM</h1>
 <h3><a href="http://tools.ietf.org/html/draft-liu-dmm-address-selection-01">draft-liu-dmm-address-selection-01</a></h3>
 <pre><code><figure class="highlight"><pre>移动节点有可能有多个移动锚点以及相对应的前缀。
 在这种情况下，移动节点需要知道地址类型以选择一个正确的地址供应用使用。
@@ -149,87 +183,59 @@
 <h4>MN Handoffs From MAR Back to Its Previous MAR</h4>
 <p>上述过程的逆过程。略。</p>
 
-      
-    </div>
-    <footer>
-      
+    
+  </section>
+  <footer>
+    
+    <div class="clearfix"></div>
+    
+      <div class="widget">
+        
+          <time datetime="2013-05-06T02:35:00.000Z"><a href="/2013/05/06/draft-liu-dmm-address-selection-01/">5月 6 2013</a></time>
+        
         
         
   
-  <div class="tags">
-    <a href="/tags/DMM/">DMM</a>
-  </div>
+  <a href="/tags/DMM/">#DMM</a>
 
         
-  <div class="addthis addthis_toolbox addthis_default_style">
+      </div>
     
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
+    <div class="clearfix"></div>
+  </footer>
 </article>
 
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜索">
-    <input type="hidden" name="q" value="site:fedoral.github.io/">
-  </form>
-</div>
 
-  
-
-  
-<div class="widget tag">
-  <h3 class="title">标签</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/DMM/">DMM</a><small>9</small></li>
-  
-    <li><a href="/tags/hadoop/">hadoop</a><small>1</small></li>
-  
-  </ul>
-</div>
-
-
-  
-
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
+    </section>
+    <footer id="footer" class="clearfix footer"><div class="alignleft">
   
   &copy; 2013 Peng Feixiang
   
 </div>
 <div class="clearfix"></div></footer>
-  <script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+  </div>
+  <script src="http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/main.js"></script>
 
 
 
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="/fancybox/jquery.fancybox.css">
+<script type="text/javascript" src="/fancybox/jquery.fancybox.js"></script>
 <script type="text/javascript">
 (function($){
-  $('.fancybox').fancybox();
+  $('.fancybox').fancybox({
+    prevEffect: 'none',
+    nextEffect: 'none',
+    closeBtn: false,
+    helpers: {
+        title: {type: 'inside'},
+        buttons: {
+            position: 'bottom'
+        }
+    }
+  });
 })(jQuery);
 </script>
 
