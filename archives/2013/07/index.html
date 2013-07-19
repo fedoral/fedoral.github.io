@@ -55,6 +55,109 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-07-19T06:36:46.000Z"><a href="/2013/07/19/keepalived-codes-modification/">7月 19 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/07/19/keepalived-codes-modification/">keepalived codes modification</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>RST 方式</h2>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre> <span class="number">28</span> <span class="keyword">enum</span> connect_result
+ <span class="number">29</span> tcp_bind_connect(<span class="keyword">int</span> fd, <span class="keyword">struct</span> sockaddr_storage *addr, <span class="keyword">struct</span> sockaddr_storage *bind_addr)
+ <span class="number">30</span> {
+ <span class="number">31</span>     <span class="keyword">struct</span> linger li = { <span class="number">0</span> };
+ <span class="number">32</span>     socklen_t addrlen;
+ <span class="number">33</span>     <span class="keyword">int</span> ret;
+ <span class="number">34</span>     <span class="keyword">int</span> val;
+ <span class="number">35</span> 
+ <span class="number">36</span>     <span class="comment">/* free the tcp port after closing the socket descriptor */</span>
+ <span class="number">37</span>     li<span class="variable">.l_onoff</span> = <span class="number">1</span>;
+ <span class="number">38</span>     li<span class="variable">.l_linger</span> = <span class="number">0</span>;
+ <span class="number">39</span>     setsockopt(fd, SOL_SOCKET, SO_LINGER, (<span class="keyword">char</span> *) &li, <span class="keyword">sizeof</span> (<span class="keyword">struct</span> linger));
+</pre></td></tr></table></figure>
+关注37-39行，设置 li.l_onoff为非0，li.l_linger为0，则套接口关闭时TCP断开连接，TCP将丢弃保留在套接口发送缓冲区中的任何数据并发送一个RST给对方。
+
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>16<span class="pseudo">:09</span><span class="pseudo">:08</span><span class="class">.981844</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34318</span>  192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: <span class="tag">Flags</span> <span class="attr_selector">[S]</span>, <span class="tag">seq</span> 108636079, <span class="tag">win</span> 14600, <span class="tag">options</span> <span class="attr_selector">[mss 1460,sackOK,TS val 250265385 ecr 0,nop,wscale 7]</span>, <span class="tag">length</span> 0
+16<span class="pseudo">:09</span><span class="pseudo">:08</span><span class="class">.982003</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>  192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34318</span>: <span class="tag">Flags</span> <span class="attr_selector">[S.]</span>, <span class="tag">seq</span> 2574714220, <span class="tag">ack</span> 108636080, <span class="tag">win</span> 14480, <span class="tag">options</span> <span class="attr_selector">[mss 1460,sackOK,TS val 1724897103 ecr 250265385,nop,wscale 7]</span>, <span class="tag">length</span> 0
+16<span class="pseudo">:09</span><span class="pseudo">:08</span><span class="class">.982020</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34318</span>  192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: <span class="tag">Flags</span> <span class="attr_selector">[.]</span>, <span class="tag">ack</span> 1, <span class="tag">win</span> 115, <span class="tag">options</span> <span class="attr_selector">[nop,nop,TS val 250265385 ecr 1724897103]</span>, <span class="tag">length</span> 0
+16<span class="pseudo">:09</span><span class="pseudo">:08</span><span class="class">.982096</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34318</span>  192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: <span class="tag">Flags</span> <span class="attr_selector">[R.]</span>, <span class="tag">seq</span> 1, <span class="tag">ack</span> 1, <span class="tag">win</span> 115, <span class="tag">options</span> <span class="attr_selector">[nop,nop,TS val 250265385 ecr 1724897103]</span>, <span class="tag">length</span> 0
+</pre></td></tr></table></figure>
+
+<h2>四步断开方式</h2>
+<p> 修改Line 37
+ <code>li.l_onoff = 0;</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>15<span class="pseudo">:39</span><span class="pseudo">:45</span><span class="class">.763854</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.5728</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: <span class="tag">Flags</span> <span class="attr_selector">[S]</span>, <span class="tag">seq</span> 1032359085, <span class="tag">win</span> 14600, <span class="tag">options</span> <span class="attr_selector">[mss 1460,sackOK,TS val 99753790 ecr 0,nop,wscale 7]</span>, <span class="tag">length</span> 0
+15<span class="pseudo">:39</span><span class="pseudo">:45</span><span class="class">.763987</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.5728</span>: <span class="tag">Flags</span> <span class="attr_selector">[S.]</span>, <span class="tag">seq</span> 1206381862, <span class="tag">ack</span> 1032359086, <span class="tag">win</span> 14480, <span class="tag">options</span> <span class="attr_selector">[mss 1460,sackOK,TS val 92751805 ecr 99753790,nop,wscale 7]</span>, <span class="tag">length</span> 0
+15<span class="pseudo">:39</span><span class="pseudo">:45</span><span class="class">.763997</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.5728</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: <span class="tag">Flags</span> <span class="attr_selector">[.]</span>, <span class="tag">ack</span> 1, <span class="tag">win</span> 115, <span class="tag">options</span> <span class="attr_selector">[nop,nop,TS val 99753790 ecr 92751805]</span>, <span class="tag">length</span> 0
+15<span class="pseudo">:39</span><span class="pseudo">:45</span><span class="class">.764028</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.5728</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: <span class="tag">Flags</span> <span class="attr_selector">[F.]</span>, <span class="tag">seq</span> 1, <span class="tag">ack</span> 1, <span class="tag">win</span> 115, <span class="tag">options</span> <span class="attr_selector">[nop,nop,TS val 99753790 ecr 92751805]</span>, <span class="tag">length</span> 0
+15<span class="pseudo">:39</span><span class="pseudo">:45</span><span class="class">.764165</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.5728</span>: <span class="tag">Flags</span> <span class="attr_selector">[F.]</span>, <span class="tag">seq</span> 1, <span class="tag">ack</span> 2, <span class="tag">win</span> 114, <span class="tag">options</span> <span class="attr_selector">[nop,nop,TS val 92751805 ecr 99753790]</span>, <span class="tag">length</span> 0
+15<span class="pseudo">:39</span><span class="pseudo">:45</span><span class="class">.764177</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.5728</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: <span class="tag">Flags</span> <span class="attr_selector">[.]</span>, <span class="tag">ack</span> 2, <span class="tag">win</span> 115, <span class="tag">options</span> <span class="attr_selector">[nop,nop,TS val 99753790 ecr 92751805]</span>, <span class="tag">length</span> 0
+</pre></td></tr></table></figure>
+
+<h2>tcpdump抓包对比</h2>
+<p>修改之后，报文数从4变为6。FIN报文取代了RST报文。
+使用<code>netstat -n | awk &#39;/^tcp/ {++state[$NF]} END {for(key in state) print key,&quot;\t&quot;,state[key]}&#39;</code>查看TCP连接状态：TIME_WAIT 数量增长到20后便不再增加。推断2 *(Max Segment Lifetime) = 60。 down掉其中一个RS后， TIME_WAIT 数量逐渐降为10。</p>
+<h2>配置文件</h2>
+<p>考虑“四步断开方式”以配置文件(keepalived.conf)中keyword的形式提供，默认情况下使用“RST 方式”</p>
+<pre><code><figure class="highlight"><pre>TCP_CHECK {
+    <span class="keyword">...</span>
+    connect_close_method <span class="number">1</span>
+    <span class="keyword">...</span>
+    }
+</pre></figure></code></pre>
+<p>参数 connect_close_method</p>
+<ul>
+<li>1 ，使用“四步断开”方式</li>
+<li>0 ，使用“发送RST”方式</li>
+</ul>
+<p>针对不同Real Server的检查可以混用这两种方式。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-07-16T03:29:50.000Z"><a href="/2013/07/16/keepalived-rst/">7月 16 2013</a></time>
       
       
@@ -224,7 +327,7 @@ MapReduce的名字由函数式编程中常用的map和reduce两个单词组成�
   
     <li><a href="/tags/hadoop/">hadoop</a><small>1</small></li>
   
-    <li><a href="/tags/lvs/">lvs</a><small>1</small></li>
+    <li><a href="/tags/lvs/">lvs</a><small>2</small></li>
   
   </ul>
 </div>

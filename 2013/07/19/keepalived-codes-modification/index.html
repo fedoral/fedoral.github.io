@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>lvs | Peng's Blog</title>
+  <title>keepalived codes modification | Peng's Blog</title>
   <meta name="author" content="Peng Feixiang">
   
   <meta name="description" content="Hello everyone">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="keepalived codes modification"/>
   <meta property="og:site_name" content="Peng's Blog"/>
 
   
@@ -44,12 +44,7 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">lvs</h2>
-
-
-  
-    <article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
   <div class="post-content">
     <header>
@@ -59,7 +54,7 @@
       
       
   
-    <h1 class="title"><a href="/2013/07/19/keepalived-codes-modification/">keepalived codes modification</a></h1>
+    <h1 class="title">keepalived codes modification</h1>
   
 
     </header>
@@ -144,108 +139,35 @@
       
         
         
+  
+  <div class="tags">
+    <a href="/tags/lvs/">lvs</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
       
       <div class="clearfix"></div>
     </footer>
   </div>
 </article>
 
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-07-16T03:29:50.000Z"><a href="/2013/07/16/keepalived-rst/">7月 16 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/07/16/keepalived-rst/">keepalived RST</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h3>keepalived</h3>
-<p>假定keepalived服务器是<code>192.168.1.1</code>，http服务器是<code>192.168.1.183</code>.</p>
-<p>启动keepalived后，从<code>192.168.1.1</code>或<code>192.168.1.183</code>上抓包可以看到很多<code>192.168.1.1</code>到<code>192.168.1.183</code>的<code>[RST ACK]</code>报文，6秒一个。</p>
-<pre><code><figure class="highlight"><pre>16<span class="pseudo">:09</span><span class="pseudo">:08</span><span class="class">.981844</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34318</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: <span class="tag">Flags</span> <span class="attr_selector">[S]</span>, <span class="tag">seq</span> 108636079, <span class="tag">win</span> 14600, <span class="tag">options</span> <span class="attr_selector">[mss 1460,sackOK,TS val 250265385 ecr 0,nop,wscale 7]</span>, <span class="tag">length</span> 0
-
-16<span class="pseudo">:09</span><span class="pseudo">:08</span><span class="class">.982003</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34318</span>: <span class="tag">Flags</span> <span class="attr_selector">[S.]</span>, <span class="tag">seq</span> 2574714220, <span class="tag">ack</span> 108636080, <span class="tag">win</span> 14480, <span class="tag">options</span> <span class="attr_selector">[mss 1460,sackOK,TS val 1724897103 ecr 250265385,nop,wscale 7]</span>, <span class="tag">length</span> 0
-
-16<span class="pseudo">:09</span><span class="pseudo">:08</span><span class="class">.982020</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34318</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: <span class="tag">Flags</span> <span class="attr_selector">[.]</span>, <span class="tag">ack</span> 1, <span class="tag">win</span> 115, <span class="tag">options</span> <span class="attr_selector">[nop,nop,TS val 250265385 ecr 1724897103]</span>, <span class="tag">length</span> 0
-
-16<span class="pseudo">:09</span><span class="pseudo">:08</span><span class="class">.982096</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34318</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: **<span class="tag">Flags</span> <span class="attr_selector">[R.]</span>**, <span class="tag">seq</span> 1, <span class="tag">ack</span> 1, <span class="tag">win</span> 115, <span class="tag">options</span> <span class="attr_selector">[nop,nop,TS val 250265385 ecr 1724897103]</span>, <span class="tag">length</span> 0
-
-16<span class="pseudo">:09</span><span class="pseudo">:14</span><span class="class">.982592</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34320</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: <span class="tag">Flags</span> <span class="attr_selector">[S]</span>, <span class="tag">seq</span> 2384928787, <span class="tag">win</span> 14600, <span class="tag">options</span> <span class="attr_selector">[mss 1460,sackOK,TS val 250271386 ecr 0,nop,wscale 7]</span>, <span class="tag">length</span> 0
-
-16<span class="pseudo">:09</span><span class="pseudo">:14</span><span class="class">.982733</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34320</span>: <span class="tag">Flags</span> <span class="attr_selector">[S.]</span>, <span class="tag">seq</span> 1294088960, <span class="tag">ack</span> 2384928788, <span class="tag">win</span> 14480, <span class="tag">options</span> <span class="attr_selector">[mss 1460,sackOK,TS val 1724903103 ecr 250271386,nop,wscale 7]</span>, <span class="tag">length</span> 0
-
-16<span class="pseudo">:09</span><span class="pseudo">:14</span><span class="class">.982750</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34320</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: <span class="tag">Flags</span> <span class="attr_selector">[.]</span>, <span class="tag">ack</span> 1, <span class="tag">win</span> 115, <span class="tag">options</span> <span class="attr_selector">[nop,nop,TS val 250271386 ecr 1724903103]</span>, <span class="tag">length</span> 0
-
-16<span class="pseudo">:09</span><span class="pseudo">:14</span><span class="class">.982826</span> <span class="tag">IP</span> 192<span class="class">.168</span><span class="class">.1</span><span class="class">.1</span><span class="class">.34320</span> &gt; 192<span class="class">.168</span><span class="class">.1</span><span class="class">.183</span><span class="class">.http</span>: **<span class="tag">Flags</span> <span class="attr_selector">[R.]</span>**, <span class="tag">seq</span> 1, <span class="tag">ack</span> 1, <span class="tag">win</span> 115, <span class="tag">options</span> <span class="attr_selector">[nop,nop,TS val 250271386 ecr 1724903103]</span>, <span class="tag">length</span> 0
-</pre></figure></code></pre>
-<p>这是keepalived的健康检查机制，192.168.1.1会定期（默认6秒）向192.168.1.183发送一个TCP连接来检测http是否正常，为了减少TCP连接带来的资源浪费，检测（TCP三次握手）完毕后会发送一个RST报文来断开这个连接，释放资源。</p>
-<p>如果业务服务器不是http，有时会在业务服务器日志里还会看到类似<a href="http://nginx.2469901.n2.nabble.com/Keep-alive-connection-errors-in-my-logs-td3385507.html"><code>connection reset by peer</code></a>的日志。</p>
-<h3>RST报文</h3>
-<p>当服务器close一个连接时，若client端接着发数据。根据TCP协议的规定，会收到一个<code>RST</code>响应，进程对接收了RST的socket发送数据时，内核会发出一个<code>SIGPIPE</code>信号给进程。根据信号的默认处理规则SIGPIPE信号的默认执行动作是<strong>终止进程</strong>,所以client会<strong>退出</strong>。若不想client退出可以把SIGPIPE设为<code>SIG_IGN</code>，如: <code>signal(SIGPIPE,SIG_IGN);</code>，这时SIGPIPE交给了系统处理。参考(1)</p>
-<h3>有序释放与异常释放</h3>
-<p>终止一个连接的正常方式是一方发送FIN，这被称为有序释放（orderly release），因为在所有排队数据已发送之后才发送FIN。但也有可能发送一个复位报文段而不是FIN来中途释放一个连接，有时称这为异常释放（abortive release）。</p>
-<p>异常终止一个连接对应用程序来说有两个优点：</p>
-<ol>
-<li>丢弃任何待发数据并立即发送复位报文段；</li>
-<li>RST的接收方会区分另一端执行的是异常关闭还是正常关闭。应用程序使用的
-API必须提供产生异常关闭而不是正常关闭的手段。参考(2)</li>
-</ol>
-<h3>用有序释放来代替异常释放</h3>
-<p>根据TCP协议，主动发起关闭的一方，会进入TIME_WAIT状态，持续2*MSL(Max Segment Lifetime)，缺省为240秒（？ RFC建议120秒，berkeley 实现30秒）。</p>
-<p><img src="http://tech.ccidnet.com/pub/attachment/2004/8/322252.png" alt=""></p>
-<p>一般来说服务器执行被动关闭，服务器不会进入TIME_WAIT状态。在Keepalived Server+ Real Server中 Server中Keepalived Server充当客户端主动发起关闭。两种方式：（1）关闭的时候使用RST的方式
-（2）对处于TIME_WAIT状态的TCP允许重用。当前Keepalived 就被设计成使用RST关闭。</p>
-<p>如果使用有序释放代替RST报文，Keepalived + NAT方式中，所有从Keepalived Server 到 Real Server的IP包的 source address都是一样的(对内地址）。TCP连接建立和关闭，会在Keepalived Server上留下TIME_WAIT状态，根据TIME_WAIT黑名单规则，Keepalived Server在240秒内不能再使用此端口建立和Real Server的连接。这样对于一个Real server 假定6秒检查一次，则需要240/6=40个端口来使用。<del>对于有60000端口的Keepalived Server来说，可以支撑1000+的Real Server</del>(若身指正，不同的RS对应不同的remote ip address，这40个端口不会被独占)。</p>
-<p>至于“对处于TIME_WAIT状态的TCP允许重用”，这种做法不建议使用，无非是减少端口的使用。更好的做法是减小MSL。</p>
-<h3>使用TCP的KeepAlive机制</h3>
-<p>很多应用层协议都有HeartBeat机制，通常是客户端每隔一小段时间向服务器发送一个数据包，通知服务器自己仍然在线，并传输一些可能必要的数据。使用心跳包的典型协议是IM，比如QQ/MSN/飞信等协议。</p>
-<p>TCP的KeepAlive 是更低层次的“心跳检测”机制，主要为探测长连接的存活状况。默认如果一个给定的连接在两小时内没有任何的动作，则服务器就向客户发一个探测报文段，客户主机必须处于以下4个状态之一：</p>
-<ol>
-<li>客户主机依然正常运行，并从服务器可达。客户的TCP响应正常，而服务器也知道对方是正常的，服务器在两小时后将保活定时器复位。</li>
-<li>客户主机已经崩溃，并且关闭或者正在重新启动。在任何一种情况下，客户的TCP都没有响应。服务端将不能收到对探测的响应，并在75秒后超时。服务器总共发送10个这样的探测 ，每个间隔75秒。如果服务器没有收到一个响应，它就认为客户主机已经关闭并终止连接。</li>
-<li><p>客户主机崩溃并已经重新启动。服务器将收到一个对其保活探测的响应，这个响应是一个复位，使得服务器终止这个连接。</p>
-</li>
-<li><p>客户机正常运行，但是服务器不可达，这种情况与第2种类似，TCP能发现的就是没有收到探查的响应。</p>
-</li>
-</ol>
-<p>TCP的KeepAlive功能开启需要做一些配置。参考<a href="http://www.tldp.org/HOWTO/html_single/TCP-Keepalive-HOWTO/#codeneeding">这里</a>，包括了KeepAlive的介绍、相关内核参数、C编程接口、如何为现有应用（可以或者不可以修改源码的）启用KeepAlive机制。</p>
-<h3>总结</h3>
-<p>使用TCP的KeepAlive机制，对Keepalived的调整会很大，大量代码修改。个人倾向“ 用有序释放来代替异常释放”，释放过程虽然不如RST方式简单明了，但性能可以接受，代码相对来说好修改一些。</p>
-<h3>扩展阅读</h3>
-<p><a href="http://rdc.taobao.com/blog/cs/?p=1055">tcp连接closse时协议栈发出rst报文, 而不是fin</a></p>
-<h3>参考来源</h3>
-<p>(1)<a href="http://blog.chinaunix.net/uid-192452-id-3279122.html"><a href="http://blog.chinaunix.net/uid-192452-id-3279122.html">http://blog.chinaunix.net/uid-192452-id-3279122.html</a></a></p>
-<p>(2)TCP/IP 详解卷一：协议 p187</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-
-  <nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
